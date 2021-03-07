@@ -14,9 +14,8 @@ export default {
 </script>
 
 <style lang="scss">
-@import url("https://fonts.googleapis.com/css2?family=Signika:wght@300;400&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Cardo:ital,wght@0,400;0,700;1,400&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Nobile:wght@400;500;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Teko:wght@300;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Yanone+Kaffeesatz:wght@200;300&display=swap");
 
 html {
   font-size: 20px;
@@ -28,10 +27,11 @@ html {
 body {
   color: black;
   background: white;
-  font-family: "Cardo", Garamond, serif;
-  font-weight: 300;
+  font-family: 'Yanone Kaffeesatz', sans-serif;
+  font-weight: 100;
   line-height: 1.3;
   margin: 0;
+  width:100%;
 }
 
 h1,
@@ -40,20 +40,27 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Signika", sans-serif;
+  font-family: 'Yanone Kaffeesatz', sans-serif;
+  font-weight: 100;
 }
 
 .title {
-  font-family: "Nobile", sans-serif;
-  font-weight: 600;
+  font-family: 'Teko', sans-serif;
+  font-weight: 100;
   line-height: 1.3;
 }
 
 h1 {
-  font-size: 2rem;
+ font-family: 'Yanone Kaffeesatz', sans-serif;
+  font-size: 2.0rem;
+   font-weight: 100;
+      line-height: 1.5;
+	  margin-top:4rem;
 }
 h2 {
-  font-size: 1.75rem;
+ font-family: 'Yanone Kaffeesatz', sans-serif;
+  font-size: 2.0rem;
+   line-height: 0.5;
 }
 
 a,
@@ -76,6 +83,18 @@ a.blind:hover {
   }
 }
 
+.VisualModule{
+ width:77%;
+ margin-top:30px; 
+  margin-bottom:60px; 
+ padding:30px;
+ margin-left:9%;
+ float:left;
+border-radius:15px;
+background-color:rgb(40, 40, 40);
+ box-shadow: 0px 10px 30px 0px rgba(0, 0, 0, 0.2), 0 6px 40px 0 rgba(0, 0, 0, 0.19);
+ }
+
 .container {
   width: 95%;
   margin: auto;
@@ -91,7 +110,7 @@ a.blind:hover {
 
 pre,
 code {
-  font-family: "Signika", sans-serif;
+ font-family: 'Yanone Kaffeesatz', sans-serif;
   font-size: 0.9em;
 }
 

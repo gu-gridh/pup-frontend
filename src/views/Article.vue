@@ -4,7 +4,7 @@
 
     <Summary v-bind="article" />
 
-    <div v-if="article.guplayId" class="container">
+    <div v-if="article.guplayId" class="VisualModule">
       <MainVideo :guplay-id="article.guplayId" />
     </div>
 
@@ -12,7 +12,7 @@
       <Downloads :downloads="article.downloads" />
     </div>
 
-    <div v-if="article.images" class="container">
+    <div v-if="article.images" class="VisualModule">
       <MainGallery :images="article.images" />
     </div>
 
@@ -75,4 +75,9 @@ export default {
   /* Make bottom margin match side margin */
   margin: 0 0 10vw;
 }
+
+.container{
+width:80%;
+}
+
 </style>

@@ -14,11 +14,10 @@ export default {
 
 <style>
 .meta-item {
-  font-family: Signika, sans-serif;
-  font-weight: 400;
+  font-weight: 600;
   line-height: 1.5;
 }
 .value {
-  font-weight: 300;
+  font-weight: 100;
 }
 </style>

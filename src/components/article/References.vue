@@ -34,17 +34,31 @@ export default {
 
 <style lang="scss" scoped>
 .article-references {
-  margin: 2rem auto 0;
+font-size:15px;
+text-align:justify;
+font-weight:300;
 
-  .references-list {
-    @media screen and (min-width: 1000px) {
-      columns: 2 30px;
+.references-list {
+      columns: 4 100px;
+	  column-gap:50px;
+  margin: 1rem auto 0;
+
+    @media screen and (max-width: 1500px) {
+      columns: 3 100px;
+	  column-gap:50px;
     }
+	
+	
+    @media screen and (max-width: 1000px) {
+      columns: 2 100px;
+
+    }
+	
 
     .references-item {
       margin-bottom: 1rem;
-      padding-left: 0.7em;
-      text-indent: -0.7em;
+      padding-left: 0em;
+      text-indent: -0em;
 
       .extra-label {
         font-weight: bold;
