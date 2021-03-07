@@ -4,7 +4,7 @@
   <div class="top">
 
   <video id="videoBG" poster="/poster.jpg" autoplay muted loop playsinline>
-      <source src="/introvideo.mp4" type="video/mp4">
+      <source src="/introvideocompressed.mp4" type="video/mp4">
   </video>
 
     	<div class="container">
