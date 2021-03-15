@@ -74,7 +74,7 @@ export default {
 .meta-table {
   width: 66.7%;
   font-weight: 100;
-  font-family: 'Yanone Kaffeesatz', sans-serif;
+  font-family: "Yanone Kaffeesatz", sans-serif;
   text-align: left;
 
   th,

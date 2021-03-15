@@ -6,15 +6,17 @@
       :href="apiUrl(download.url)"
       class="download blind popout"
     >
-	<div class="downloadmeta">
-      <div class="download-title">{{ download.caption }}</div>
-      <div class="download-description">Format: 
-        {{ download.ext.slice(1).toUpperCase() }}
+      <div class="downloadmeta">
+        <div class="download-title">{{ download.caption }}</div>
+        <div class="download-description">
+          Format:
+          {{ download.ext.slice(1).toUpperCase() }}
+        </div>
+        <div class="download-description">
+          File size:
+          {{ download.ext.slice(1).toUpperCase() }}
+        </div>
       </div>
-      <div class="download-description">File size: 
-        {{ download.ext.slice(1).toUpperCase() }}
-      </div>
-	     </div>
     </a>
   </div>
 </template>
@@ -34,17 +36,15 @@ export default {
 .article-downloads {
   display: flex;
   flex-wrap: wrap;
- 
-	
-  .downloadmeta{
-  padding:0rem;
- 
+
+  .downloadmeta {
+    padding: 0rem;
   }
-  
+
   .download {
-  height: 5rem;
-   
-	position:relative;
+    height: 5rem;
+
+    position: relative;
     background: url(../../assets/file.png) no-repeat;
     background-size: 4rem;
     background-position: 0.5rem 50%;
@@ -54,26 +54,21 @@ export default {
     padding: 0.7rem 1rem 1rem 4.5rem;
     margin-bottom: 1rem;
 
-
-	
-    width: calc(30.33% - 1.0rem);
+    width: calc(30.33% - 1rem);
     box-sizing: border-box;
-	
-   
 
     @media screen and (max-width: 1100px) {
-      width: calc(50% - 1.0rem);
+      width: calc(50% - 1rem);
     }
 
     @media screen and (max-width: 600px) {
       width: 100%;
     }
-   
 
     .download-description {
       font-size: 80%;
-	  margin-top:3px;
-	  font-weight:300;
+      margin-top: 3px;
+      font-weight: 300;
     }
   }
 
@@ -85,8 +80,5 @@ export default {
       margin-right: 0rem;
     }
   }
-  }
-  
-
-
+}
 </style>

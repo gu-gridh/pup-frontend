@@ -34,26 +34,23 @@ export default {
 
 <style lang="scss" scoped>
 .article-references {
-font-size:15px;
-text-align:justify;
-font-weight:300;
+  font-size: 15px;
+  text-align: justify;
+  font-weight: 300;
 
-.references-list {
-      columns: 4 100px;
-	  column-gap:50px;
-  margin: 1rem auto 0;
+  .references-list {
+    columns: 4 100px;
+    column-gap: 50px;
+    margin: 1rem auto 0;
 
     @media screen and (max-width: 1500px) {
       columns: 3 100px;
-	  column-gap:50px;
+      column-gap: 50px;
     }
-	
-	
+
     @media screen and (max-width: 1000px) {
       columns: 2 100px;
-
     }
-	
 
     .references-item {
       margin-bottom: 1rem;

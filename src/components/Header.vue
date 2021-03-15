@@ -20,11 +20,10 @@ export default {
 #header {
   background-color: #333;
   color: #eaeae7;
-   font-family: 'Teko', sans-serif;
-   font-size:30px;
+  font-family: "Teko", sans-serif;
+  font-size: 30px;
   display: flex;
-     padding: 20px 10%;
-
+  padding: 20px 10%;
 
   @media screen and (max-width: 600px) {
     padding: 10px 10%;

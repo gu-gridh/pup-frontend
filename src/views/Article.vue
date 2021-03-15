@@ -76,8 +76,7 @@ export default {
   margin: 0 0 10vw;
 }
 
-.container{
-width:80%;
+.container {
+  width: 80%;
 }
-
 </style>
