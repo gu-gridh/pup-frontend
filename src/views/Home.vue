@@ -276,12 +276,11 @@ export default {
 
   .teaser {
     transition: all 0.2s ease-in-out;
-    width: calc(33.33% - 0rem);
-    margin: 0 0rem 0rem 0;
-    box-sizing: border-box;
+    width: 33.33%;
+    margin: 0;
 
     @media screen and (max-width: 1700px) {
-      width: calc(50% - 1rem);
+      width: 50%;
     }
 
     @media screen and (max-width: 900px) {

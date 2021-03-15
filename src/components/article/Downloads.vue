@@ -55,7 +55,6 @@ export default {
     margin-bottom: 1rem;
 
     width: calc(30.33% - 1rem);
-    box-sizing: border-box;
 
     @media screen and (max-width: 1100px) {
       width: calc(50% - 1rem);

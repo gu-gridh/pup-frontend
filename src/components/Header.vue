@@ -41,7 +41,6 @@ a {
 .left,
 .right {
   width: 10%;
-  box-sizing: border-box;
   text-align: right;
 }
 
