@@ -1,8 +1,7 @@
 /** Concatenate a list of strings with commas and an ampersand (or your own choices). */
 export function commaAnd(strs, comma = ", ", and = " & ") {
-  return strs.length <= 2
-    ? strs.join(and)
-    : strs[0] + comma + commaAnd(strs.slice(1), comma, and);
+  const init = strs.slice(0, -1).join(comma);
+  return [init, strs.slice(-1)].filter((s) => s).join(and);
 }
 
 export function fullName({ firstname, lastname }) {
