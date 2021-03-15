@@ -31,16 +31,20 @@
 
     <div class="main">
       <div class="container journal-content">
-        <div
-          v-if="journalPage === 'about'"
-          class="journalpresentation"
-          v-html="parseMarkdown(journal.presentation)"
-        />
+        <TransitionExpand>
+          <div
+            v-if="journalPage === 'about'"
+            class="journalpresentation"
+            v-html="parseMarkdown(journal.presentation)"
+          />
+        </TransitionExpand>
 
-        <div
-          v-if="journalPage === 'contact'"
-          v-html="parseMarkdown(journal.contact)"
-        />
+        <TransitionExpand>
+          <div
+            v-if="journalPage === 'contact'"
+            v-html="parseMarkdown(journal.contact)"
+          />
+        </TransitionExpand>
       </div>
 
       <div class="collections">
@@ -88,13 +92,14 @@
 import showdown from "showdown";
 import { ToggleButton } from "vue-js-toggle-button";
 import { getJournal, getArticles } from "@/assets/api";
+import TransitionExpand from "@/components/TransitionExpand";
 import Teaser from "@/components/Teaser";
 
 const showdownConverter = new showdown.Converter();
 
 export default {
   name: "Home",
-  components: { ToggleButton, Teaser },
+  components: { TransitionExpand, ToggleButton, Teaser },
   data() {
     return {
       journal: null,
