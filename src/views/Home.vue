@@ -109,8 +109,6 @@ export default {
 
 <style lang="scss" scoped>
 .home {
-  font-family: "Yanone Kaffeesatz", sans-serif;
-  padding-bottom: 4rem;
   width: 100%;
 }
 
@@ -195,7 +193,7 @@ export default {
 }
 
 .main {
-  padding: 50px 0px 0px 0px;
+  padding: 50px 0px 4rem 0px;
   background-color: rgba(70, 70, 70, 1);
   z-index: 1;
   width: 100%;

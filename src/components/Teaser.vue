@@ -75,7 +75,6 @@ export default {
   margin-left: 55%;
   with: 600px;
   height: 100%;
-  font-family: "Yanone Kaffeesatz", sans-serif;
   position: relative;
   padding: 1rem 1rem 1rem;
   background: rgba(255, 255, 255, 0.85);
@@ -108,7 +107,6 @@ export default {
 .author {
   font-size: 15px;
   margin-top: 30px;
-  font-family: "Yanone Kaffeesatz", sans-serif;
   font-weight: 300;
   display: none;
 }

@@ -67,22 +67,7 @@ export default {
   padding: 1.5rem 0 1.5rem;
   font-weight: 100;
 
-  .article-menu {
-    font-family: "Yanone Kaffeesatz", sans-serif;
-    font-size: 16px;
-    position: absolute;
-    right: 0;
-    width: 10%;
-
-    button {
-      font-family: "Yanone Kaffeesatz", sans-serif;
-      font-size: inherit;
-    }
-  }
-
   .article-mainmeta {
-    font-family: "Yanone Kaffeesatz", sans-serif;
-    font-weight: 100;
     margin: 0 0 1.5rem;
     line-height: 1.5;
   }

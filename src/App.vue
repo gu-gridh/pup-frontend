@@ -51,14 +51,11 @@ h6 {
 }
 
 h1 {
-  font-family: "Yanone Kaffeesatz", sans-serif;
   font-size: 2rem;
-  font-weight: 100;
   line-height: 1.5;
   margin-top: 4rem;
 }
 h2 {
-  font-family: "Yanone Kaffeesatz", sans-serif;
   font-size: 2rem;
   line-height: 0.5;
 }
