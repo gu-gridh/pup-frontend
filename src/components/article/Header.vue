@@ -67,30 +67,25 @@ export default {
   padding: 1.5rem 0 1.5rem;
   font-weight: 100;
 
-  .article-menu {
-    font-family: Signika, sans-serif;
-    font-size: 16px;
-    position: absolute;
-    right: 0;
-    width: 10%;
-
-    button {
-      font-family: Signika, sans-serif;
-      font-size: inherit;
-    }
-  }
-
   .article-mainmeta {
-    font-family: Signika, sans-serif;
-    font-weight: 400;
     margin: 0 0 1.5rem;
     line-height: 1.5;
   }
+
   .article-title {
-    margin: 1.5rem 0 0.5rem;
+    font-family: "Yanone Kaffeesatz", sans-serif;
+    margin: 3rem 0 0.5rem;
+    text-align: left;
+    width: 100%;
+    font-weight: 100;
+    font-style: normal;
+    font-size: 60px;
+    line-height: 1;
   }
   .article-subtitle {
     margin: 0.5rem 0 1rem;
+    font-weight: 100;
+    font-family: "Yanone Kaffeesatz", sans-serif;
   }
 
   @media screen and (min-width: 600px) {

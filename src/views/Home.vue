@@ -1,12 +1,55 @@
 <template>
   <div v-if="journal" class="home">
-    <div class="container">
-      <img src="/biccs_2021.jpg" />
-      <h1 class="title">{{ journal.title }}</h1>
-      <p v-html="parseMarkdown(journal.presentation)" />
-      <div>
+    <div class="top">
+      <video id="videoBG" poster="/poster.jpg" autoplay muted loop playsinline>
+        <source src="/introvideocompressed.mp4" type="video/mp4" />
+      </video>
+
+      <div class="container">
+        <div class="journalheader">
+          <img src="/biccs_2021.png" />
+          <div class="title">{{ journal.title }}</div>
+          <div class="home-menu">
+            <div
+              class="home-menu-item"
+              @click="toggleJournalPage('about')"
+              :class="{ active: journalPage === 'about' }"
+            >
+              About BICCS
+            </div>
+            <div
+              class="home-menu-item"
+              @click="toggleJournalPage('contact')"
+              :class="{ active: journalPage === 'contact' }"
+            >
+              Contact
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="main">
+      <div class="container journal-content">
+        <TransitionExpand>
+          <div
+            v-if="journalPage === 'about'"
+            class="journalpresentation"
+            v-html="parseMarkdown(journal.presentation)"
+          />
+        </TransitionExpand>
+
+        <TransitionExpand>
+          <div
+            v-if="journalPage === 'contact'"
+            v-html="parseMarkdown(journal.contact)"
+          />
+        </TransitionExpand>
+      </div>
+
+      <div class="collections">
         <div class="grouping-select">
-          <label>Order articles by: </label>
+          <label>Order articles by:</label>
           <span
             :class="{ active: grouping === 'themes' }"
             @click="groupByThemes"
@@ -23,21 +66,22 @@
             :class="{ active: grouping === 'formats' }"
             @click="groupByFormats"
           >
-            Output format
+            Format
           </span>
         </div>
-      </div>
-      <div v-for="group in groups" :key="group.id" class="group">
-        <h2>{{ group.heading }}</h2>
-        <p>{{ group.description }}</p>
-        <div class="articles">
-          <Teaser
-            :article="
-              articles.find((article2) => article.id === article2.id) || article
-            "
-            v-for="article of group.articles"
-            :key="article.id"
-          />
+        <div v-for="group in groups" :key="group.id" class="group">
+          <h1>{{ group.heading }}</h1>
+          <p>{{ group.description }}</p>
+          <div class="articles">
+            <Teaser
+              :article="
+                articles.find((article2) => article.id === article2.id) ||
+                article
+              "
+              v-for="article of group.articles"
+              :key="article.id"
+            />
+          </div>
         </div>
       </div>
     </div>
@@ -48,16 +92,18 @@
 import showdown from "showdown";
 import { ToggleButton } from "vue-js-toggle-button";
 import { getJournal, getArticles } from "@/assets/api";
+import TransitionExpand from "@/components/TransitionExpand";
 import Teaser from "@/components/Teaser";
 
 const showdownConverter = new showdown.Converter();
 
 export default {
   name: "Home",
-  components: { ToggleButton, Teaser },
+  components: { TransitionExpand, ToggleButton, Teaser },
   data() {
     return {
       journal: null,
+      journalPage: "",
       articles: null,
       grouping: "themes",
     };
@@ -72,6 +118,9 @@ export default {
     getArticles().then((articles) => (this.articles = articles));
   },
   methods: {
+    toggleJournalPage(name) {
+      this.journalPage = this.journalPage === name ? "" : name;
+    },
     groupByThemes() {
       this.grouping = "themes";
     },
@@ -90,20 +139,134 @@ export default {
 
 <style lang="scss" scoped>
 .home {
-  font-family: "Signika", sans-serif;
-  padding-bottom: 5rem;
+  width: 100%;
 }
 
-img {
-  max-width: 100%;
+.top {
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.7);
+  box-shadow: 10px 10px 20px 0px rgba(0, 0, 0, 0.2),
+    0 6px 40px 0 rgba(0, 0, 0, 0.19);
+  z-index: 100;
+  opacity: 0.99;
+  transform: translateZ(0);
+  overflow: hidden;
 }
 
-.grouping-select span.active {
-  font-weight: bold;
+.videocontainer {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+#videoBG {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  opacity: 0.2;
+  transform: translateZ(0);
+  overflow: hidden;
+  z-index: -1;
+}
+
+.journalheader {
+  padding: 50px 0px 20px 0px;
+
+  img {
+    display: block;
+    width: 200px;
+  }
+}
+
+.title {
+  font-family: "Teko", sans-serif;
+  font-weight: 100;
+  font-size: 200px;
+  line-height: 0.75;
+  margin-top: 60px;
+  max-width: 1100px;
+  margin-left: -10px;
+}
+
+.home-menu {
+  margin-top: 20px;
+  font-family: "Teko", sans-serif;
+  line-height: 0.8;
+
+  font-size: 40px;
+  margin-left: -10px;
+}
+
+.home-menu-item {
+  cursor: pointer;
+  display: inline-block;
+  margin-right: 20px;
+  border-radius: 5px;
+  padding: 10px 10px 5px 10px;
+}
+.home-menu-item:hover {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+.journal-content {
+  padding: 2rem 0;
+  color: white;
+  font-size: 1.25rem;
+  text-align: justify;
+}
+
+.journalpresentation {
+  columns: 2;
+  column-gap: 40px;
+
+  ::v-deep & p:first-child {
+    margin-top: 0;
+  }
+
+  ::v-deep & p:last-child {
+    margin-bottom: 0;
+  }
+
+  @media screen and (max-width: 1500px) {
+    columns: 1;
+  }
+}
+
+.main {
+  padding: 0 0px 4rem 0px;
+  background-color: rgba(70, 70, 70, 1);
+  z-index: 1;
+  width: 100%;
+}
+
+.collections {
+  width: 80%;
+  margin-left: 10%;
+  font-family: "Teko", sans-serif;
+  font-weight: 100;
+}
+
+.active {
+  font-weight: 300;
+  color: rgb(150, 240, 255);
+
+  .top & {
+    color: #009eb8;
+  }
+}
+
+.grouping-select {
+  font-family: "Teko", sans-serif;
+  font-size: 25px;
+  margin-top: 0px;
+  color: white;
 }
 
 .group {
-  margin-top: 3rem;
+  margin-top: 2rem;
+  color: white;
+  font-size: 20px;
 }
 
 .articles {
@@ -112,11 +275,16 @@ img {
   margin-right: -0.5rem;
 
   .teaser {
-    width: calc(50% - 0.5rem);
-    margin: 0 0.5rem 0.5rem 0;
+    transition: all 0.2s ease-in-out;
+    width: calc(33.33% - 0rem);
+    margin: 0 0rem 0rem 0;
     box-sizing: border-box;
 
-    @media screen and (max-width: 1000px) {
+    @media screen and (max-width: 1700px) {
+      width: calc(50% - 1rem);
+    }
+
+    @media screen and (max-width: 900px) {
       width: 100%;
     }
   }

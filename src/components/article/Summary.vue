@@ -51,7 +51,7 @@ export default {
 <style lang="scss" scoped>
 .article-summary {
   .summary-text {
-    margin: 1rem 0 1.5rem;
+    margin: 1rem 0 0.5rem;
     font-size: 1.1rem;
     font-weight: 100;
 
@@ -73,7 +73,6 @@ export default {
 
 .meta-table {
   width: 66.7%;
-  font-family: "Signika", sans-serif;
   text-align: left;
 
   th,
@@ -83,7 +82,7 @@ export default {
   }
 
   th {
-    font-weight: 400;
+    font-weight: 300;
     padding-right: 1rem;
   }
 

@@ -10,12 +10,15 @@
     }"
   >
     <div class="text">
-      <div class="title main">{{ article.title }}</div>
-      <div v-if="article.subtitle" class="title sub">
-        {{ article.subtitle }}
-      </div>
-      <div v-if="article.authors">
-        {{ commaAnd(article.authors.map(fullName)) }}
+      <div class="group">
+        <div class="title main">{{ article.title }}</div>
+        <div v-if="article.subtitle" class="title sub group">
+          {{ article.subtitle }}
+        </div>
+
+        <div v-if="article.authors" class="title author">
+          {{ commaAnd(article.authors.map(fullName)) }}
+        </div>
       </div>
     </div>
   </router-link>
@@ -53,14 +56,12 @@ export default {
 
 <style lang="scss" scoped>
 .teaser {
-  margin: 0.5rem 0;
-  height: 18rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  font-weight: 600;
+  margin: 0.5rem 10;
+  height: 12rem;
+
+  font-weight: 100;
   position: relative;
-  /* overflow: hidden; */
+  overflow: hidden;
   background-size: cover;
   background-position: center;
   cursor: pointer;
@@ -71,33 +72,67 @@ export default {
 }
 
 .text {
+  margin-left: 55%;
+  height: 100%;
   position: relative;
+  padding: 1rem 1rem 1rem;
   display: flex;
+  justify-content: center;
   flex-direction: column;
-  justify-content: flex-end;
-  padding: 0.5rem 0.5rem 0.2rem;
-  background: rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.85);
+  transition: all 0.2s ease-in-out;
   z-index: 20;
   top: 0;
-  transition: top 150ms ease;
+  cursor: pointer;
+}
+
+.title {
+  color: black;
+  font-family: "Yanone Kaffeesatz", sans-serif;
+}
+
+.main {
+  font-size: 35px;
+  font-weight: 600;
+  line-height: 1;
+  margin-top: 15px;
+}
+
+.sub {
+  font-size: 25px;
+  font-weight: 300;
+  line-height: 1;
+  display: none;
+  margin-top: 10px;
+}
+
+.author {
+  font-size: 15px;
+  margin-top: 30px;
+  font-weight: 300;
+  display: none;
+}
+
+.group {
 }
 
 .teaser:hover {
   z-index: 10;
-  box-shadow: 0 0 0.3rem rgba(0, 0, 0, 0.2);
-  &:not(.no-image) .text {
-    box-shadow: 0 0 0.3rem rgba(0, 0, 0, 0.2);
-    background: rgb(255, 255, 255);
-    position: relative;
-    top: 2rem;
+  cursor: pointer;
+  .text {
+    margin-left: 20%;
+    background: rgba(255, 255, 255, 0.95);
+    cursor: pointer;
   }
-}
-
-.main {
-  font-size: 120%;
-}
-
-.title {
-  margin: 0 0 0.2rem;
+  .group {
+  }
+  .author {
+    display: block;
+  }
+  .sub {
+    display: block;
+  }
+  .main {
+  }
 }
 </style>
