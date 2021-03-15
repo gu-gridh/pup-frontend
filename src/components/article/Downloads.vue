@@ -12,9 +12,9 @@
           Format:
           {{ download.ext.slice(1).toUpperCase() }}
         </div>
-        <div class="download-description">
+        <div v-if="download.size" class="download-description">
           File size:
-          {{ download.ext.slice(1).toUpperCase() }}
+          {{ size(download.size) }}
         </div>
       </div>
     </a>
@@ -22,12 +22,20 @@
 </template>
 
 <script>
+import filesize from "filesize";
 import { apiUrl } from "@/assets/api";
 
 export default {
   props: ["downloads"],
   methods: {
     apiUrl,
+    size(size) {
+      // If size is 273503 bytes, Strapi says `273.5`
+      // Express with suitable unit (KB, MB...)
+      const str = filesize(size * 1000 * 15, { round: 1 });
+      // Use regex to remove the decimal if more than 2 figures.
+      return str.replace(/(\d\d)\.\d+/, "$1");
+    },
   },
 };
 </script>
