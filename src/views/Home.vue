@@ -112,11 +112,9 @@ export default {
   font-family: "Yanone Kaffeesatz", sans-serif;
   padding-bottom: 4rem;
   width: 100%;
-  float: left;
 }
 
 .top {
-  float: left;
   width: 100%;
   background-color: rgba(255, 255, 255, 0.7);
   box-shadow: 10px 10px 20px 0px rgba(0, 0, 0, 0.2),
@@ -145,18 +143,15 @@ export default {
 }
 
 .journalheader {
-  padding: 50px 0px 40px 0px;
-  float: left;
-}
+  padding: 50px 0px 20px 0px;
 
-img {
-  width: 200px;
-
-  float: left;
+  img {
+    display: block;
+    width: 200px;
+  }
 }
 
 .title {
-  float: left;
   font-family: "Teko", sans-serif;
   font-weight: 100;
   font-size: 200px;
@@ -170,14 +165,14 @@ img {
   margin-top: 20px;
   font-family: "Teko", sans-serif;
   line-height: 0.8;
-  float: left;
+
   font-size: 40px;
   margin-left: -10px;
 }
 
 .home-menu-item {
   cursor: pointer;
-  float: left;
+  display: inline-block;
   margin-right: 20px;
   border-radius: 5px;
   padding: 10px 10px 5px 10px;
@@ -187,7 +182,6 @@ img {
 }
 
 .journalpresentation {
-  float: left;
   text-align: justify;
   display: none;
   //background-color:lightgray;//
@@ -201,7 +195,6 @@ img {
 }
 
 .main {
-  float: left;
   padding: 50px 0px 0px 0px;
   background-color: rgba(70, 70, 70, 1);
   z-index: 1;

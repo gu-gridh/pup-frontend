@@ -89,8 +89,7 @@ export default {
 
   .article-title {
     font-family: "Yanone Kaffeesatz", sans-serif;
-    margin: 1.5rem 0 0.5rem;
-    float: left;
+    margin: 3rem 0 0.5rem;
     text-align: left;
     width: 100%;
     font-weight: 100;

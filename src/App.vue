@@ -86,10 +86,9 @@ a.blind:hover {
 .VisualModule {
   width: 77%;
   margin-top: 30px;
-  margin-bottom: 60px;
+  margin-bottom: 30px;
   padding: 30px;
   margin-left: 9%;
-  float: left;
   border-radius: 15px;
   background-color: rgb(40, 40, 40);
   box-shadow: 0px 10px 30px 0px rgba(0, 0, 0, 0.2),
