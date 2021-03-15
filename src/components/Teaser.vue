@@ -73,10 +73,12 @@ export default {
 
 .text {
   margin-left: 55%;
-  with: 600px;
   height: 100%;
   position: relative;
   padding: 1rem 1rem 1rem;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
   background: rgba(255, 255, 255, 0.85);
   transition: all 0.2s ease-in-out;
   z-index: 20;
