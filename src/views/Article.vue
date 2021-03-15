@@ -12,7 +12,7 @@
       <Downloads :downloads="article.downloads" />
     </div>
 
-    <div v-if="article.images" class="VisualModule">
+    <div v-if="article.images && article.images.length" class="VisualModule">
       <MainGallery :images="article.images" />
     </div>
 
