@@ -10,18 +10,39 @@
           <img src="/biccs_2021.png" />
           <div class="title">{{ journal.title }}</div>
           <div class="home-menu">
-            <div class="home-menu-item">About BICCS</div>
-            <div class="home-menu-item">Contact</div>
+            <div
+              class="home-menu-item"
+              @click="toggleJournalPage('about')"
+              :class="{ active: journalPage === 'about' }"
+            >
+              About BICCS
+            </div>
+            <div
+              class="home-menu-item"
+              @click="toggleJournalPage('contact')"
+              :class="{ active: journalPage === 'contact' }"
+            >
+              Contact
+            </div>
           </div>
-          <div
-            class="journalpresentation"
-            v-html="parseMarkdown(journal.presentation)"
-          />
         </div>
       </div>
     </div>
 
     <div class="main">
+      <div class="container journal-content">
+        <div
+          v-if="journalPage === 'about'"
+          class="journalpresentation"
+          v-html="parseMarkdown(journal.presentation)"
+        />
+
+        <div
+          v-if="journalPage === 'contact'"
+          v-html="parseMarkdown(journal.contact)"
+        />
+      </div>
+
       <div class="collections">
         <div class="grouping-select">
           <label>Order articles by:</label>
@@ -77,6 +98,7 @@ export default {
   data() {
     return {
       journal: null,
+      journalPage: "",
       articles: null,
       grouping: "themes",
     };
@@ -91,6 +113,9 @@ export default {
     getArticles().then((articles) => (this.articles = articles));
   },
   methods: {
+    toggleJournalPage(name) {
+      this.journalPage = this.journalPage === name ? "" : name;
+    },
     groupByThemes() {
       this.grouping = "themes";
     },
@@ -179,13 +204,24 @@ export default {
   background-color: rgba(255, 255, 255, 0.5);
 }
 
-.journalpresentation {
+.journal-content {
+  padding: 2rem 0;
+  color: white;
+  font-size: 1.25rem;
   text-align: justify;
-  display: none;
-  //background-color:lightgray;//
-  //padding:0 30px 0 30px;//
+}
+
+.journalpresentation {
   columns: 2;
   column-gap: 40px;
+
+  ::v-deep & p:first-child {
+    margin-top: 0;
+  }
+
+  ::v-deep & p:last-child {
+    margin-bottom: 0;
+  }
 
   @media screen and (max-width: 1500px) {
     columns: 1;
@@ -193,7 +229,7 @@ export default {
 }
 
 .main {
-  padding: 50px 0px 4rem 0px;
+  padding: 0 0px 4rem 0px;
   background-color: rgba(70, 70, 70, 1);
   z-index: 1;
   width: 100%;
@@ -205,9 +241,14 @@ export default {
   font-family: "Teko", sans-serif;
   font-weight: 100;
 }
-.grouping-select span.active {
+
+.active {
   font-weight: 300;
   color: rgb(150, 240, 255);
+
+  .top & {
+    color: #009eb8;
+  }
 }
 
 .grouping-select {
