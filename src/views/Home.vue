@@ -72,14 +72,14 @@
         <div v-for="group in groups" :key="group.id" class="group">
           <h1>{{ group.heading }}</h1>
           <p>{{ group.description }}</p>
-          <div class="articles">
+          <div v-if="articles" class="articles">
             <Teaser
+              v-for="articlePartial of group.articles"
+              :key="articlePartial.id"
               :article="
-                articles.find((article2) => article.id === article2.id) ||
+                articles.find((article) => article.id === articlePartial.id) ||
                 article
               "
-              v-for="article of group.articles"
-              :key="article.id"
             />
           </div>
         </div>

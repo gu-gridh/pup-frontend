@@ -64,7 +64,6 @@ export default {
   },
   async created() {
     this.article = await getArticle(this.identifier, this.revision);
-    this.$store.commit("setArticleData", this.article);
     document.title = this.article.title;
     this.$store.commit("setHeader", {
       route: "/",

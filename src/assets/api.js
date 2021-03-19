@@ -1,25 +1,16 @@
 import axios from "axios";
-import qs from "qs";
+import { memoize } from "./util";
 
 const API_BASE = process.env.VUE_APP_API_BASE || "http://localhost:1337/";
 
-export function apiUrl(path, params = null) {
-  return (
-    API_BASE +
-    path.replace(/^\//, "") +
-    (params ? "?" + qs.stringify(params) : "")
-  );
-}
+export const apiUrl = (path) => API_BASE + path.replace(/^\//, "");
 
-export async function getJournal(id) {
-  return axios.get(apiUrl(`journals/${id}`)).then((response) => response.data);
-}
+export const get = async (endpoint, params) =>
+  (await axios.get(apiUrl(endpoint), { params })).data;
 
-export async function getArticles(params) {
-  return axios.get(apiUrl("articles", params)).then((resp) => resp.data);
-}
+export const getJournal = memoize((id) => get(`journals/${id}`));
 
-export async function getArticle(identifier, revision) {
-  const articles = await getArticles({ identifier, revision });
-  return articles.pop();
-}
+export const getArticles = memoize((params) => get("articles", params));
+
+export const getArticle = async (identifier, revision) =>
+  (await getArticles({ identifier, revision }))[0];
