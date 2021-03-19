@@ -4,7 +4,7 @@
       <div class="article-mainmeta">
         <MetaItem label="Publication date">{{ date }}</MetaItem>
         <MetaItem label="Version">
-          {{ revision }} ({{ revision_date }})
+          {{ revision }} ({{ revisionDate }})
         </MetaItem>
       </div>
 
@@ -47,7 +47,7 @@ export default {
     ...mapState({
       date: (state) => state.article.date,
       revision: (state) => state.article.revision,
-      revision_date: (state) => state.article.revision_date,
+      revisionDate: (state) => state.article.revisionDate,
       title: (state) => state.article.title,
       subtitle: (state) => state.article.subtitle,
       authors: (state) => state.article.authors,
