@@ -66,6 +66,10 @@ export default {
     this.article = await getArticle(this.identifier, this.revision);
     this.$store.commit("setArticleData", this.article);
     document.title = this.article.title;
+    this.$store.commit("setHeader", {
+      route: "/",
+      label: "Biennial International Conference for the Craft Sciences 2021",
+    });
   },
 };
 </script>

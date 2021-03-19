@@ -7,7 +7,7 @@
 
       <div class="container">
         <div class="journalheader">
-          <img src="/biccs_2021.png" />
+          <img src="/biccs_2021-s.png" />
           <div class="title">{{ journal.title }}</div>
           <div class="home-menu">
             <div
@@ -114,8 +114,17 @@ export default {
     },
   },
   created() {
-    getJournal(1).then((journal) => (this.journal = journal));
+    getJournal(1).then((journal) => {
+      this.journal = journal;
+      document.title = this.journal.title;
+    });
+
     getArticles().then((articles) => (this.articles = articles));
+
+    this.$store.commit("setHeader", {
+      href: "https://craftsciencesconference.com/",
+      label: "Biennial International Conference for the Craft Sciences",
+    });
   },
   methods: {
     toggleJournalPage(name) {

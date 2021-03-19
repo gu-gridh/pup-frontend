@@ -2,17 +2,24 @@
   <aside id="header">
     <!-- <div class="left"></div> -->
     <div class="middle">
-      <router-link to="/">
-        Biennial International Conference for the Craft Sciences
+      <router-link v-if="header.route" :to="header.route">
+        {{ header.label }}
       </router-link>
+      <a v-if="header.href" :href="header.href" :target="header.target || ''">
+        {{ header.label }}
+      </a>
     </div>
     <!-- <div class="right"></div> -->
   </aside>
 </template>
 
 <script>
+import { mapState } from "vuex";
 export default {
   name: "Header",
+  computed: {
+    ...mapState(["header"]),
+  },
 };
 </script>
 
