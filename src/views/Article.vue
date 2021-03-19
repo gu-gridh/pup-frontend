@@ -8,7 +8,7 @@
       <MainVideo :guplay-id="article.guplayId" />
     </div>
 
-    <div class="container">
+    <div v-if="article.downloads" class="container">
       <Downloads :downloads="article.downloads" />
     </div>
 
