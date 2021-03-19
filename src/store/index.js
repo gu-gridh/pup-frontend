@@ -5,11 +5,15 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    header: {}
+    header: {},
+    article: null
   },
   mutations: {
     setHeader(state, header) {
       state.header = header;
+    },
+    setArticle(state, article) {
+      state.article = article;
     }
   }
 });

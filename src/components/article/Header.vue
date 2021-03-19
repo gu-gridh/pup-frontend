@@ -34,6 +34,7 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 import { apiUrl } from "@/assets/api";
 import { commaAnd, fullName } from "@/assets/util";
 import MetaItem from "@/components/article/MetaItem";
@@ -42,8 +43,15 @@ import CommaAnd from "@/components/CommaAnd";
 export default {
   name: "Header",
   components: { MetaItem, CommaAnd },
-  props: ["date", "revision", "revision_date", "title", "subtitle", "authors"],
   computed: {
+    ...mapState({
+      date: (state) => state.article.date,
+      revision: (state) => state.article.revision,
+      revision_date: (state) => state.article.revision_date,
+      title: (state) => state.article.title,
+      subtitle: (state) => state.article.subtitle,
+      authors: (state) => state.article.authors,
+    }),
     affiliations() {
       return this.uniq(
         this.authors.map((author) => author.affiliation).filter(Boolean)

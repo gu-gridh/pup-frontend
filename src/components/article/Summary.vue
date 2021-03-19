@@ -27,16 +27,22 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 import showdown from "showdown";
 import { commaAnd, lastnameFirst } from "@/assets/util";
-import MetaItem from "@/components/article/MetaItem";
 
 const showdownConverter = new showdown.Converter();
 
 export default {
-  props: ["summary", "keywords", "authors", "date", "title", "revision"],
-  components: {
-    MetaItem,
+  computed: {
+    ...mapState({
+      summary: (state) => state.article.summary,
+      keywords: (state) => state.article.keywords,
+      authors: (state) => state.article.authors,
+      date: (state) => state.article.date,
+      title: (state) => state.article.title,
+      revision: (state) => state.article.revision,
+    }),
   },
   methods: {
     commaAnd,

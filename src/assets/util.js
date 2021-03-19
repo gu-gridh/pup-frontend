@@ -12,6 +12,12 @@ export function lastnameFirst({ firstname, lastname }) {
   return `${lastname}, ${firstname}`;
 }
 
+/**
+ * Make an object out of keys and a value factory.
+ */
+export const mapToObj = (keys, makeValue) =>
+  keys.reduce((obj, key) => ({ ...obj, [key]: makeValue(key) }));
+
 /** Deterministically converts a string to a friendly CSS color. */
 export function strToColor(str) {
   const hue =

@@ -1,8 +1,8 @@
 <template>
   <article v-if="article" class="full-article">
-    <Header v-bind="article" />
+    <Header />
 
-    <Summary v-bind="article" />
+    <Summary />
 
     <div v-if="article.guplayId" class="VisualModule">
       <MainVideo :guplay-id="article.guplayId" />
@@ -44,6 +44,7 @@ import Summary from "@/components/article/Summary";
 import Downloads from "@/components/article/Downloads";
 import ContentSection from "@/components/article/ContentSection";
 import References from "@/components/article/References";
+import { mapState } from "vuex";
 
 export default {
   name: "Article",
@@ -57,14 +58,13 @@ export default {
     References,
   },
   props: ["identifier", "revision"],
-  data() {
-    return {
-      article: null,
-    };
+  computed: {
+    ...mapState(["article"]),
   },
   async created() {
-    this.article = await getArticle(this.identifier, this.revision);
-    document.title = this.article.title;
+    const article = await getArticle(this.identifier, this.revision);
+    document.title = article.title;
+    this.$store.commit("setArticle", article);
     this.$store.commit("setHeader", {
       route: "/",
       label: "Biennial International Conference for the Craft Sciences 2021",
