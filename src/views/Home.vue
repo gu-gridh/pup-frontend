@@ -32,18 +32,20 @@
     <div class="main">
       <div class="container journal-content">
         <TransitionExpand>
-          <div
-            v-if="journalPage === 'about'"
-            class="journalpresentation"
-            v-html="parseMarkdown(journal.presentation)"
-          />
+          <div v-if="journalPage === 'about'">
+            <h2>About BICCS</h2>
+            <div
+              v-html="parseMarkdown(journal.presentation)"
+              class="journalpresentation"
+            />
+          </div>
         </TransitionExpand>
 
         <TransitionExpand>
-          <div
-            v-if="journalPage === 'contact'"
-            v-html="parseMarkdown(journal.contact)"
-          />
+          <div v-if="journalPage === 'contact'">
+            <h2>Contact</h2>
+            <div v-html="parseMarkdown(journal.contact)" />
+          </div>
         </TransitionExpand>
       </div>
 
