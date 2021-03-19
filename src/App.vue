@@ -4,14 +4,16 @@
     <keep-alive>
       <router-view />
     </keep-alive>
+    <Footer />
   </div>
 </template>
 
 <script>
-import Header from "@/components/Header";
+import Header from "@/components/Header.vue";
+import Footer from "@/components/Footer.vue";
 
 export default {
-  components: { Header },
+  components: { Header, Footer },
 };
 </script>
 
@@ -119,5 +121,9 @@ code {
 
 iframe {
   border: none;
+}
+
+img {
+  max-width: 100%;
 }
 </style>

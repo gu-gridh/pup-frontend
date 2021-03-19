@@ -67,7 +67,7 @@ export default {
   created() {
     this.load();
   },
-  unmounted() {
+  deactivated() {
     this.$store.commit("setArticle", null);
   },
   methods: {
