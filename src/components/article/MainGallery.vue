@@ -11,9 +11,7 @@
       v-masonry-tile
       class="images-item"
     >
-      <a :href="apiUrl(image.formats.large.url)">
-        <img :src="apiUrl(image.formats.small.url)"
-      /></a>
+      <img :src="apiUrl(image.formats.small.url)" />
     </div>
   </div>
 </template>

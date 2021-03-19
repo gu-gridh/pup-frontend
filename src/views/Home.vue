@@ -116,19 +116,25 @@ export default {
     },
   },
   created() {
-    getJournal(1).then((journal) => {
-      this.journal = journal;
-      document.title = this.journal.title;
-    });
-
-    getArticles().then((articles) => (this.articles = articles));
-
-    this.$store.commit("setHeader", {
-      href: "https://craftsciencesconference.com/",
-      label: "Biennial International Conference for the Craft Sciences",
-    });
+    this.load();
+  },
+  activated() {
+    this.load();
   },
   methods: {
+    load() {
+      getJournal(1).then((journal) => {
+        this.journal = journal;
+        document.title = this.journal.title;
+      });
+
+      getArticles().then((articles) => (this.articles = articles));
+
+      this.$store.commit("setHeader", {
+        href: "https://craftsciencesconference.com/",
+        label: "Biennial International Conference for the Craft Sciences",
+      });
+    },
     toggleJournalPage(name) {
       this.journalPage = this.journalPage === name ? "" : name;
     },
@@ -197,7 +203,11 @@ export default {
   line-height: 0.75;
   margin-top: 60px;
   max-width: 1100px;
-  margin-left: -10px;
+  margin-left: -0.05em;
+
+  @media screen and (max-width: 1200px) {
+    font-size: 14vw;
+  }
 }
 
 .home-menu {

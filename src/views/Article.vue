@@ -61,14 +61,25 @@ export default {
   computed: {
     ...mapState(["article"]),
   },
-  async created() {
-    const article = await getArticle(this.identifier, this.revision);
-    document.title = article.title;
-    this.$store.commit("setArticle", article);
-    this.$store.commit("setHeader", {
-      route: "/",
-      label: "Biennial International Conference for the Craft Sciences 2021",
-    });
+  activated() {
+    this.load();
+  },
+  created() {
+    this.load();
+  },
+  unmounted() {
+    this.$store.commit("setArticle", null);
+  },
+  methods: {
+    async load() {
+      this.$store.commit("setHeader", {
+        route: "/",
+        label: "Biennial International Conference for the Craft Sciences 2021",
+      });
+      const article = await getArticle(this.identifier, this.revision);
+      this.$store.commit("setArticle", article);
+      document.title = article.title;
+    },
   },
 };
 </script>
