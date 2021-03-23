@@ -1,62 +1,124 @@
 <template>
-  <div>
-    <Nuxt />
+  <div id="app">
+    <Header />
+    <keep-alive>
+      <Nuxt />
+    </keep-alive>
+    <Footer />
   </div>
 </template>
 
-<style>
+<script>
+export default {}
+</script>
+
+<style lang="scss">
+@import url('https://fonts.googleapis.com/css2?family=Teko:wght@300;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Yanone+Kaffeesatz:wght@200;300&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
 html {
-  font-family:
-    'Source Sans Pro',
-    -apple-system,
-    BlinkMacSystemFont,
-    'Segoe UI',
-    Roboto,
-    'Helvetica Neue',
-    Arial,
-    sans-serif;
-  font-size: 16px;
-  word-spacing: 1px;
-  -ms-text-size-adjust: 100%;
-  -webkit-text-size-adjust: 100%;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
-  box-sizing: border-box;
-}
+  font-size: 20px;
 
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
+  @media screen and (max-width: 1000px) {
+    font-size: 18px;
+  }
+}
+body {
+  color: black;
+  background: white;
+  font-family: 'Yanone Kaffeesatz', sans-serif;
+  font-weight: 100;
+  line-height: 1.3;
   margin: 0;
+  width: 100%;
 }
 
-.button--green {
-  display: inline-block;
-  border-radius: 4px;
-  border: 1px solid #3b8070;
-  color: #3b8070;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Yanone Kaffeesatz', sans-serif;
+  font-weight: 100;
+}
+
+.title {
+  font-family: 'Teko', sans-serif;
+  font-weight: 100;
+  line-height: 1.3;
+}
+
+h1 {
+  font-size: 2rem;
+  line-height: 1.5;
+  margin-top: 4rem;
+}
+h2 {
+  font-size: 2rem;
+  line-height: 0.5;
+}
+
+a,
+a:hover {
+  color: #159cea;
   text-decoration: none;
-  padding: 10px 30px;
+}
+a.blind,
+a.blind:hover {
+  color: inherit;
+  text-decoration: inherit;
+}
+.popout {
+  position: relative;
+  display: block;
+  transition: transform 150ms ease;
+  &:hover {
+    transform: scale(1.02);
+    z-index: 3;
+  }
 }
 
-.button--green:hover {
-  color: #fff;
-  background-color: #3b8070;
+.VisualModule {
+  width: 82%;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  padding: 30px;
+  margin-left: 9%;
+  border-radius: 15px;
+  background-color: rgb(40, 40, 40);
+  box-shadow: 0px 10px 30px 0px rgba(0, 0, 0, 0.2),
+    0 6px 40px 0 rgba(0, 0, 0, 0.19);
 }
 
-.button--grey {
-  display: inline-block;
-  border-radius: 4px;
-  border: 1px solid #35495e;
-  color: #35495e;
-  text-decoration: none;
-  padding: 10px 30px;
-  margin-left: 15px;
+.container {
+  width: 95%;
+  margin: auto;
+
+  &:not(.snug) {
+    padding: 1rem 0;
+  }
+
+  @media screen and (min-width: 600px) {
+    width: 80%;
+  }
 }
 
-.button--grey:hover {
-  color: #fff;
-  background-color: #35495e;
+pre,
+code {
+  font-family: 'Yanone Kaffeesatz', sans-serif;
+  font-size: 0.9em;
+}
+
+iframe {
+  border: none;
+}
+
+img {
+  max-width: 100%;
 }
 </style>
