@@ -2,10 +2,10 @@
   <header class="article-header">
     <div class="container">
       <div class="article-mainmeta">
-        <MetaItem label="Publication date">{{ date }}</MetaItem>
-        <MetaItem label="Version">
+        <ArticleMetaItem label="Publication date">{{ date }}</ArticleMetaItem>
+        <ArticleMetaItem label="Version">
           {{ revision }} ({{ revisionDate }})
-        </MetaItem>
+        </ArticleMetaItem>
       </div>
 
       <h1 class="article-title title">{{ title }}</h1>
@@ -37,12 +37,9 @@
 import { mapState } from 'vuex'
 import { apiUrl } from '@/assets/api'
 import { commaAnd, fullName } from '@/assets/util'
-import MetaItem from '@/components/article/MetaItem'
-import CommaAnd from '@/components/CommaAnd'
 
 export default {
   name: 'Header',
-  components: { MetaItem, CommaAnd },
   computed: {
     ...mapState({
       date: (state) => state.article.date,

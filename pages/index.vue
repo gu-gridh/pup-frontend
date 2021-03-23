@@ -95,14 +95,11 @@
 <script>
 import showdown from 'showdown'
 import { getJournal, getArticles } from '@/assets/api'
-import TransitionExpand from '@/components/TransitionExpand'
-import Teaser from '@/components/Teaser'
 
 const showdownConverter = new showdown.Converter()
 
 export default {
   name: 'Home',
-  components: { TransitionExpand, Teaser },
   async asyncData({ store }) {
     const journal = await getJournal(1)
     const articles = await getArticles()

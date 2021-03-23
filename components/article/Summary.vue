@@ -7,20 +7,22 @@
 
     <div class="container">
       <table class="meta-table">
-        <tr>
-          <th>Keywords:</th>
-          <td>{{ keywords.map((keyword) => keyword.label).join(', ') }}</td>
-        </tr>
-        <tr>
-          <th>Cite as:</th>
-          <td>
-            {{ commaAnd(authors.map(lastnameFirst)) }}
-            ({{ date.slice(0, 4) }})
-            <em>{{ title }}.</em>
-            Biennial International Conference for the Craft Sciences. Version
-            {{ revision }}. https://pup-demo.dh.gu.se{{ $route.path }}
-          </td>
-        </tr>
+        <tbody>
+          <tr>
+            <th>Keywords:</th>
+            <td>{{ keywords.map((keyword) => keyword.label).join(', ') }}</td>
+          </tr>
+          <tr>
+            <th>Cite as:</th>
+            <td>
+              {{ commaAnd(authors.map(lastnameFirst)) }}
+              ({{ date.slice(0, 4) }})
+              <em>{{ title }}.</em>
+              Biennial International Conference for the Craft Sciences. Version
+              {{ revision }}. https://pup-demo.dh.gu.se{{ $route.path }}
+            </td>
+          </tr>
+        </tbody>
       </table>
     </div>
   </div>
