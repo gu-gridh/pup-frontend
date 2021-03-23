@@ -18,7 +18,7 @@
             ({{ date.slice(0, 4) }})
             <em>{{ title }}.</em>
             Biennial International Conference for the Craft Sciences. Version
-            {{ revision }}. https://pup-demo.dh.gu.se{{ $route.path }}
+            {{ revision }}. https://biccs.dh.gu.se{{ $route.path }}
           </td>
         </tr>
       </table>
