@@ -180,7 +180,7 @@ export default {
   position: absolute;
   width: 100%;
   height: 100%;
-  object-fit: fill;
+  object-fit: cover;
   opacity: 0.2;
   transform: translateZ(0);
   overflow: hidden;
