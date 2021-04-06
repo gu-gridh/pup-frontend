@@ -89,8 +89,4 @@ export default {
   /* Make bottom margin match side margin */
   margin: 0 0 10vw;
 }
-
-.container {
-  width: 80%;
-}
 </style>

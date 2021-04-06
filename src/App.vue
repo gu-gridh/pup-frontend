@@ -89,15 +89,17 @@ a.blind:hover {
 }
 
 .VisualModule {
-  width: 82%;
-  margin-top: 30px;
-  margin-bottom: 30px;
+  width: 97%;
+  margin: 30px auto;
   padding: 30px;
-  margin-left: 9%;
   border-radius: 15px;
   background-color: rgb(40, 40, 40);
   box-shadow: 0px 10px 30px 0px rgba(0, 0, 0, 0.2),
     0 6px 40px 0 rgba(0, 0, 0, 0.19);
+
+  @media screen and (min-width: 600px) {
+    width: 82%;
+  }
 }
 
 .container {

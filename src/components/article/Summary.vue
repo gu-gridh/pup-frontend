@@ -78,7 +78,6 @@ export default {
 }
 
 .meta-table {
-  width: 66.7%;
   text-align: left;
 
   th,
@@ -97,6 +96,10 @@ export default {
     td {
       padding-bottom: 1rem;
     }
+  }
+
+  @media screen and (min-width: 800px) {
+    width: 66.7%;
   }
 }
 </style>
