@@ -135,4 +135,16 @@ export default {
   .main {
   }
 }
+
+@media screen and (max-width: 600px) {
+  .text,
+  .teaser:hover .text {
+    margin-left: 0;
+  }
+
+  .author,
+  .sub {
+    display: block;
+  }
+}
 </style>
