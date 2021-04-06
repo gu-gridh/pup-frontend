@@ -49,7 +49,7 @@
         </TransitionExpand>
       </div>
 
-      <div class="collections">
+      <div class="collections container">
         <div class="grouping-select">
           <label>Order articles by:</label>
           <span
@@ -262,8 +262,6 @@ export default {
 }
 
 .collections {
-  width: 80%;
-  margin-left: 10%;
   font-family: "Teko", sans-serif;
   font-weight: 100;
 }
@@ -293,10 +291,10 @@ export default {
 .articles {
   display: flex;
   flex-wrap: wrap;
-  margin-right: -0.5rem;
 
   .teaser {
     transition: all 0.2s ease-in-out;
+    min-width: 400px;
     width: 33.33%;
     margin: 0;
 
@@ -304,7 +302,7 @@ export default {
       width: 50%;
     }
 
-    @media screen and (max-width: 900px) {
+    @media screen and (max-width: 1200px) {
       width: 100%;
     }
   }
