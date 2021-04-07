@@ -14,11 +14,16 @@
         <tr>
           <th>Cite as:</th>
           <td>
-            {{ commaAnd(authors.map(lastnameFirst)) }}
-            ({{ date.slice(0, 4) }})
-            <em>{{ title }}.</em>
-            Biennial International Conference for the Craft Sciences. Version
-            {{ revision }}. https://biccs.dh.gu.se{{ $route.path }}
+            <template v-if="citeAs">
+              {{ citeAs }}
+            </template>
+            <template v-else>
+              {{ commaAnd(authors.map(lastnameFirst)) }}
+              ({{ date.slice(0, 4) }})
+              <em>{{ title }}.</em>
+              Biennial International Conference for the Craft Sciences. Version
+              {{ revision }}. https://biccs.dh.gu.se{{ $route.path }}
+            </template>
           </td>
         </tr>
       </table>
@@ -38,6 +43,7 @@ export default {
     ...mapState({
       abstract: (state) => state.article.abstract,
       keywords: (state) => state.article.keywords,
+      citeAs: (state) => state.article.citeAs,
       authors: (state) => state.article.authors,
       date: (state) => state.article.date,
       title: (state) => state.article.title,
