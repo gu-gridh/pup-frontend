@@ -261,11 +261,6 @@ export default {
   width: 100%;
 }
 
-.collections {
-  font-family: "Teko", sans-serif;
-  font-weight: 100;
-}
-
 .active {
   font-weight: 300;
   color: rgb(150, 240, 255);
@@ -277,6 +272,7 @@ export default {
 
 .grouping-select {
   font-family: "Teko", sans-serif;
+  font-weight: 100;
   font-size: 25px;
   margin-top: 0px;
   color: white;
