@@ -2,7 +2,7 @@
   <article v-if="article" class="full-article">
     <Header />
 
-    <Summary />
+    <Abstract />
 
     <div v-if="article.guplayId" class="VisualModule">
       <MainVideo :guplay-id="article.guplayId" />
@@ -37,13 +37,13 @@
 
 <script>
 import { getArticle } from "@/assets/api";
-import Header from "@/components/article/Header";
-import MainVideo from "@/components/article/MainVideo";
-import MainGallery from "@/components/article/MainGallery";
-import Summary from "@/components/article/Summary";
-import Downloads from "@/components/article/Downloads";
-import ContentSection from "@/components/article/ContentSection";
-import References from "@/components/article/References";
+import Header from "@/components/article/Header.vue";
+import MainVideo from "@/components/article/MainVideo.vue";
+import MainGallery from "@/components/article/MainGallery.vue";
+import Abstract from "@/components/article/Abstract.vue";
+import Downloads from "@/components/article/Downloads.vue";
+import ContentSection from "@/components/article/ContentSection.vue";
+import References from "@/components/article/References.vue";
 import { mapState } from "vuex";
 
 export default {
@@ -52,7 +52,7 @@ export default {
     Header,
     MainVideo,
     MainGallery,
-    Summary,
+    Abstract,
     Downloads,
     ContentSection,
     References,

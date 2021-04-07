@@ -1,8 +1,8 @@
 <template>
   <div>
-    <div class="container article-summary">
-      <h2>Summary</h2>
-      <div class="summary-text" v-html="parseMarkdown(summary)" />
+    <div class="container article-abstract">
+      <h2>Abstract</h2>
+      <div class="abstract-text" v-html="parseMarkdown(abstract)" />
     </div>
 
     <div class="container">
@@ -36,7 +36,7 @@ const showdownConverter = new showdown.Converter();
 export default {
   computed: {
     ...mapState({
-      summary: (state) => state.article.summary,
+      abstract: (state) => state.article.abstract,
       keywords: (state) => state.article.keywords,
       authors: (state) => state.article.authors,
       date: (state) => state.article.date,
@@ -55,8 +55,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.article-summary {
-  .summary-text {
+.article-abstract {
+  .abstract-text {
     margin: 1rem 0 0.5rem;
     font-size: 1.1rem;
     font-weight: 100;
