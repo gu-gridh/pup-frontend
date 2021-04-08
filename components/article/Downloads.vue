@@ -44,6 +44,7 @@ export default {
 .article-downloads {
   display: flex;
   flex-wrap: wrap;
+  margin-right: -1rem;
 
   .downloadmeta {
     padding: 0rem;
@@ -80,7 +81,7 @@ export default {
   }
 
   @media screen and (max-width: 600px) {
-    margin-right: -2rem;
+    margin-right: 0;
 
     .download {
       width: 100%;

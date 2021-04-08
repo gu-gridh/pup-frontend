@@ -1,7 +1,7 @@
 <template>
   <nuxt-link
     tag="div"
-    :to="`/${article.identifier}/${article.revision}`"
+    :to="`/${journalName}/${article.identifier}/${article.revision}`"
     class="teaser"
     :class="{ 'no-image': !image }"
     :style="{
@@ -30,7 +30,7 @@ import { apiUrl } from '@/assets/api'
 
 export default {
   name: 'Teaser',
-  props: ['article'],
+  props: ['journalName', 'article'],
   computed: {
     image() {
       return this.article.image && apiUrl(this.article.image.formats.large.url)
@@ -124,6 +124,18 @@ export default {
     display: block;
   }
   .main {
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .text,
+  .teaser:hover .text {
+    margin-left: 0;
+  }
+
+  .author,
+  .sub {
+    display: block;
   }
 }
 </style>

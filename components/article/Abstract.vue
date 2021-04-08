@@ -1,8 +1,8 @@
 <template>
   <div>
-    <div class="container article-summary">
-      <h2>Summary</h2>
-      <div class="summary-text" v-html="parseMarkdown(summary)" />
+    <div class="container article-abstract">
+      <h2>Abstract</h2>
+      <div class="abstract-text" v-html="parseMarkdown(abstract)" />
     </div>
 
     <div class="container">
@@ -15,11 +15,17 @@
           <tr>
             <th>Cite as:</th>
             <td>
-              {{ commaAnd(authors.map(lastnameFirst)) }}
-              ({{ date.slice(0, 4) }})
-              <em>{{ title }}.</em>
-              Biennial International Conference for the Craft Sciences. Version
-              {{ revision }}. https://pup-demo.dh.gu.se{{ $route.path }}
+              <template v-if="citeAs">
+                {{ citeAs }}
+              </template>
+              <template v-else>
+                {{ commaAnd(authors.map(lastnameFirst)) }}
+                ({{ date.slice(0, 4) }})
+                <em>{{ title }}.</em>
+                Biennial International Conference for the Craft Sciences.
+                Version
+                {{ revision }}. https://biccs.dh.gu.se{{ $route.path }}
+              </template>
             </td>
           </tr>
         </tbody>
@@ -38,8 +44,9 @@ const showdownConverter = new showdown.Converter()
 export default {
   computed: {
     ...mapState({
-      summary: (state) => state.article.summary,
+      abstract: (state) => state.article.abstract,
       keywords: (state) => state.article.keywords,
+      citeAs: (state) => state.article.citeAs,
       authors: (state) => state.article.authors,
       date: (state) => state.article.date,
       title: (state) => state.article.title,
@@ -57,8 +64,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.article-summary {
-  .summary-text {
+.article-abstract {
+  .abstract-text {
     margin: 1rem 0 0.5rem;
     font-size: 1.1rem;
     font-weight: 100;
@@ -80,7 +87,6 @@ export default {
 }
 
 .meta-table {
-  width: 66.7%;
   text-align: left;
 
   th,
@@ -99,6 +105,10 @@ export default {
     td {
       padding-bottom: 1rem;
     }
+  }
+
+  @media screen and (min-width: 800px) {
+    width: 66.7%;
   }
 }
 </style>

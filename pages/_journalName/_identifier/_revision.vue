@@ -2,7 +2,7 @@
   <article v-if="article" class="full-article">
     <ArticleHeader />
 
-    <ArticleSummary />
+    <ArticleAbstract />
 
     <div v-if="article.guplayId" class="VisualModule">
       <LazyArticleMainVideo :guplay-id="article.guplayId" />
@@ -41,12 +41,11 @@ import { mapState } from 'vuex'
 
 export default {
   name: 'Article',
-  props: ['identifier', 'revision'],
   async asyncData({ params, store }) {
     const article = await getArticle(params.identifier, params.revision)
     store.commit('setArticle', article)
     store.commit('setHeader', {
-      route: '/',
+      route: `/${params.journalName}`,
       label: 'Biennial International Conference for the Craft Sciences 2021',
     })
   },
@@ -68,9 +67,5 @@ export default {
 .full-article {
   /* Make bottom margin match side margin */
   margin: 0 0 10vw;
-}
-
-.container {
-  width: 80%;
 }
 </style>

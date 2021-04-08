@@ -1,7 +1,6 @@
 <template>
   <aside id="header">
-    <!-- <div class="left"></div> -->
-    <div class="middle">
+    <div class="container">
       <nuxt-link v-if="header.route" :to="header.route">
         {{ header.label }}
       </nuxt-link>
@@ -9,7 +8,6 @@
         {{ header.label }}
       </a>
     </div>
-    <!-- <div class="right"></div> -->
   </aside>
 </template>
 
@@ -30,10 +28,11 @@ export default {
   font-family: 'Teko', sans-serif;
   font-size: 30px;
   display: flex;
-  padding: 20px 10%;
 
   @media screen and (max-width: 600px) {
-    padding: 10px 10%;
+    .container {
+      padding: 10px 0;
+    }
   }
 }
 
@@ -43,19 +42,5 @@ a {
     color: white;
     text-decoration: underline;
   }
-}
-
-.left,
-.right {
-  width: 10%;
-  text-align: right;
-}
-
-.middle {
-  flex: 2;
-}
-
-.right {
-  flex: 1;
 }
 </style>

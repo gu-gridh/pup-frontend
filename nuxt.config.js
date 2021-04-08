@@ -28,10 +28,7 @@ export default {
 
   css: [],
 
-  plugins: [
-    { src: '~plugins/vue-js-toggle-button', mode: 'client' },
-    { src: '~plugins/vue-masonry', mode: 'client' },
-  ],
+  plugins: [{ src: '~plugins/vue-js-toggle-button', mode: 'client' }],
 
   components: true,
 
