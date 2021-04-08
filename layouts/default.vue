@@ -13,9 +13,6 @@ export default {}
 </script>
 
 <style lang="scss">
-@import url('https://fonts.googleapis.com/css2?family=Teko:wght@300;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Yanone+Kaffeesatz:wght@200;300&display=swap');
-
 * {
   box-sizing: border-box;
 }

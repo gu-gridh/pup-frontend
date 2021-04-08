@@ -1,5 +1,5 @@
 export default {
-  target: 'static',
+  target: 'server',
 
   head: {
     title: 'Biennial International Conference for the Craft Sciences',
@@ -11,7 +11,19 @@ export default {
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: '' },
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+    link: [
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      {
+        rel: 'stylesheet',
+        href:
+          'https://fonts.googleapis.com/css2?family=Teko:wght@300;700&display=swap',
+      },
+      {
+        rel: 'stylesheet',
+        href:
+          'https://fonts.googleapis.com/css2?family=Yanone+Kaffeesatz:wght@200;300&display=swap',
+      },
+    ],
   },
 
   css: [],
