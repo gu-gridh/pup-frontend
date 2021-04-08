@@ -57,7 +57,7 @@ export default {
     ContentSection,
     References,
   },
-  props: ["identifier", "revision"],
+  props: ["journalName", "identifier", "revision"],
   computed: {
     ...mapState(["article"]),
   },
