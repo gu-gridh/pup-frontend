@@ -1,19 +1,21 @@
 <template>
   <div class="main-gallery">
     <div v-for="image in images" :key="image.id" class="images-item">
-      <img :src="apiUrl(image.formats.small.url)" />
+      <img :src="imageUrl(image)" />
     </div>
   </div>
 </template>
 
 <script>
-import { apiUrl } from "@/assets/api";
+import { apiUrl, getImageAtLeast } from "@/assets/api";
 
 export default {
   name: "MainGallery",
   props: ["images"],
   methods: {
-    apiUrl,
+    imageUrl(image) {
+      return apiUrl(getImageAtLeast(image, 1000).url);
+    },
   },
 };
 </script>

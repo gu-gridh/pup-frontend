@@ -21,3 +21,13 @@ export const getArticles = memoize((params) => get("articles", params));
 
 export const getArticle = async (identifier, revision) =>
   (await getArticles({ identifier, revision }))[0];
+
+export const getImageAtLeast = (imageValue, width, height = 0) => {
+  const format = ["thumbnail", "small", "medium", "large"].find(
+    (format) =>
+      imageValue.formats[format] &&
+      imageValue.formats[format].width > width &&
+      imageValue.formats[format].height > height
+  );
+  return imageValue.formats[format] || imageValue;
+};
