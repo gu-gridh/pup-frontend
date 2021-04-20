@@ -14,7 +14,7 @@ export default {
   props: ["images"],
   methods: {
     imageUrl(image) {
-      return apiUrl(getImageAtLeast(image, 1000).url);
+      return image && apiUrl(getImageAtLeast(image, 1000).url);
     },
   },
 };
