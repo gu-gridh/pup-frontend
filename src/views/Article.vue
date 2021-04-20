@@ -4,9 +4,12 @@
 
     <Abstract />
 
-    <div v-if="article.guplayId" class="VisualModule">
-      <MainVideo :guplay-id="article.guplayId" />
-    </div>
+    <MainVideo
+      v-for="guplayRef in article.guplayRef"
+      :key="guplayRef.id"
+      :guplay-id="guplayRef.guplayId"
+      :title="guplayRef.title"
+    />
 
     <div v-if="article.downloads" class="container">
       <Downloads :downloads="article.downloads" />

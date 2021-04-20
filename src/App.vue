@@ -94,11 +94,16 @@ a.blind:hover {
   padding: 30px;
   border-radius: 15px;
   background-color: rgb(40, 40, 40);
+  color: white;
   box-shadow: 0px 10px 30px 0px rgba(0, 0, 0, 0.2),
     0 6px 40px 0 rgba(0, 0, 0, 0.19);
 
   @media screen and (min-width: 600px) {
     width: 82%;
+  }
+
+  > :first-child {
+    margin-top: 0;
   }
 }
 
