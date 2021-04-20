@@ -89,12 +89,10 @@ border-radius:0px;
   transition: all 0.2s ease-in-out;
   z-index: 20;
   top: 0;
-  border-style:solid;
-  border-width:0px 0px 0px 0.5px;
-  border-color:black;
+
   cursor: pointer;
   text-align:left;
-    box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.2), 0 6px 40px 0 rgba(0, 0, 0, 0.19);
+    box-shadow: 0px 0px 20px 10px rgba(0, 0, 0, 0.2), 0 0px 40px 10px rgba(0, 0, 0, 0.19);
 }
 
 .title {
