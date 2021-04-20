@@ -294,8 +294,6 @@ export default {
     min-width: 400px;
     width: 33.3%;
     margin-bottom: 10px;
-   
-  
 
     @media screen and (max-width: 1700px) {
       width: 50%;

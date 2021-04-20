@@ -61,16 +61,14 @@ export default {
 .teaser {
   margin: 0.5rem 10;
   height: 15rem;
-border-radius:0px;
+  border-radius: 0px;
   font-weight: 100;
   position: relative;
   overflow: hidden;
   background-size: cover;
   background-position: center;
   cursor: pointer;
- 
 }
-
 
 .no-image {
   background-color: #f4f4f4;
@@ -80,21 +78,22 @@ border-radius:0px;
   margin-left: 55%;
   height: 100%;
   position: relative;
-  color:white;
+  color: white;
   padding: 1rem 1rem 1rem;
   display: flex;
   justify-content: center;
   flex-direction: column;
-  background: rgba(0, 0, 0, 0.80);
+  background: rgba(0, 0, 0, 0.8);
   transition: all 0.2s ease-in-out;
   z-index: 20;
   top: 0;
-  border-style:solid;
-  border-width:0px 0px 0px 0.5px;
-  border-color:black;
+  border-style: solid;
+  border-width: 0px 0px 0px 0.5px;
+  border-color: black;
   cursor: pointer;
-  text-align:left;
-    box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.2), 0 6px 40px 0 rgba(0, 0, 0, 0.19);
+  text-align: left;
+  box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.2),
+    0 6px 40px 0 rgba(0, 0, 0, 0.19);
 }
 
 .title {
@@ -105,7 +104,7 @@ border-radius:0px;
 .main {
   font-size: 26px;
   font-weight: 600;
- line-height: 1.1;
+  line-height: 1.1;
   margin-top: 15px;
 }
 
@@ -132,7 +131,7 @@ border-radius:0px;
   cursor: pointer;
   .text {
     margin-left: 20%;
-  
+
     background: rgba(0, 0, 0, 0.99);
     cursor: pointer;
   }
