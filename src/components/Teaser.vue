@@ -60,15 +60,17 @@ export default {
 <style lang="scss" scoped>
 .teaser {
   margin: 0.5rem 10;
-  height: 12rem;
-
+  height: 15rem;
+border-radius:0px;
   font-weight: 100;
   position: relative;
   overflow: hidden;
   background-size: cover;
   background-position: center;
   cursor: pointer;
+ 
 }
+
 
 .no-image {
   background-color: #f4f4f4;
@@ -78,39 +80,45 @@ export default {
   margin-left: 55%;
   height: 100%;
   position: relative;
+  color:white;
   padding: 1rem 1rem 1rem;
   display: flex;
   justify-content: center;
   flex-direction: column;
-  background: rgba(255, 255, 255, 0.85);
+  background: rgba(0, 0, 0, 0.80);
   transition: all 0.2s ease-in-out;
   z-index: 20;
   top: 0;
+  border-style:solid;
+  border-width:0px 0px 0px 0.5px;
+  border-color:black;
   cursor: pointer;
+  text-align:left;
+    box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.2), 0 6px 40px 0 rgba(0, 0, 0, 0.19);
 }
 
 .title {
-  color: black;
+  color: white;
   font-family: "Yanone Kaffeesatz", sans-serif;
 }
 
 .main {
-  font-size: 35px;
+  font-size: 26px;
   font-weight: 600;
-  line-height: 1;
+ line-height: 1.1;
   margin-top: 15px;
 }
 
 .sub {
-  font-size: 25px;
+  font-size: 20px;
   font-weight: 300;
-  line-height: 1;
+  line-height: 1.1;
   display: none;
   margin-top: 10px;
 }
 
 .author {
-  font-size: 15px;
+  font-size: 18px;
   margin-top: 30px;
   font-weight: 300;
   display: none;
@@ -124,7 +132,8 @@ export default {
   cursor: pointer;
   .text {
     margin-left: 20%;
-    background: rgba(255, 255, 255, 0.95);
+  
+    background: rgba(0, 0, 0, 0.99);
     cursor: pointer;
   }
   .group {

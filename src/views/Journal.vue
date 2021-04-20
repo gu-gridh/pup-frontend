@@ -275,7 +275,7 @@ export default {
   font-family: "Teko", sans-serif;
   font-weight: 100;
   font-size: 25px;
-  margin-top: 0px;
+  margin-top: -20px;
   color: white;
 }
 
@@ -292,8 +292,10 @@ export default {
   .teaser {
     transition: all 0.2s ease-in-out;
     min-width: 400px;
-    width: 33.33%;
-    margin: 0;
+    width: 33.3%;
+    margin-bottom: 10px;
+   
+  
 
     @media screen and (max-width: 1700px) {
       width: 50%;
