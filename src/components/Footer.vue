@@ -2,7 +2,7 @@
   <footer id="footer">
     <div class="container">
       <div class="column">
-        <img src="/biccs_2020-litet_rgb-copy.png" />
+        <img src="/biccs_2021-s.png" />
       </div>
 
       <div class="column">
@@ -13,9 +13,8 @@
       </div>
 
       <div class="column">
-        <a href="https://www.youtube.com/channel/UCISZUm8lwGl1e0I1kmgMaMw">
-          ▸ The Craft Laboratory on YouTube
-        </a>
+      
+     
       </div>
     </div>
   </footer>
@@ -32,11 +31,12 @@ export default {
   background-color: #333;
   color: #eaeae7;
   font-family: "Teko", sans-serif;
-  font-size: 30px;
-  text-align: center;
+  font-size: 20px;
+  line-height:1.2;
+  text-align: left;
 
   .column {
-    margin-bottom: 2rem;
+    margin-bottom: 0.5rem;
   }
 
   .container {
@@ -46,7 +46,7 @@ export default {
       .column {
         flex: 1;
         &:not(:last-child) {
-          margin-right: 4rem;
+          margin-right: 1rem;
         }
       }
     }
