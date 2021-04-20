@@ -32,7 +32,7 @@ export default {
     size(size) {
       // If size is 273503 bytes, Strapi says `273.5`
       // Express with suitable unit (KB, MB...)
-      const str = filesize(size * 1000 * 15, { round: 1 });
+      const str = filesize(size * 1000, { round: 1 });
       // Use regex to remove the decimal if more than 2 figures.
       return str.replace(/(\d\d)\.\d+/, "$1");
     },
