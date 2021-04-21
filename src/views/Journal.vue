@@ -294,6 +294,7 @@ export default {
     min-width: 400px;
     width: 33.3%;
     margin-bottom: 10px;
+    
    
   
 
