@@ -47,15 +47,15 @@ export default {
   margin-right: -1rem;
 
   .downloadmeta {
-    padding: 0rem;
+    padding: 0.3rem 1rem 0rem 1rem;
   }
 
   .download {
-    height: 5rem;
+    height: 7rem;
 
     position: relative;
     background: url(../../assets/file.png) no-repeat;
-    background-size: 4rem;
+    background-size: 5.5rem;
     background-position: 0.5rem 50%;
     border: thin dashed #666;
     border-radius: 0.5rem;
@@ -63,9 +63,14 @@ export default {
     padding: 0.7rem 1rem 1rem 4.5rem;
     margin-bottom: 1rem;
 
-    width: calc(30.33% - 1rem);
+    width: calc(24.33% - 1rem);
+	
+    @media screen and (max-width: 1700px) {
+      width: calc(33.33% - 1rem);
+    }
+	
 
-    @media screen and (max-width: 1100px) {
+    @media screen and (max-width: 1200px) {
       width: calc(50% - 1rem);
     }
 
@@ -76,6 +81,13 @@ export default {
     .download-description {
       font-size: 80%;
       margin-top: 3px;
+      font-weight: 300;
+    }
+	
+    .download-title {
+      
+     height:53px;
+	 overflow:hidden;
       font-weight: 300;
     }
   }
