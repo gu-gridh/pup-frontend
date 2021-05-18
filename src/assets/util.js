@@ -5,11 +5,11 @@ export function commaAnd(strs, comma = ", ", and = " & ") {
 }
 
 export function fullName({ firstname, lastname }) {
-  return `${firstname} ${lastname}`;
+  return `${firstname.trim()} ${lastname.trim()}`;
 }
 
 export function lastnameFirst({ firstname, lastname }) {
-  return `${lastname}, ${firstname}`;
+  return `${lastname.trim()}, ${firstname.trim()}`;
 }
 
 /**

@@ -1,18 +1,18 @@
 <template>
   <div>
-    <div class="container article-abstract">
+    <div v-if="abstract" class="container article-abstract">
       <h2>Abstract</h2>
       <div class="abstract-text" v-html="parseMarkdown(abstract)" />
     </div>
 
     <div class="container">
       <table class="meta-table">
-        <tr>
+        <tr v-if="keywords.length">
           <th>Keywords:</th>
           <td>{{ keywords.map((keyword) => keyword.label).join(", ") }}</td>
         </tr>
         <tr>
-          <th>Cite as:</th>
+          <th>Cite&nbsp;as:</th>
           <td>
             <template v-if="citeAs">
               {{ citeAs }}
