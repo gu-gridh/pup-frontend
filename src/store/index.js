@@ -6,7 +6,8 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     header: {},
-    article: null
+    article: null,
+    notFound: false
   },
   mutations: {
     setHeader(state, header) {
@@ -14,6 +15,12 @@ export default new Vuex.Store({
     },
     setArticle(state, article) {
       state.article = article;
+    },
+    reportNotFound(state) {
+      state.notFound = true;
+    },
+    clearNotFound(state) {
+      state.notFound = false;
     }
   }
 });

@@ -91,6 +91,7 @@
 </template>
 
 <script>
+import { mapMutations } from "vuex";
 import showdown from "showdown";
 import { ToggleButton } from "vue-js-toggle-button";
 import { getJournal, getArticles } from "@/assets/api";
@@ -116,15 +117,17 @@ export default {
       return this.journal ? this.journal[this.grouping] : [];
     },
   },
-  created() {
-    this.load();
-  },
   activated() {
     this.load();
   },
   methods: {
+    ...mapMutations(["reportNotFound"]),
     load() {
       getJournal(this.journalName).then((journal) => {
+        if (!journal) {
+          this.reportNotFound();
+          return;
+        }
         this.journal = journal;
         document.title = this.journal.title;
       });
@@ -294,9 +297,6 @@ export default {
     min-width: 400px;
     width: 33.3%;
     margin-bottom: 10px;
-    
-   
-  
 
     @media screen and (max-width: 1700px) {
       width: 50%;

@@ -47,7 +47,7 @@ import Abstract from "@/components/article/Abstract.vue";
 import Downloads from "@/components/article/Downloads.vue";
 import ContentSection from "@/components/article/ContentSection.vue";
 import References from "@/components/article/References.vue";
-import { mapState } from "vuex";
+import { mapMutations, mapState } from "vuex";
 
 export default {
   name: "Article",
@@ -74,12 +74,17 @@ export default {
     this.$store.commit("setArticle", null);
   },
   methods: {
+    ...mapMutations(["reportNotFound"]),
     async load() {
       this.$store.commit("setHeader", {
         route: "/",
         label: "Biennial International Conference for the Craft Sciences 2021",
       });
       const article = await getArticle(this.identifier, this.revision);
+      if (!article) {
+        this.reportNotFound();
+        return;
+      }
       this.$store.commit("setArticle", article);
       document.title = article.title;
     },

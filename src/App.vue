@@ -1,9 +1,18 @@
 <template>
   <div id="app">
     <Header />
-    <keep-alive>
-      <router-view />
-    </keep-alive>
+    <main>
+      <keep-alive>
+        <router-view />
+      </keep-alive>
+      <div v-if="notFound" class="container">
+        <h2>Page not found</h2>
+        <p>
+          You might want to try the
+          <router-link to="/">front page</router-link>.
+        </p>
+      </div>
+    </main>
     <Footer />
   </div>
 </template>
@@ -11,9 +20,24 @@
 <script>
 import Header from "@/components/Header.vue";
 import Footer from "@/components/Footer.vue";
+import { mapMutations, mapState } from "vuex";
 
 export default {
   components: { Header, Footer },
+  computed: {
+    ...mapState(["notFound"]),
+  },
+  methods: {
+    ...mapMutations(["clearNotFound"]),
+  },
+  unmounted() {
+    this.clearNotFound();
+  },
+  watch: {
+    $route() {
+      this.clearNotFound();
+    },
+  },
 };
 </script>
 
@@ -33,13 +57,25 @@ html {
   }
 }
 body {
+  position: absolute;
   color: black;
   background: white;
   font-family: "Yanone Kaffeesatz", sans-serif;
   font-weight: 100;
   line-height: 1.3;
   margin: 0;
+  height: 100%;
   width: 100%;
+}
+
+#app {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  main {
+    flex: 1;
+  }
 }
 
 h1,
