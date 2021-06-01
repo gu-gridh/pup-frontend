@@ -39,7 +39,7 @@
 </template>
 
 <script>
-import { getArticle } from "@/assets/api";
+import { apiUrl, getArticle, getImageAtLeast } from "@/assets/api";
 import Header from "@/components/article/Header.vue";
 import MainVideo from "@/components/article/MainVideo.vue";
 import MainGallery from "@/components/article/MainGallery.vue";
@@ -88,6 +88,55 @@ export default {
       this.$store.commit("setArticle", article);
       document.title = article.title;
     },
+  },
+  metaInfo() {
+    return {
+      meta: this.article
+        ? [
+            { property: "og:title", content: this.article.title },
+            { property: "og:type", content: "article" },
+            {
+              property: "og:image",
+              content: apiUrl(getImageAtLeast(this.article.image, 1000).url),
+            },
+            {
+              property: "og:url",
+              content: `https://biccs.dh.gu.se${this.$route.path}`,
+            },
+            { property: "og:description", content: this.article.abstract },
+            {
+              property: "og:site_name",
+              content:
+                "Biennial International Conference for the Craft Sciences 2021",
+            },
+            {
+              property: "article:published_time",
+              content: this.article.date,
+            },
+            {
+              property: "article:modified_time",
+              content: this.article.revisionDate,
+            },
+            {
+              name: "keywords",
+              content: this.article.keywords
+                .map((keyword) => keyword.label)
+                .join(", "),
+            },
+            { name: "description", content: this.article.abstract },
+            {
+              name: "author",
+              content: this.article.authors
+                .map((author) =>
+                  [`${author.firstname} ${author.lastname}`, author.email]
+                    .filter(Boolean)
+                    .join(", ")
+                )
+                .join("; "),
+            },
+          ]
+        : [],
+    };
   },
 };
 </script>

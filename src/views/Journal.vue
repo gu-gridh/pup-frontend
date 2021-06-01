@@ -7,7 +7,7 @@
 
       <div class="container">
         <div class="journalheader">
-          <img src="/biccs_2021-s.png" />
+          <img src="/biccs_2021-s.png" alt="BICCS 2021" title="Logo" />
           <div class="title">{{ journal.title }}</div>
           <div class="journal-menu">
             <div
@@ -154,6 +154,26 @@ export default {
     parseMarkdown(md) {
       return showdownConverter.makeHtml(md);
     },
+  },
+  metaInfo() {
+    return {
+      meta: this.journal
+        ? [
+            { property: "og:title", content: this.journal.title },
+            { property: "og:type", content: "website" },
+            {
+              property: "og:image",
+              content: "https://biccs.dh.gu.se/biccs_2021.png",
+            },
+            {
+              property: "og:url",
+              content: "https://biccs.dh.gu.se/",
+            },
+            { property: "og:description", content: this.journal.presentation },
+            { property: "description", content: this.journal.presentation },
+          ]
+        : [],
+    };
   },
 };
 </script>

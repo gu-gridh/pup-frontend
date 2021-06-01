@@ -4,6 +4,7 @@
       v-for="download in downloads"
       :key="download.id"
       :href="apiUrl(download.url)"
+      :title="download.caption"
       class="download blind popout"
     >
       <div class="downloadmeta">
@@ -64,11 +65,10 @@ export default {
     margin-bottom: 1rem;
 
     width: calc(25% - 1rem);
-	
+
     @media screen and (max-width: 1700px) {
       width: calc(33.33% - 1rem);
     }
-	
 
     @media screen and (max-width: 1200px) {
       width: calc(50% - 1rem);
@@ -83,13 +83,12 @@ export default {
       margin-top: 3px;
       font-weight: 300;
     }
-	
+
     .download-title {
-         font-size: 24px;
-         line-height:1.1;
-          height:53px;
-	      overflow:hidden;
-   
+      font-size: 24px;
+      line-height: 1.1;
+      height: 53px;
+      overflow: hidden;
     }
   }
 

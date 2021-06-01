@@ -2,7 +2,7 @@
   <footer id="footer">
     <div class="container">
       <div class="column">
-        <img src="/biccs_2021-s.png" />
+        <img src="/biccs_2021-s.png" alt="BICCS 2021" title="Logo" />
       </div>
 
       <div class="column">
@@ -12,10 +12,7 @@
         Sweden
       </div>
 
-      <div class="column">
-      
-     
-      </div>
+      <div class="column"></div>
     </div>
   </footer>
 </template>
@@ -32,7 +29,7 @@ export default {
   color: #eaeae7;
   font-family: "Teko", sans-serif;
   font-size: 20px;
-  line-height:1.2;
+  line-height: 1.2;
   text-align: left;
 
   .column {

@@ -1,10 +1,15 @@
 <template>
   <aside id="header">
     <div class="container">
-      <router-link v-if="header.route" :to="header.route">
+      <router-link v-if="header.route" :to="header.route" :title="header.label">
         {{ header.label }}
       </router-link>
-      <a v-if="header.href" :href="header.href" :target="header.target || ''">
+      <a
+        v-if="header.href"
+        :href="header.href"
+        :target="header.target || ''"
+        :title="header.label"
+      >
         {{ header.label }}
       </a>
     </div>
