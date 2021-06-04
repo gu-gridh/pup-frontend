@@ -48,6 +48,7 @@ import Downloads from "@/components/article/Downloads.vue";
 import ContentSection from "@/components/article/ContentSection.vue";
 import References from "@/components/article/References.vue";
 import { mapMutations, mapState } from "vuex";
+import { fullName } from "@/assets/util";
 
 export default {
   name: "Article",
@@ -87,6 +88,12 @@ export default {
       }
       this.$store.commit("setArticle", article);
       document.title = article.title;
+      document.dispatchEvent(
+        new Event("ZoteroItemUpdated", {
+          bubbles: true,
+          cancelable: true,
+        })
+      );
     },
   },
   metaInfo() {
@@ -124,16 +131,10 @@ export default {
                 .join(", "),
             },
             { name: "description", content: this.article.abstract },
-            {
+            ...this.article.authors.map((author) => ({
               name: "author",
-              content: this.article.authors
-                .map((author) =>
-                  [`${author.firstname} ${author.lastname}`, author.email]
-                    .filter(Boolean)
-                    .join(", ")
-                )
-                .join("; "),
-            },
+              content: fullName(author),
+            })),
           ]
         : [],
     };
