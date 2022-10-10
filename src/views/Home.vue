@@ -94,7 +94,7 @@ export default {
   data() {
     return {
       venue: null,
-      tab: "about",
+      tab: "",
     };
   },
   created() {
@@ -150,10 +150,6 @@ export default {
 .top {
   width: 100%;
   background-color: rgba(255, 255, 255, 0.7);
-  box-shadow: 10px 10px 20px 0px rgba(0, 0, 0, 0.2),
-    0 6px 40px 0 rgba(0, 0, 0, 0.19);
-  z-index: 100;
-  position: relative;
   opacity: 0.99;
   transform: translateZ(0);
   overflow: hidden;
@@ -218,6 +214,8 @@ export default {
 
 .info {
   background-color: rgba(70, 70, 70, 1);
+  box-shadow: inset 0 10px 20px 0px rgba(0, 0, 0, 0.2),
+    inset 0 6px 40px 0 rgba(0, 0, 0, 0.19);
   color: white;
   z-index: 1;
   width: 100%;
