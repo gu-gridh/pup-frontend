@@ -78,7 +78,7 @@ export default {
     ...mapMutations(["reportNotFound"]),
     async load() {
       this.$store.commit("setHeader", {
-        route: "/",
+        route: `/${this.journalName}`,
         label: "Biennial International Conference for the Craft Sciences 2021",
       });
       const article = await getArticle(this.identifier, this.revision);

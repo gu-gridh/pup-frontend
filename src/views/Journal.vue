@@ -1,54 +1,11 @@
 <template>
   <div v-if="journal" class="journal">
-    <div class="top">
-      <video id="videoBG" poster="/poster.jpg" autoplay muted loop playsinline>
-        <source src="/introvideocompressed.mp4" type="video/mp4" />
-      </video>
-
-      <div class="container">
-        <div class="journalheader">
-          <img src="/biccs_2021-s.png" alt="BICCS 2021" title="Logo" />
-          <div class="title">{{ journal.title }}</div>
-          <div class="journal-menu">
-            <div
-              class="journal-menu-item"
-              @click="toggleJournalPage('about')"
-              :class="{ active: journalPage === 'about' }"
-            >
-              About BICCS
-            </div>
-            <div
-              class="journal-menu-item"
-              @click="toggleJournalPage('contact')"
-              :class="{ active: journalPage === 'contact' }"
-            >
-              Contact
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
     <div class="main">
-      <div class="container journal-content">
-        <TransitionExpand>
-          <div v-if="journalPage === 'about'">
-            <h2>About BICCS</h2>
-            <div
-              v-html="parseMarkdown(journal.presentation)"
-              class="journalpresentation"
-            />
-          </div>
-        </TransitionExpand>
-
-        <TransitionExpand>
-          <div v-if="journalPage === 'contact'">
-            <h2>Contact</h2>
-            <div v-html="parseMarkdown(journal.contact)" />
-          </div>
-        </TransitionExpand>
+      <div class="container">
+        <h1 class="title">
+          {{ journal.title }}
+        </h1>
       </div>
-
       <div class="collections container">
         <div class="grouping-select">
           <label>Order articles by:</label>
@@ -60,9 +17,9 @@
           </span>
           <ToggleButton
             :value="grouping === 'formats'"
-            @change="toggleGroupBy"
             :color="{ unchecked: '#333', checked: '#333' }"
             :sync="true"
+            @change="toggleGroupBy"
           />
           <span
             :class="{ active: grouping === 'formats' }"
@@ -80,7 +37,7 @@
               :key="articlePartial.id"
               :article="
                 articles.find((article) => article.id === articlePartial.id) ||
-                article
+                  article
               "
             />
           </div>
@@ -92,22 +49,17 @@
 
 <script>
 import { mapMutations } from "vuex";
-import showdown from "showdown";
 import { ToggleButton } from "vue-js-toggle-button";
 import { getJournal, getArticles } from "@/assets/api";
-import TransitionExpand from "@/components/TransitionExpand";
 import Teaser from "@/components/Teaser";
-
-const showdownConverter = new showdown.Converter();
 
 export default {
   name: "Journal",
-  components: { TransitionExpand, ToggleButton, Teaser },
+  components: { ToggleButton, Teaser },
   props: ["journalName"],
   data() {
     return {
       journal: null,
-      journalPage: "",
       articles: null,
       grouping: "themes",
     };
@@ -135,12 +87,9 @@ export default {
       getArticles().then((articles) => (this.articles = articles));
 
       this.$store.commit("setHeader", {
-        href: "https://craftsciencesconference.com/",
+        href: process.env.BASE_URL,
         label: "Biennial International Conference for the Craft Sciences",
       });
-    },
-    toggleJournalPage(name) {
-      this.journalPage = this.journalPage === name ? "" : name;
     },
     groupByThemes() {
       this.grouping = "themes";
@@ -150,9 +99,6 @@ export default {
     },
     toggleGroupBy({ value }) {
       this.grouping = value ? "formats" : "themes";
-    },
-    parseMarkdown(md) {
-      return showdownConverter.makeHtml(md);
     },
   },
   metaInfo() {
@@ -179,119 +125,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.journal {
-  // width: 100%;
-}
-
-.top {
-  width: 100%;
-  background-color: rgba(255, 255, 255, 0.7);
-  box-shadow: 10px 10px 20px 0px rgba(0, 0, 0, 0.2),
-    0 6px 40px 0 rgba(0, 0, 0, 0.19);
-  z-index: 100;
-  opacity: 0.99;
-  transform: translateZ(0);
-  overflow: hidden;
-}
-
-.videocontainer {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-}
-
-#videoBG {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  opacity: 0.2;
-  transform: translateZ(0);
-  overflow: hidden;
-  z-index: -1;
-}
-
-.journalheader {
-  padding: 50px 0px 20px 0px;
-
-  img {
-    display: block;
-    width: 200px;
-  }
-}
-
 .title {
-  font-family: "Teko", sans-serif;
-  font-weight: 100;
-  font-size: 200px;
-  line-height: 0.75;
-  margin-top: 60px;
-  max-width: 1100px;
-  margin-left: -0.05em;
-
-  @media screen and (max-width: 1200px) {
-    font-size: 14vw;
-  }
-}
-
-.journal-menu {
-  margin-top: 20px;
-  font-family: "Teko", sans-serif;
-  line-height: 0.8;
-
-  font-size: 40px;
-  margin-left: -10px;
-}
-
-.journal-menu-item {
-  cursor: pointer;
-  display: inline-block;
-  margin-right: 20px;
-  border-radius: 5px;
-  padding: 10px 10px 5px 10px;
-  &:hover {
-    background-color: rgba(255, 255, 255, 0.5);
-  }
-}
-
-.journal-content {
-  padding: 2rem 0;
   color: white;
-  font-size: 1.25rem;
-  text-align: justify;
-}
-
-.journalpresentation {
-  columns: 2;
-  column-gap: 40px;
-
-  ::v-deep & p:first-child {
-    margin-top: 0;
-  }
-
-  ::v-deep & p:last-child {
-    margin-bottom: 0;
-  }
-
-  @media screen and (max-width: 1500px) {
-    columns: 1;
-  }
-}
-
-.main {
-  padding: 0 0px 4rem 0px;
-  background-color: rgba(70, 70, 70, 1);
-  z-index: 1;
-  width: 100%;
+  font-size: 6rem;
+  margin-bottom: 2rem;
 }
 
 .active {
   font-weight: 300;
   color: rgb(150, 240, 255);
-
-  .top & {
-    color: #009eb8;
-  }
 }
 
 .grouping-select {

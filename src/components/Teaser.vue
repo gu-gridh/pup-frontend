@@ -10,13 +10,12 @@
     }"
   >
     <div class="text">
-      <div class="group">
-        <div class="title main">{{ article.title }}</div>
-        <div v-if="article.subtitle" class="title sub group">
+        <div class="teaser-title">{{ article.title }}</div>
+        <div v-if="article.subtitle" class="teaser-subtitle">
           {{ article.subtitle }}
         </div>
 
-        <div v-if="article.authors" class="title author">
+        <div v-if="article.authors" class="teaser-author">
           {{ commaAnd(article.authors.map(fullName)) }}
         </div>
       </div>
@@ -61,16 +60,14 @@ export default {
 .teaser {
   margin: 0.5rem 10;
   height: 15rem;
-border-radius:0px;
+  border-radius: 0px;
   font-weight: 100;
   position: relative;
   overflow: hidden;
   background-size: cover;
   background-position: center;
   cursor: pointer;
- 
 }
-
 
 .no-image {
   background-color: #f4f4f4;
@@ -80,34 +77,35 @@ border-radius:0px;
   margin-left: 55%;
   height: 100%;
   position: relative;
-  color:white;
+  color: white;
   padding: 1rem 1rem 1rem;
   display: flex;
   justify-content: center;
   flex-direction: column;
-  background: rgba(0, 0, 0, 0.80);
+  background: rgba(0, 0, 0, 0.8);
   transition: all 0.2s ease-in-out;
   z-index: 20;
   top: 0;
 
   cursor: pointer;
-  text-align:left;
-    box-shadow: 0px 0px 20px 10px rgba(0, 0, 0, 0.2), 0 0px 40px 10px rgba(0, 0, 0, 0.19);
+  text-align: left;
+  box-shadow: 0px 0px 20px 10px rgba(0, 0, 0, 0.2),
+    0 0px 40px 10px rgba(0, 0, 0, 0.19);
 }
 
-.title {
+.text {
   color: white;
   font-family: "Yanone Kaffeesatz", sans-serif;
 }
 
-.main {
+.teaser-title {
   font-size: 26px;
   font-weight: 600;
- line-height: 1.1;
+  line-height: 1.1;
   margin-top: 15px;
 }
 
-.sub {
+.teaser-subtitle {
   font-size: 20px;
   font-weight: 300;
   line-height: 1.1;
@@ -115,14 +113,11 @@ border-radius:0px;
   margin-top: 10px;
 }
 
-.author {
+.teaser-author {
   font-size: 18px;
   margin-top: 30px;
   font-weight: 300;
   display: none;
-}
-
-.group {
 }
 
 .teaser:hover {
@@ -130,19 +125,15 @@ border-radius:0px;
   cursor: pointer;
   .text {
     margin-left: 20%;
-  
+
     background: rgba(0, 0, 0, 0.99);
     cursor: pointer;
   }
-  .group {
-  }
-  .author {
+  .teaser-author {
     display: block;
   }
-  .sub {
+  .teaser-subtitle {
     display: block;
-  }
-  .main {
   }
 }
 
@@ -152,8 +143,8 @@ border-radius:0px;
     margin-left: 0;
   }
 
-  .author,
-  .sub {
+  .teaser-author,
+  .teaser-subtitle {
     display: block;
   }
 }
