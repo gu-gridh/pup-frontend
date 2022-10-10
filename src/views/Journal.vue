@@ -3,7 +3,7 @@
     <div class="main">
       <div class="container">
         <h1 class="title">
-          {{ journal.title }}
+          {{ journal.identifier }}
         </h1>
       </div>
       <div class="collections container">
@@ -35,6 +35,7 @@
             <Teaser
               v-for="articlePartial of group.articles"
               :key="articlePartial.id"
+              :journal-name="journalName"
               :article="
                 articles.find((article) => article.id === articlePartial.id) ||
                   article
@@ -87,7 +88,7 @@ export default {
       getArticles().then((articles) => (this.articles = articles));
 
       this.$store.commit("setHeader", {
-        href: process.env.BASE_URL,
+        route: "/",
         label: "Biennial International Conference for the Craft Sciences",
       });
     },
@@ -125,11 +126,29 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.journal {
+  background-color: rgba(70, 70, 70, 1);
+}
+
 .title {
+  font-family: "Teko", sans-serif;
+  font-weight: 100;
+  font-size: 200px;
+  line-height: 0.75;
   color: white;
   font-size: 6rem;
   margin-bottom: 2rem;
 }
+
+// .title {
+//   margin-top: 60px;
+//   max-width: 1100px;
+//   margin-left: -0.05em;
+
+//   @media screen and (max-width: 1200px) {
+//     font-size: 14vw;
+//   }
+// }
 
 .active {
   font-weight: 300;

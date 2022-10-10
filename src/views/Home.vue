@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section v-if="venue">
     <div class="top">
       <video id="videoBG" poster="/poster.jpg" autoplay muted loop playsinline>
         <source src="/introvideocompressed.mp4" type="video/mp4" />
@@ -9,7 +9,7 @@
         <div class="journalheader">
           <img src="/biccs_2021-s.png" alt="BICCS 2021" title="Logo" />
           <div class="title">
-            Biennial International Conference for the Craft Sciences
+            {{ venue.title }}
           </div>
           <div class="info-menu">
             <div
@@ -60,36 +60,21 @@
     <div class="main">
       <div class="journal-menu">
         <div class="container">
-          <div
-            v-for="journal in journals"
+          <router-link
+            v-for="journal in venue.journals"
             :key="journal.id"
+            :to="`/${journal.identifier}`"
             class="journal-menu-item"
           >
-            {{ journal.title }}
-          </div>
+            {{ journal.identifier }}
+          </router-link>
         </div>
       </div>
       <div class="intro">
         <div class="container">
           <h2>Welcome</h2>
-          <div class="body">
-            <p>
-              Löksås ipsum olika ordningens rännil sin räv om sällan, kanske som
-              händer det dimmhöljd sin enligt sig sin, dimma när groda precis
-              söka björnbär händer. Träutensilierna samma mot hans precis tiden
-              både göras att åker äng på, annan där vad varit träutensilierna
-              där mot lax faktor verkligen, det annan själv sista kunde kan
-              kanske händer häst själv. Nu kom smultron kunde gör sjö vemod
-              genom precis tidigare hans, har dock stig ordningens att kanske
-              hela så kanske redan helt, regn vid det strand groda rännil därmed
-              tid precis.
-            </p>
-            <p>
-              Sig tid jäst dock hans vid groda del fram hans verkligen miljoner,
-              dimma annat tiden där äng vid plats genom varit har hav, att tid
-              hela annat år och jäst mjuka se vid.
-            </p>
-          </div>
+          <div class="body" v-html="parseMarkdown(venue.introduction)" />
+          <Downloads :downloads="venue.files" class="venue-downloads" />
         </div>
       </div>
     </div>
@@ -99,16 +84,17 @@
 <script>
 import showdown from "showdown";
 import TransitionExpand from "@/components/TransitionExpand";
-import { getLatestJournal } from "@/assets/api";
+import { getVenue } from "@/assets/api";
+import Downloads from "@/components/article/Downloads.vue";
 
 const showdownConverter = new showdown.Converter();
 
 export default {
-  components: { TransitionExpand },
+  components: { TransitionExpand, Downloads },
   data() {
     return {
+      venue: null,
       tab: "about",
-      journals: null,
     };
   },
   created() {
@@ -119,11 +105,14 @@ export default {
   },
   methods: {
     async load() {
+      this.loadVenue();
       this.$store.commit("setHeader", {
-        href: process.env.BASE_URL,
+        route: "/",
         label: "Biennial International Conference for the Craft Sciences",
       });
-      this.journals = [await getLatestJournal()];
+    },
+    async loadVenue() {
+      this.venue = await getVenue();
     },
     toggleTab(name) {
       this.tab = this.tab === name ? "" : name;
@@ -157,7 +146,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .top {
   width: 100%;
   background-color: rgba(255, 255, 255, 0.7);
@@ -281,6 +270,7 @@ export default {
     :first-child {
       margin-top: 0;
     }
+    margin-bottom: 2rem;
   }
 }
 </style>

@@ -8,6 +8,10 @@ export const apiUrl = (path) => API_BASE + path.replace(/^\//, "");
 export const get = async (endpoint, params) =>
   (await axios.get(apiUrl(endpoint), { params })).data;
 
+export const getVenue = memoize(async () => get("venue"));
+
+export const getJournals = memoize(async () => get("journals"));
+
 export const getLatestJournal = memoize(
   async () =>
     (await get(`journals`, { _sort: "published_at:DESC", _limit: 1 }))[0]

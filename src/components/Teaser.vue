@@ -29,7 +29,7 @@ import { apiUrl, getImageAtLeast } from "@/assets/api";
 
 export default {
   name: "Teaser",
-  props: ["article"],
+  props: ["journalName", "article"],
   computed: {
     image() {
       return (
@@ -41,6 +41,7 @@ export default {
       return {
         name: "article",
         params: {
+          journalName: this.journalName,
           identifier: this.article.identifier,
           revision: this.article.revision,
         },
