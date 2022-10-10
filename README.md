@@ -4,6 +4,10 @@ Vue-based web frontend for the Publication Platform of the Centre for Digital Hu
 
 Uses [pup-admin](https://github.com/CDH-DevTeam/pup-admin) as backend.
 
+### Requirements
+
+- Node 16
+
 ### Development
 
 ```sh
@@ -13,6 +17,5 @@ yarn run serve
 ### Deployment
 
 ```sh
-# Node 12 recommended
 yarn run build
 ```
