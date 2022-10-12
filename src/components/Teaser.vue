@@ -15,7 +15,7 @@
          <div v-if="article.subtitle" class="teaser-subtitle">
           {{ article.subtitle }}      
           </div>
-        {{ commaAnd(article.authors.map(fullName)) }}
+       <div class="teaser-author"> {{ commaAnd(article.authors.map(fullName)) }} </div>
 
    
       </div>
@@ -62,7 +62,6 @@ export default {
 <style lang="scss" scoped>
 .teaser {
   margin: -1px 0px;
-  
   border-radius: 0px;
   height: 15rem;
   font-weight: 100;
@@ -121,11 +120,16 @@ export default {
 }
 
 .teaser-author {
+  border-width:0.5px 0 0 0;
+  padding:1rem 1rem 0 1rem;
+  border-style:dashed;
+  border-color:black;
   font-size: 18px;
-  margin-top: 30px;
+  margin-top: 10px;
   font-weight: 300;
     line-height: 1.0;
-  display: none;
+    width:calc(100% + 2rem);
+    margin-left:-1rem;
 }
 
 .teaser:hover {
@@ -135,7 +139,7 @@ export default {
   margin-top: calc(15rem - 9rem);
   height: 9rem;
 
-    background: rgba(240, 240, 240, 0.9);
+    background: rgba(255, 255, 255, 0.9);
     cursor: pointer;
   }
   .teaser-author {

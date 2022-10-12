@@ -200,20 +200,20 @@ h1{
   .teaser {
     transition: all 0.2s ease-in-out;
     min-width: 400px;
-    width: 33.1%;
+    width: 33.3%;
     margin-bottom: 10px;
 
     @media screen and (max-width: 1700px) {
       width: 50%;
     }
 
-    @media screen and (max-width: 1200px) {
+    @media screen and (max-width: 1000px) {
       width: 100%;
     }
   }
 }
 
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 1000px) {
 p{
    column-count:1;
 
