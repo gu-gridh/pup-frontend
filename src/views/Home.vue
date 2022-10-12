@@ -6,25 +6,20 @@
       </video>
 
       <div class="container">
-        <div class="journalheader">
+        <div class="header">
           <img src="/biccs_2021-s.png" alt="BICCS 2021" title="Logo" />
           <div class="title">
             {{ venue.title }}
           </div>
           <div class="info-menu">
             <div
+              v-for="page in venue.pages"
+              :key="page.id"
               class="info-menu-item"
-              :class="{ active: tab === 'about' }"
-              @click="toggleTab('about')"
+              :class="{ active: tab === page.id }"
+              @click="toggleTab(page.id)"
             >
-              About BICCS
-            </div>
-            <div
-              class="info-menu-item"
-              :class="{ active: tab === 'contact' }"
-              @click="toggleTab('contact')"
-            >
-              Contact
+              {{ page.heading }}
             </div>
           </div>
         </div>
@@ -34,23 +29,10 @@
     <TransitionExpand>
       <div v-if="tab" class="info">
         <div class="container">
-          <TransitionExpand>
-            <div v-if="tab === 'about'">
-              <h2>About BICCS</h2>
-              Blah
-              <!-- <div
-                class="journalpresentation"
-                v-html="parseMarkdown(journal.presentation)"
-              /> -->
-            </div>
-          </TransitionExpand>
-          <TransitionExpand>
-            <div v-if="tab === 'contact'">
-              <h2>Contact</h2>
-              Bleh<br />
-              Bleh<br />
-              Bleh<br />Bleh
-              <!-- <div v-html="parseMarkdown(journal.contact)" /> -->
+          <TransitionExpand v-for="page in venue.pages" :key="page.id">
+            <div v-if="tab === page.id">
+              <h2>{{ page.heading }}</h2>
+              <div v-html="parseMarkdown(page.body)" />
             </div>
           </TransitionExpand>
         </div>
@@ -162,7 +144,7 @@ export default {
   z-index: -1;
 }
 
-.journalheader {
+.header {
   padding: 50px 0px 20px 0px;
 
   img {
