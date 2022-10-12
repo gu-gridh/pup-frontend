@@ -5,6 +5,7 @@
         <h1 class="title">
           {{ journal.identifier }}
         </h1>
+        <div class="body" v-html="journalHtml" />
       </div>
       <div class="collections container">
         <div class="grouping-select">
@@ -52,6 +53,7 @@
 import { mapMutations } from "vuex";
 import { ToggleButton } from "vue-js-toggle-button";
 import { getJournal, getArticles } from "@/assets/api";
+import { parseMarkdown } from "@/assets/markdown";
 import Teaser from "@/components/Teaser";
 
 export default {
@@ -68,6 +70,12 @@ export default {
   computed: {
     groups() {
       return this.journal ? this.journal[this.grouping] : [];
+    },
+    journalHtml() {
+      return (
+        parseMarkdown(this.journal.presentation) +
+        parseMarkdown(this.journal.contact)
+      );
     },
   },
   activated() {
@@ -128,6 +136,7 @@ export default {
 <style lang="scss" scoped>
 .journal {
   background-color: rgba(70, 70, 70, 1);
+  color: white;
 }
 
 .title {
@@ -140,15 +149,12 @@ export default {
   margin-bottom: 2rem;
 }
 
-// .title {
-//   margin-top: 60px;
-//   max-width: 1100px;
-//   margin-left: -0.05em;
-
-//   @media screen and (max-width: 1200px) {
-//     font-size: 14vw;
-//   }
-// }
+.body {
+  columns: 15em 2;
+  ::v-deep p:first-child {
+    margin-top: 0;
+  }
+}
 
 .active {
   font-weight: 300;

@@ -82,12 +82,10 @@
 </template>
 
 <script>
-import showdown from "showdown";
 import TransitionExpand from "@/components/TransitionExpand";
 import { getVenue } from "@/assets/api";
+import { parseMarkdown } from "@/assets/markdown";
 import Downloads from "@/components/article/Downloads.vue";
-
-const showdownConverter = new showdown.Converter();
 
 export default {
   components: { TransitionExpand, Downloads },
@@ -104,6 +102,7 @@ export default {
     this.load();
   },
   methods: {
+    parseMarkdown,
     async load() {
       this.loadVenue();
       this.$store.commit("setHeader", {
@@ -122,9 +121,6 @@ export default {
         throw new Error("Journal has no identifier");
       }
       this.$router.push(`/${identifier}`);
-    },
-    parseMarkdown(md) {
-      return showdownConverter.makeHtml(md);
     },
   },
   metaInfo() {
@@ -264,7 +260,7 @@ export default {
     margin-block: 1rem;
   }
   .body {
-    columns: 15em;
+    columns: 15em 2;
     :first-child {
       margin-top: 0;
     }
