@@ -52,6 +52,7 @@
           </router-link>
         </div>
       </div>
+
       <div class="intro">
         <div class="container">
           <h2>Welcome</h2>
@@ -59,18 +60,38 @@
           <Downloads :downloads="venue.files" class="venue-downloads" />
         </div>
       </div>
+
+      <div v-if="venue.images.length" class="gallery">
+        <CaptionedImage
+          v-for="image in venue.images"
+          :key="image.id"
+          :src="imageUrl(image.image)"
+          :caption="image.caption"
+        />
+      </div>
+
+      <footer
+        v-if="venue.footer.heading || venue.footer.body"
+        class="venue-footer"
+      >
+        <div class="container">
+          <h2>{{ venue.footer.heading }}</h2>
+          <div v-html="venue.footer.body" />
+        </div>
+      </footer>
     </div>
   </section>
 </template>
 
 <script>
 import TransitionExpand from "@/components/TransitionExpand";
-import { getVenue } from "@/assets/api";
+import { apiUrl, getImageAtLeast, getVenue } from "@/assets/api";
 import { parseMarkdown } from "@/assets/markdown";
 import Downloads from "@/components/article/Downloads.vue";
+import CaptionedImage from "@/components/CaptionedImage.vue";
 
 export default {
-  components: { TransitionExpand, Downloads },
+  components: { TransitionExpand, Downloads, CaptionedImage },
   data() {
     return {
       venue: null,
@@ -103,6 +124,9 @@ export default {
         throw new Error("Journal has no identifier");
       }
       this.$router.push(`/${identifier}`);
+    },
+    imageUrl(image) {
+      return apiUrl(getImageAtLeast(image, 1000).url);
     },
   },
   metaInfo() {
@@ -248,5 +272,13 @@ export default {
     }
     margin-bottom: 2rem;
   }
+}
+
+.venue-footer {
+  padding: 0 0 1rem;
+  background-color: rgba(70, 70, 70, 1);
+  box-shadow: inset 0 10px 20px 0px rgba(0, 0, 0, 0.2),
+    inset 0 6px 40px 0 rgba(0, 0, 0, 0.19);
+  color: white;
 }
 </style>
