@@ -40,7 +40,7 @@
     </TransitionExpand>
 
     <div class="main">
-      <div class="journal-menu">
+      <div v-if="venue.journals.length" class="journal-menu">
         <div class="container">
           <router-link
             v-for="journal in venue.journals"
@@ -53,7 +53,7 @@
         </div>
       </div>
 
-      <div class="intro">
+      <div v-if="venue.introduction || venue.files.length" class="intro">
         <div class="container">
           <h2>Welcome</h2>
           <div class="body" v-html="parseMarkdown(venue.introduction)" />
@@ -70,10 +70,7 @@
         />
       </div>
 
-      <footer
-        v-if="venue.footer.heading || venue.footer.body"
-        class="venue-footer"
-      >
+      <footer v-if="venue.footer" class="venue-footer">
         <div class="container">
           <h2>{{ venue.footer.heading }}</h2>
           <div v-html="venue.footer.body" />
