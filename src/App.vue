@@ -44,6 +44,7 @@ export default {
 <style lang="scss">
 @import url("https://fonts.googleapis.com/css2?family=Teko:wght@300;700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Yanone+Kaffeesatz:wght@200;300&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Barlow+Condensed:100,200,300,400,500,600&display=swap");
 
 * {
   box-sizing: border-box;
@@ -60,7 +61,7 @@ body {
   position: absolute;
   color: black;
   background: white;
-  font-family: "Yanone Kaffeesatz", sans-serif;
+   font-family: "Barlow Condensed", sans-serif;
   font-weight: 100;
   line-height: 1.3;
   margin: 0;

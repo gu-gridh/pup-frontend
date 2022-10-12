@@ -7,7 +7,7 @@
 
       <div class="container">
         <div class="header">
-          <img src="/biccs_2021-s.png" alt="BICCS 2021" title="Logo" />
+          <img src="/biccs.png" alt="BICCS" title="Logo" />
           <div class="title">
             {{ venue.title }}
           </div>
@@ -42,6 +42,7 @@
     <div class="main">
       <div v-if="venue.journals.length" class="journal-menu">
         <div class="container">
+          Editions: 
           <router-link
             v-for="journal in venue.journals"
             :key="journal.id"

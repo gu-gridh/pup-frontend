@@ -10,17 +10,19 @@
     }"
   >
     <div class="text">
+       
         <div class="teaser-title">{{ article.title }}</div>
-        <div v-if="article.subtitle" class="teaser-subtitle">
-          {{ article.subtitle }}
-        </div>
+         <div v-if="article.subtitle" class="teaser-subtitle">
+          {{ article.subtitle }}      
+          </div>
+        {{ commaAnd(article.authors.map(fullName)) }}
 
-        <div v-if="article.authors" class="teaser-author">
-          {{ commaAnd(article.authors.map(fullName)) }}
-        </div>
+   
       </div>
     </div>
+
   </router-link>
+   
 </template>
 
 <script>
@@ -59,15 +61,17 @@ export default {
 
 <style lang="scss" scoped>
 .teaser {
-  margin: 0.5rem 10;
-  height: 15rem;
+  margin: -1px 0px;
+  
   border-radius: 0px;
+  height: 15rem;
   font-weight: 100;
   position: relative;
   overflow: hidden;
   background-size: cover;
   background-position: center;
   cursor: pointer;
+
 }
 
 .no-image {
@@ -75,19 +79,19 @@ export default {
 }
 
 .text {
-  margin-left: 55%;
-  height: 100%;
+  margin-top: calc(15rem - 7rem);
+  height: 7rem;
   position: relative;
-  color: white;
-  padding: 1rem 1rem 1rem;
+  color: black;
+  padding-left:1rem;
+    padding-right:1rem;
   display: flex;
   justify-content: center;
   flex-direction: column;
-  background: rgba(0, 0, 0, 0.8);
+  background: rgba(255, 255, 255, 0.8);
   transition: all 0.2s ease-in-out;
   z-index: 20;
-  top: 0;
-
+  backdrop-filter: blur(5px);
   cursor: pointer;
   text-align: left;
   box-shadow: 0px 0px 20px 10px rgba(0, 0, 0, 0.2),
@@ -95,15 +99,17 @@ export default {
 }
 
 .text {
-  color: white;
+  color: black;
   font-family: "Yanone Kaffeesatz", sans-serif;
 }
 
 .teaser-title {
-  font-size: 26px;
+  font-size: 22px;
   font-weight: 600;
   line-height: 1.1;
-  margin-top: 15px;
+  margin-top: 0px;
+  margin-bottom:10px;
+   
 }
 
 .teaser-subtitle {
@@ -111,13 +117,14 @@ export default {
   font-weight: 300;
   line-height: 1.1;
   display: none;
-  margin-top: 10px;
+   margin-bottom:10px;
 }
 
 .teaser-author {
   font-size: 18px;
   margin-top: 30px;
   font-weight: 300;
+    line-height: 1.0;
   display: none;
 }
 
@@ -125,9 +132,10 @@ export default {
   z-index: 10;
   cursor: pointer;
   .text {
-    margin-left: 20%;
+  margin-top: calc(15rem - 9rem);
+  height: 9rem;
 
-    background: rgba(0, 0, 0, 0.99);
+    background: rgba(240, 240, 240, 0.9);
     cursor: pointer;
   }
   .teaser-author {

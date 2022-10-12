@@ -42,7 +42,9 @@
                   article
               "
             />
+          
           </div>
+
         </div>
       </div>
     </div>
@@ -135,8 +137,10 @@ export default {
 
 <style lang="scss" scoped>
 .journal {
-  background-color: rgba(70, 70, 70, 1);
-  color: white;
+  background-color: rgba(240, 240, 240, 1);
+  color: black;
+  font-size: 25px;
+    font-weight: 200;
 }
 
 .title {
@@ -144,7 +148,7 @@ export default {
   font-weight: 100;
   font-size: 200px;
   line-height: 0.75;
-  color: white;
+  color: black;
   font-size: 6rem;
   margin-bottom: 2rem;
 }
@@ -158,7 +162,7 @@ export default {
 
 .active {
   font-weight: 300;
-  color: rgb(150, 240, 255);
+  color: rgb(100, 190, 215);
 }
 
 .grouping-select {
@@ -166,23 +170,37 @@ export default {
   font-weight: 100;
   font-size: 25px;
   margin-top: -20px;
-  color: white;
+  color: black;
 }
 
 .group {
-  margin-top: 2rem;
-  color: white;
+  margin-top: 10px;
+  color: black;
   font-size: 20px;
+    font-weight: 200;
+  
+}
+p{
+   column-count:2;
+   text-align:justify;
+   column-gap:40px;
+}
+
+h1{
+    font-weight: 300;
+    line-height:1.0;
+    margin-bottom:-10px;
 }
 
 .articles {
+  font-family: "Yanone Kaffeesatz", sans-serif;
   display: flex;
   flex-wrap: wrap;
 
   .teaser {
     transition: all 0.2s ease-in-out;
     min-width: 400px;
-    width: 33.3%;
+    width: 33.1%;
     margin-bottom: 10px;
 
     @media screen and (max-width: 1700px) {
@@ -193,5 +211,12 @@ export default {
       width: 100%;
     }
   }
+}
+
+@media screen and (max-width: 900px) {
+p{
+   column-count:1;
+
+}
 }
 </style>
