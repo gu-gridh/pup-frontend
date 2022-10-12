@@ -7,7 +7,7 @@
         </h1>
         <div class="body" v-html="journalHtml" />
       </div>
-      <div class="collections container">
+      <div class="collections container" style="margin-top:30px;">
         <div class="grouping-select">
           <label>Order articles by:</label>
           <span
@@ -141,6 +141,7 @@ export default {
   color: black;
   font-size: 25px;
     font-weight: 200;
+  
 }
 
 .title {
