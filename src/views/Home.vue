@@ -157,6 +157,18 @@ export default {
 
 <style lang="scss" scoped>
 
+::v-deep h3 {
+  margin-block-end:0em;
+    margin-block-start:0.5em;
+  line-height:1.0;
+}
+::v-deep a:link{
+  color:black;
+}
+
+::v-deep a:visited{
+  color:black;
+}
 
 .top {
   width: 100%;
