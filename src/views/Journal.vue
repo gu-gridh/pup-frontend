@@ -141,7 +141,6 @@ export default {
   color: black;
   font-size: 25px;
     font-weight: 200;
-  
 }
 
 .title {
@@ -151,14 +150,16 @@ export default {
   line-height: 0.75;
   color: black;
   font-size: 6rem;
-  margin-bottom: 2rem;
+  margin-bottom: 0rem;
 }
 
 .body {
   columns: 15em 2;
-  ::v-deep p:first-child {
-    margin-top: 0;
-  }
+  //  :first-child {
+  //     margin-top: 0;
+  //   }
+
+  
 }
 
 .active {
@@ -201,8 +202,17 @@ h1{
   .teaser {
     transition: all 0.2s ease-in-out;
     min-width: 400px;
-    width: 33.3%;
+    width:20%;
     margin-bottom: 10px;
+
+     @media screen and (max-width: 2500px) {
+      width: 25%;
+    }
+
+
+     @media screen and (max-width: 2000px) {
+      width: 33.3%;
+    }
 
     @media screen and (max-width: 1700px) {
       width: 50%;
@@ -217,6 +227,7 @@ h1{
 @media screen and (max-width: 1000px) {
 p{
    column-count:1;
+   font-size:28px;
 
 }
 }

@@ -56,8 +56,8 @@
 
       <div v-if="venue.introduction || venue.files.length" class="intro">
         <div class="container">
-          <h2>Welcome</h2>
-          <div class="body" v-html="parseMarkdown(venue.introduction)" />
+          <h2>BICCS 2023</h2>
+          <div class="introduction" style="" v-html="parseMarkdown(venue.introduction)" />
           <Downloads :downloads="venue.files" class="venue-downloads" />
         </div>
       </div>
@@ -150,13 +150,35 @@ export default {
 
 <style lang="scss" scoped>
 
+
+.introduction{
+    letter-spacing: 1.0px;
+  font-size:22px;
+    columns:2;
+    column-gap:40px;
+    text-align:left;
+
+    :first-child {
+      margin-top: 0;
+    }
+    margin-bottom: 2rem;
+}
+
+.intro {
+  h2 {
+    font-family: "Teko", sans-serif;
+    font-size: 3rem;
+    margin-block: 1rem;
+  }
+}
+
+
 ::v-deep .intro h3 {
   margin-block-end:0.5em;
     margin-block-start:0em;
   line-height:1.5;
-  
-  
 }
+
 ::v-deep .intro h3 a:link{
   color:black;
 }
@@ -178,6 +200,24 @@ export default {
        
   
 }
+
+  @media screen and (max-width: 900px) {
+
+.introduction{
+  font-size:30px;
+  columns:1;
+}
+
+::v-deep .intro h3 a:link{
+  background-image:url(/linkbutton.png);
+    background-size:28px;
+       background-repeat:no-repeat;
+       padding-left:45px;
+       background-position: 0px 0px;
+       
+  
+}
+  }
 
 .top {
   width: 100%;
@@ -289,23 +329,9 @@ export default {
   }
 }
 
-.intro {
-  h2 {
-    font-family: "Teko", sans-serif;
-    font-size: 3rem;
-    margin-block: 1rem;
-  }
-  .body {
-    columns: 20em 2;
-    :first-child {
-      margin-top: 0;
-    }
-    margin-bottom: 2rem;
-  
 
-  }
 
-}
+
 
 
 

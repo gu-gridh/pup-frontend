@@ -69,6 +69,13 @@ body {
   width: 100%;
 }
 
+.intro .body{
+
+  font-size:35px;
+  text-align:justify;
+
+}
+
 #app {
   height: 100%;
   display: flex;
