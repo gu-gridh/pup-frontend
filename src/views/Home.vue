@@ -278,15 +278,16 @@ export default {
       margin-top: 0;
     }
     margin-bottom: 2rem;
+  
+  h3 {
+  margin-block-end:0em;
+  line-height:1.0;
+}
   }
 
 }
 
-  .body h3{
-  margin-top:0px;
-  line-height:1.0;
-  color:red;
-}
+
 
 .venue-footer {
   padding: 0 0 1rem;
