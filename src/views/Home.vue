@@ -71,14 +71,7 @@
         />
       </div>
 
-       <div class="full">
-        <CaptionedImage
-          v-for="image in venue.images"
-          :key="image.id"
-          :src="imageUrl(image.image)"
-          :caption="image.caption"
-        />
-      </div>
+    
 
       <footer v-if="venue.footer" class="venue-footer">
         <div class="container">
@@ -158,9 +151,11 @@ export default {
 <style lang="scss" scoped>
 
 ::v-deep .intro h3 {
-  margin-block-end:0em;
-    margin-block-start:0.5em;
-  line-height:1.0;
+  margin-block-end:0.5em;
+    margin-block-start:0em;
+  line-height:1.5;
+  
+  
 }
 ::v-deep .introa:link{
   color:black;
@@ -176,10 +171,12 @@ export default {
 
 ::v-deep .intro a:link{
   background-image:url(/linkbutton.png);
-    background-size:20px;
-    background-position: 0px 0px;
+    background-size:19px;
        background-repeat:no-repeat;
        padding-left:30px;
+       background-position: 0px 0px;
+       
+  
 }
 
 .top {
@@ -299,7 +296,7 @@ export default {
     margin-block: 1rem;
   }
   .body {
-    columns: 15em 2;
+    columns: 20em 2;
     :first-child {
       margin-top: 0;
     }
