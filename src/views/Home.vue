@@ -71,6 +71,15 @@
         />
       </div>
 
+       <div class="full">
+        <CaptionedImage
+          v-for="image in venue.images"
+          :key="image.id"
+          :src="imageUrl(image.image)"
+          :caption="image.caption"
+        />
+      </div>
+
       <footer v-if="venue.footer" class="venue-footer">
         <div class="container">
           <h2>{{ venue.footer.heading }}</h2>
@@ -270,6 +279,13 @@ export default {
     }
     margin-bottom: 2rem;
   }
+
+}
+
+  .body h3{
+  margin-top:0px;
+  line-height:1.0;
+  color:red;
 }
 
 .venue-footer {
@@ -279,4 +295,6 @@ export default {
     inset 0 6px 40px 0 rgba(0, 0, 0, 0.19);
   color: white;
 }
+
+
 </style>
