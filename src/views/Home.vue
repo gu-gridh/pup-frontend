@@ -157,19 +157,19 @@ export default {
   
   
 }
-::v-deep .introa:link{
+::v-deep .intro h3 a:link{
   color:black;
 }
 
-::v-deep .intro a:visited{
+::v-deep .intro h3 a:visited{
   color:black;
 }
 
-::v-deep .introa:hover{
+::v-deep .intro h3 a:hover{
    color: #159cea;
 }
 
-::v-deep .intro a:link{
+::v-deep .intro h3 a:link{
   background-image:url(/linkbutton.png);
     background-size:19px;
        background-repeat:no-repeat;
