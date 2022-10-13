@@ -157,17 +157,29 @@ export default {
 
 <style lang="scss" scoped>
 
-::v-deep h3 {
+::v-deep .intro h3 {
   margin-block-end:0em;
     margin-block-start:0.5em;
   line-height:1.0;
 }
-::v-deep a:link{
+::v-deep .introa:link{
   color:black;
 }
 
-::v-deep a:visited{
+::v-deep .intro a:visited{
   color:black;
+}
+
+::v-deep .introa:hover{
+   color: #159cea;
+}
+
+::v-deep .intro a:link{
+  background-image:url(/linkbutton.png);
+    background-size:20px;
+    background-position: 0px 0px;
+       background-repeat:no-repeat;
+       padding-left:30px;
 }
 
 .top {
