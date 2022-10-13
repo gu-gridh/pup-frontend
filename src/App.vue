@@ -89,6 +89,19 @@ h6 {
   font-weight: 100;
 }
 
+  h3 {
+  margin-block-end:0em;
+    margin-block-start:0.5em;
+  line-height:1.0;
+}
+a:link{
+  color:black;
+}
+
+a:visited{
+  color:black;
+}
+
 .title {
   font-family: "Teko", sans-serif;
   font-weight: 100;

@@ -156,17 +156,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  h3 {
-  margin-block-end:0em;
-  line-height:1.0;
-}
-a:link{
-  color:black;
-}
 
-a:visited{
-  color:black;
-}
 
 .top {
   width: 100%;
