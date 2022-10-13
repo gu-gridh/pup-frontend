@@ -283,6 +283,13 @@ export default {
   margin-block-end:0em;
   line-height:1.0;
 }
+a:link{
+  color:black;
+}
+
+a:link{
+  color:black;
+}
   }
 
 }
