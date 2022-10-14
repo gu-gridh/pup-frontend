@@ -42,7 +42,7 @@
     <div class="main">
       <div v-if="venue.journals.length" class="journal-menu">
         <div class="container">
-          Editions: 
+         Past editions: 
           <router-link
             v-for="journal in venue.journals"
             :key="journal.id"
@@ -176,7 +176,7 @@ export default {
 ::v-deep .intro h3 {
   margin-block-end:0.5em;
     margin-block-start:0em;
-  line-height:1.5;
+  line-height:1.2;
 }
 
 ::v-deep .intro h3 a:link{
@@ -328,9 +328,6 @@ export default {
     }
   }
 }
-
-
-
 
 
 
