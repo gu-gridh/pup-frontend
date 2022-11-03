@@ -31,8 +31,8 @@
         <div class="container">
           <TransitionExpand v-for="page in venue.pages" :key="page.id">
             <div v-if="tab === page.id">
-              <h2>{{ page.heading }}</h2>
-              <div v-html="parseMarkdown(page.body)" />
+                <!--<h2>{{ page.heading }}</h2>-->
+              <div class="menu-item" v-html="parseMarkdown(page.body)" />
             </div>
           </TransitionExpand>
         </div>
@@ -40,7 +40,7 @@
     </TransitionExpand>
 
     <div class="main">
-      <div v-if="venue.journals.length" class="journal-menu">
+      <!-- <div v-if="venue.journals.length" class="journal-menu">
         <div class="container">
          Past editions: 
           <router-link
@@ -51,11 +51,11 @@
           >
             {{ journal.identifier }}
           </router-link>
-        </div>
+        </div> -->
       </div>
 
       <div v-if="venue.introduction || venue.files.length" class="intro">
-        <div class="container">
+        <div class="container" style="margin-top:30px;">
           <h2>BICCS 2023</h2>
           <div class="introduction" style="" v-html="parseMarkdown(venue.introduction)" />
           <Downloads :downloads="venue.files" class="venue-downloads" />
@@ -150,6 +150,46 @@ export default {
 
 <style lang="scss" scoped>
 
+.menu-item{
+  font-size:22px;
+  //columns:2;
+   //:first-child {margin-top: 0;}
+  //  column-gap:40px;
+    margin-bottom:2rem;
+    text-align:left;
+    max-width:1100px;
+
+
+  
+}
+
+
+
+  ::v-deep .menu-item p{
+   line-height:1.2;
+   padding:0px;
+   margin-top:0px;
+    margin-bottom:8px;
+    }
+
+     ::v-deep .menu-item h1{
+font-size:30px;
+ margin-bottom:10px;
+  margin-top:30px;
+    }
+
+    ::v-deep .menu-item a{
+   color: lightblue;
+}
+
+
+  @media screen and (max-width: 1200px) {
+.menu-item{
+  font-size:18px;
+  columns:1;
+
+  }
+  }
 
 .introduction{
     letter-spacing: 1.0px;
@@ -199,6 +239,24 @@ export default {
        background-position: 0px 0px;
        
   
+}
+
+::v-deep .menu-item h3 a:link{
+  background-image:url(/linkbuttonwhite.png);
+    background-size:19px;
+       background-repeat:no-repeat;
+       padding-left:30px;
+       background-position: 0px 0px;
+       color:white;
+   cursor:pointer;
+}
+
+::v-deep .menu-item h3 a{
+       color:white;
+}
+
+::v-deep .menu-item h3 a:hover{
+          color: lightblue;
 }
 
   @media screen and (max-width: 900px) {
