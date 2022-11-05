@@ -194,9 +194,11 @@ font-size:30px;
 .introduction{
     letter-spacing: 1.0px;
   font-size:22px;
+  font-weight:200;
     columns:2;
     column-gap:40px;
-    text-align:left;
+    text-align:justify;
+    
 
     :first-child {
       margin-top: 0;
