@@ -15,8 +15,8 @@ export default {
   methods: {
     imageUrl(image) {
       return image && apiUrl(getImageAtLeast(image, 1000).url);
-    },
-  },
+    }
+  }
 };
 </script>
 

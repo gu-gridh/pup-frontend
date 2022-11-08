@@ -28,7 +28,7 @@
 
 <script>
 export default {
-  props: ["references", "extras"],
+  props: ["references", "extras"]
 };
 </script>
 

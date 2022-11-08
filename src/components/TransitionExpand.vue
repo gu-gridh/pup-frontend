@@ -63,8 +63,8 @@ export default {
       requestAnimationFrame(() => {
         element.style.height = 0;
       });
-    },
-  },
+    }
+  }
 };
 </script>
 

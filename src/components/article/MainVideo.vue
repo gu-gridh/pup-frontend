@@ -3,7 +3,9 @@
     <div v-if="guplayId" class="VisualModule">
       <h3 v-if="title">{{ title }}</h3>
       <iframe
-        :src="`https://play.gu.se/embed/secure/iframe/entryId/${guplayId}/uiConfId/23450401`"
+        :src="
+          `https://play.gu.se/embed/secure/iframe/entryId/${guplayId}/uiConfId/23450401`
+        "
         class="mainvisual-video"
         allowfullscreen
         webkitallowfullscreen
@@ -18,7 +20,7 @@
 
 <script>
 export default {
-  props: ["guplayId", "title"],
+  props: ["guplayId", "title"]
 };
 </script>
 

@@ -38,13 +38,11 @@
               :key="articlePartial.id"
               :journal-name="journalName"
               :article="
-                articles.find((article) => article.id === articlePartial.id) ||
+                articles.find(article => article.id === articlePartial.id) ||
                   article
               "
             />
-          
           </div>
-
         </div>
       </div>
     </div>
@@ -66,7 +64,7 @@ export default {
     return {
       journal: null,
       articles: null,
-      grouping: "themes",
+      grouping: "themes"
     };
   },
   computed: {
@@ -78,7 +76,7 @@ export default {
         parseMarkdown(this.journal.presentation) +
         parseMarkdown(this.journal.contact)
       );
-    },
+    }
   },
   activated() {
     this.load();
@@ -86,7 +84,7 @@ export default {
   methods: {
     ...mapMutations(["reportNotFound"]),
     load() {
-      getJournal(this.journalName).then((journal) => {
+      getJournal(this.journalName).then(journal => {
         if (!journal) {
           this.reportNotFound();
           return;
@@ -95,11 +93,11 @@ export default {
         document.title = this.journal.title;
       });
 
-      getArticles().then((articles) => (this.articles = articles));
+      getArticles().then(articles => (this.articles = articles));
 
       this.$store.commit("setHeader", {
         route: "/",
-        label: "Biennial International Conference for the Craft Sciences",
+        label: "Biennial International Conference for the Craft Sciences"
       });
     },
     groupByThemes() {
@@ -110,7 +108,7 @@ export default {
     },
     toggleGroupBy({ value }) {
       this.grouping = value ? "formats" : "themes";
-    },
+    }
   },
   metaInfo() {
     return {
@@ -120,18 +118,18 @@ export default {
             { property: "og:type", content: "website" },
             {
               property: "og:image",
-              content: "https://biccs.dh.gu.se/biccs_2021.png",
+              content: "https://biccs.dh.gu.se/biccs_2021.png"
             },
             {
               property: "og:url",
-              content: "https://biccs.dh.gu.se/",
+              content: "https://biccs.dh.gu.se/"
             },
             { property: "og:description", content: this.journal.presentation },
-            { property: "description", content: this.journal.presentation },
+            { property: "description", content: this.journal.presentation }
           ]
-        : [],
+        : []
     };
-  },
+  }
 };
 </script>
 
@@ -140,7 +138,7 @@ export default {
   background-color: rgba(240, 240, 240, 1);
   color: black;
   font-size: 25px;
-    font-weight: 200;
+  font-weight: 200;
 }
 
 .title {
@@ -158,8 +156,6 @@ export default {
   //  :first-child {
   //     margin-top: 0;
   //   }
-
-  
 }
 
 .active {
@@ -179,19 +175,18 @@ export default {
   margin-top: 10px;
   color: black;
   font-size: 20px;
-    font-weight: 200;
-  
+  font-weight: 200;
 }
-p{
-   column-count:2;
-   text-align:justify;
-   column-gap:40px;
+p {
+  column-count: 2;
+  text-align: justify;
+  column-gap: 40px;
 }
 
-h1{
-    font-weight: 300;
-    line-height:1.0;
-    margin-bottom:-10px;
+h1 {
+  font-weight: 300;
+  line-height: 1;
+  margin-bottom: -10px;
 }
 
 .articles {
@@ -202,15 +197,14 @@ h1{
   .teaser {
     transition: all 0.2s ease-in-out;
     min-width: 400px;
-    width:20%;
+    width: 20%;
     margin-bottom: 10px;
 
-     @media screen and (max-width: 2500px) {
+    @media screen and (max-width: 2500px) {
       width: 25%;
     }
 
-
-     @media screen and (max-width: 2000px) {
+    @media screen and (max-width: 2000px) {
       width: 33.3%;
     }
 
@@ -225,10 +219,9 @@ h1{
 }
 
 @media screen and (max-width: 1000px) {
-p{
-   column-count:1;
-   font-size:28px;
-
-}
+  p {
+    column-count: 1;
+    font-size: 28px;
+  }
 }
 </style>

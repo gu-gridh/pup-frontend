@@ -1,8 +1,8 @@
 <template>
   <footer id="footer">
     <div class="container" style="width:800px; float:left; margin-left:10%;">
-      <div class="column" >
-        <img src="/biccs.png" alt="BICCS" title="Logo" height="90px"/>
+      <div class="column">
+        <img src="/biccs.png" alt="BICCS" title="Logo" height="90px" />
       </div>
 
       <div class="column">
@@ -19,7 +19,7 @@
 
 <script>
 export default {
-  name: "Footer",
+  name: "Footer"
 };
 </script>
 
@@ -35,8 +35,6 @@ export default {
   .column {
     margin-bottom: 0.5rem;
   }
-
-  
 
   .container {
     @media screen and (min-width: 800px) {

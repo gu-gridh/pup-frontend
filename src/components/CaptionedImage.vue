@@ -8,7 +8,7 @@
 <script>
 export default {
   name: "CaptionedImage",
-  props: ["src", "alt", "caption"],
+  props: ["src", "alt", "caption"]
 };
 </script>
 

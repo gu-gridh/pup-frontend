@@ -40,7 +40,7 @@
     <div v-if="section.text[0] != '<'" class="content-text content-text-plain">
       <p>{{ section.text }}</p>
     </div>
-    <div v-else v-html="section.text" class="content-text content-text-html" />
+    <div v-else class="content-text content-text-html" v-html="section.text" />
   </section>
 </template>
 
@@ -50,8 +50,8 @@ import { apiUrl } from "@/assets/api";
 export default {
   props: ["section"],
   methods: {
-    apiUrl,
-  },
+    apiUrl
+  }
 };
 </script>
 

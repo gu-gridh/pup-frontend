@@ -45,27 +45,27 @@ export default {
   components: { MetaItem, CommaAnd },
   computed: {
     ...mapState({
-      date: (state) => state.article.date,
-      revision: (state) => state.article.revision,
-      revisionDate: (state) => state.article.revisionDate,
-      title: (state) => state.article.title,
-      subtitle: (state) => state.article.subtitle,
-      authors: (state) => state.article.authors,
+      date: state => state.article.date,
+      revision: state => state.article.revision,
+      revisionDate: state => state.article.revisionDate,
+      title: state => state.article.title,
+      subtitle: state => state.article.subtitle,
+      authors: state => state.article.authors
     }),
     affiliations() {
       return this.uniq(
-        this.authors.map((author) => author.affiliation).filter(Boolean)
+        this.authors.map(author => author.affiliation).filter(Boolean)
       );
-    },
+    }
   },
   methods: {
     apiUrl,
     commaAnd,
     fullName,
     /** Remove duplicates, keep order by first occurrence. */
-    uniq: (arr) =>
-      arr.reduce((arr2, x) => (arr2.includes(x) ? arr2 : [...arr2, x]), []),
-  },
+    uniq: arr =>
+      arr.reduce((arr2, x) => (arr2.includes(x) ? arr2 : [...arr2, x]), [])
+  }
 };
 </script>
 

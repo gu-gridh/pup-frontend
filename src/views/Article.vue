@@ -59,11 +59,11 @@ export default {
     Abstract,
     Downloads,
     ContentSection,
-    References,
+    References
   },
   props: ["journalName", "identifier", "revision"],
   computed: {
-    ...mapState(["article"]),
+    ...mapState(["article"])
   },
   activated() {
     this.load();
@@ -79,7 +79,7 @@ export default {
     async load() {
       this.$store.commit("setHeader", {
         route: `/${this.journalName}`,
-        label: "Biennial International Conference for the Craft Sciences 2021",
+        label: "Biennial International Conference for the Craft Sciences 2021"
       });
       const article = await getArticle(this.identifier, this.revision);
       if (!article) {
@@ -91,10 +91,10 @@ export default {
       document.dispatchEvent(
         new Event("ZoteroItemUpdated", {
           bubbles: true,
-          cancelable: true,
+          cancelable: true
         })
       );
-    },
+    }
   },
   metaInfo() {
     return {
@@ -104,41 +104,41 @@ export default {
             { property: "og:type", content: "article" },
             {
               property: "og:image",
-              content: apiUrl(getImageAtLeast(this.article.image, 1000).url),
+              content: apiUrl(getImageAtLeast(this.article.image, 1000).url)
             },
             {
               property: "og:url",
-              content: `https://biccs.dh.gu.se${this.$route.path}`,
+              content: `https://biccs.dh.gu.se${this.$route.path}`
             },
             { property: "og:description", content: this.article.abstract },
             {
               property: "og:site_name",
               content:
-                "Biennial International Conference for the Craft Sciences 2021",
+                "Biennial International Conference for the Craft Sciences 2021"
             },
             {
               property: "article:published_time",
-              content: this.article.date,
+              content: this.article.date
             },
             {
               property: "article:modified_time",
-              content: this.article.revisionDate,
+              content: this.article.revisionDate
             },
             {
               name: "keywords",
               content: this.article.keywords
-                .map((keyword) => keyword.label)
-                .join(", "),
+                .map(keyword => keyword.label)
+                .join(", ")
             },
             { name: "description", content: this.article.abstract },
-            ...this.article.authors.map((author) => ({
+            ...this.article.authors.map(author => ({
               name: "author",
-              content: fullName(author),
-            })),
+              content: fullName(author)
+            }))
           ]
-        : [],
+        : []
     };
-  },
+  }
 };
 </script>
 

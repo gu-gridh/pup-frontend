@@ -36,8 +36,8 @@ export default {
       const str = filesize(size * 1000, { round: 1 });
       // Use regex to remove the decimal if more than 2 figures.
       return str.replace(/(\d\d)\.\d+/, "$1");
-    },
-  },
+    }
+  }
 };
 </script>
 

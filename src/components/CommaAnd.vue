@@ -12,7 +12,7 @@ export default {
   props: {
     items: { type: Array, default: Array },
     comma: { type: String, default: () => ", " },
-    and: { type: String, default: () => " & " },
-  },
+    and: { type: String, default: () => " & " }
+  }
 };
 </script>

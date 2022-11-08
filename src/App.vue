@@ -25,10 +25,10 @@ import { mapMutations, mapState } from "vuex";
 export default {
   components: { Header, Footer },
   computed: {
-    ...mapState(["notFound"]),
+    ...mapState(["notFound"])
   },
   methods: {
-    ...mapMutations(["clearNotFound"]),
+    ...mapMutations(["clearNotFound"])
   },
   unmounted() {
     this.clearNotFound();
@@ -36,8 +36,8 @@ export default {
   watch: {
     $route() {
       this.clearNotFound();
-    },
-  },
+    }
+  }
 };
 </script>
 
@@ -61,7 +61,7 @@ body {
   position: absolute;
   color: black;
   background: white;
-   font-family: "Barlow Condensed", sans-serif;
+  font-family: "Barlow Condensed", sans-serif;
   font-weight: 100;
   line-height: 1.3;
   margin: 0;
@@ -69,11 +69,9 @@ body {
   width: 100%;
 }
 
-.intro .body{
-
-  font-size:35px;
-  text-align:justify;
-
+.intro .body {
+  font-size: 35px;
+  text-align: justify;
 }
 
 #app {
@@ -95,8 +93,6 @@ h6 {
   font-family: "Yanone Kaffeesatz", sans-serif;
   font-weight: 100;
 }
-
-
 
 .title {
   font-family: "Teko", sans-serif;

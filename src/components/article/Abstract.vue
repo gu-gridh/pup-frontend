@@ -9,7 +9,7 @@
       <table class="meta-table">
         <tr v-if="keywords.length">
           <th>Keywords:</th>
-          <td>{{ keywords.map((keyword) => keyword.label).join(", ") }}</td>
+          <td>{{ keywords.map(keyword => keyword.label).join(", ") }}</td>
         </tr>
         <tr>
           <th>Cite&nbsp;as:</th>
@@ -41,22 +41,22 @@ const showdownConverter = new showdown.Converter();
 export default {
   computed: {
     ...mapState({
-      abstract: (state) => state.article.abstract,
-      keywords: (state) => state.article.keywords,
-      citeAs: (state) => state.article.citeAs,
-      authors: (state) => state.article.authors,
-      date: (state) => state.article.date,
-      title: (state) => state.article.title,
-      revision: (state) => state.article.revision,
-    }),
+      abstract: state => state.article.abstract,
+      keywords: state => state.article.keywords,
+      citeAs: state => state.article.citeAs,
+      authors: state => state.article.authors,
+      date: state => state.article.date,
+      title: state => state.article.title,
+      revision: state => state.article.revision
+    })
   },
   methods: {
     commaAnd,
     lastnameFirst,
     parseMarkdown(md) {
       return showdownConverter.makeHtml(md);
-    },
-  },
+    }
+  }
 };
 </script>
 
