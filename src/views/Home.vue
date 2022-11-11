@@ -1,11 +1,11 @@
 <template>
   <section v-if="venue">
-    <div class="top">
+    <div class="top" style="margin-top:-79px; background-color:white;">
       <video id="videoBG" poster="/poster.jpg" autoplay muted loop playsinline>
         <source src="/introvideocompressed.mp4" type="video/mp4" />
       </video>
 
-      <div class="container">
+      <div class="container" >
         <div class="header">
           <img src="/biccs.png" alt="BICCS" title="Logo" />
           <div class="title">
@@ -183,13 +183,7 @@ font-size:30px;
 }
 
 
-  @media screen and (max-width: 1200px) {
-.menu-item{
-  font-size:18px;
-  columns:1;
 
-  }
-  }
 
 .introduction{
     letter-spacing: 1.0px;
@@ -197,7 +191,7 @@ font-size:30px;
   font-weight:200;
     columns:2;
     column-gap:40px;
-    text-align:justify;
+    text-align:left;
     
 
     :first-child {
@@ -266,6 +260,25 @@ font-size:30px;
 .introduction{
   font-size:30px;
   columns:1;
+}
+
+.menu-item{
+  font-size:32px;  
+}
+
+::v-deep .menu-item h1{
+  font-size:52px; 
+   line-height:1.0;  
+   margin-top:50px;
+}
+
+::v-deep .menu-item h3 a:link{
+  background-image:url(/linkbuttonwhite.png);
+    background-size:34px;
+       background-repeat:no-repeat;
+       padding-left:55px;
+       background-position: 0px 0px;
+       
 }
 
 ::v-deep .intro h3 a:link{
