@@ -5,7 +5,7 @@
         <source src="/introvideocompressed.mp4" type="video/mp4" />
       </video>
 
-      <div class="container" >
+      <div class="container">
         <div class="header">
           <img src="/biccs.png" alt="BICCS" title="Logo" />
           <div class="title">
@@ -31,7 +31,7 @@
         <div class="container">
           <TransitionExpand v-for="page in venue.pages" :key="page.id">
             <div v-if="tab === page.id">
-                <!--<h2>{{ page.heading }}</h2>-->
+              <!--<h2>{{ page.heading }}</h2>-->
               <div class="menu-item" v-html="parseMarkdown(page.body)" />
             </div>
           </TransitionExpand>
@@ -51,13 +51,17 @@
           >
             {{ journal.identifier }}
           </router-link>
-        </div> -->
-      </div>
+        </div>
+      </div>-->
 
       <div v-if="venue.introduction || venue.files.length" class="intro">
         <div class="container" style="margin-top:30px;">
           <h2>BICCS 2023</h2>
-          <div class="introduction" style="" v-html="parseMarkdown(venue.introduction)" />
+          <div
+            class="introduction"
+            style=""
+            v-html="parseMarkdown(venue.introduction)"
+          />
           <Downloads :downloads="venue.files" class="venue-downloads" />
         </div>
       </div>
@@ -70,8 +74,6 @@
           :caption="image.caption"
         />
       </div>
-
-    
 
       <footer v-if="venue.footer" class="venue-footer">
         <div class="container">
@@ -95,7 +97,7 @@ export default {
   data() {
     return {
       venue: null,
-      tab: "",
+      tab: ""
     };
   },
   created() {
@@ -110,7 +112,7 @@ export default {
       this.loadVenue();
       this.$store.commit("setHeader", {
         route: "/",
-        label: "Biennial International Conference for the Craft Sciences",
+        label: "Biennial International Conference for the Craft Sciences"
       });
     },
     async loadVenue() {
@@ -127,7 +129,7 @@ export default {
     },
     imageUrl(image) {
       return apiUrl(getImageAtLeast(image, 1000).url);
-    },
+    }
   },
   metaInfo() {
     return {
@@ -135,69 +137,59 @@ export default {
         {
           property: "og:title",
           content:
-            "Biennial International Conference for the Craft Sciences (BICCS)",
+            "Biennial International Conference for the Craft Sciences (BICCS)"
         },
         { property: "og:type", content: "website" },
         {
           property: "og:url",
-          content: location.origin + location.pathname,
-        },
-      ],
+          content: location.origin + location.pathname
+        }
+      ]
     };
-  },
+  }
 };
 </script>
 
 <style lang="scss" scoped>
-
-.menu-item{
-  font-size:22px;
+.menu-item {
+  font-size: 22px;
   //columns:2;
-   //:first-child {margin-top: 0;}
+  //:first-child {margin-top: 0;}
   //  column-gap:40px;
-    margin-bottom:2rem;
-    text-align:left;
-    max-width:1100px;
-
-
-  
+  margin-bottom: 2rem;
+  text-align: left;
+  max-width: 1100px;
 }
 
-
-
-  ::v-deep .menu-item p{
-   line-height:1.2;
-   padding:0px;
-   margin-top:0px;
-    margin-bottom:8px;
-    }
-
-     ::v-deep .menu-item h1{
-font-size:30px;
- margin-bottom:10px;
-  margin-top:30px;
-    }
-
-    ::v-deep .menu-item a{
-   color: lightblue;
+::v-deep .menu-item p {
+  line-height: 1.2;
+  padding: 0px;
+  margin-top: 0px;
+  margin-bottom: 8px;
 }
 
+::v-deep .menu-item h1 {
+  font-size: 30px;
+  margin-bottom: 10px;
+  margin-top: 30px;
+}
 
+::v-deep .menu-item a {
+  color: lightblue;
+}
 
+.introduction {
+  letter-spacing: 1px;
+  font-size: 22px;
+  font-weight: 200;
+  columns: 2;
+  column-gap: 40px;
+  text-align: left;
 
-.introduction{
-    letter-spacing: 1.0px;
-  font-size:22px;
-  font-weight:200;
-    columns:2;
-    column-gap:40px;
-    text-align:left;
-    
-
-    :first-child {
-      margin-top: 0;
-    }
-    margin-bottom: 2rem;
+  :first-child {
+    margin-top: 0;
+  }
+  margin-bottom: 2rem;
 }
 
 .intro {
@@ -208,89 +200,82 @@ font-size:30px;
   }
 }
 
-
 ::v-deep .intro h3 {
-  margin-block-end:0.5em;
-    margin-block-start:0em;
-  line-height:1.2;
+  margin-block-end: 0.5em;
+  margin-block-start: 0em;
+  line-height: 1.2;
 }
 
-::v-deep .intro h3 a:link{
-  color:black;
+::v-deep .intro h3 a:link {
+  color: black;
 }
 
-::v-deep .intro h3 a:visited{
-  color:black;
+::v-deep .intro h3 a:visited {
+  color: black;
 }
 
-::v-deep .intro h3 a:hover{
-   color: #159cea;
+::v-deep .intro h3 a:hover {
+  color: #159cea;
 }
 
-::v-deep .intro h3 a:link{
-  background-image:url(/linkbutton.png);
-    background-size:19px;
-       background-repeat:no-repeat;
-       padding-left:30px;
-       background-position: 0px 0px;
-       
-  
+::v-deep .intro h3 a:link {
+  background-image: url(/linkbutton.png);
+  background-size: 19px;
+  background-repeat: no-repeat;
+  padding-left: 30px;
+  background-position: 0px 0px;
 }
 
-::v-deep .menu-item h3 a:link{
-  background-image:url(/linkbuttonwhite.png);
-    background-size:19px;
-       background-repeat:no-repeat;
-       padding-left:30px;
-       background-position: 0px 0px;
-       color:white;
-   cursor:pointer;
+::v-deep .menu-item h3 a:link {
+  background-image: url(/linkbuttonwhite.png);
+  background-size: 19px;
+  background-repeat: no-repeat;
+  padding-left: 30px;
+  background-position: 0px 0px;
+  color: white;
+  cursor: pointer;
 }
 
-::v-deep .menu-item h3 a{
-       color:white;
+::v-deep .menu-item h3 a {
+  color: white;
 }
 
-::v-deep .menu-item h3 a:hover{
-          color: lightblue;
+::v-deep .menu-item h3 a:hover {
+  color: lightblue;
 }
 
-  @media screen and (max-width: 900px) {
-
-.introduction{
-  font-size:30px;
-  columns:1;
-}
-
-.menu-item{
-  font-size:32px;  
-}
-
-::v-deep .menu-item h1{
-  font-size:52px; 
-   line-height:1.0;  
-   margin-top:50px;
-}
-
-::v-deep .menu-item h3 a:link{
-  background-image:url(/linkbuttonwhite.png);
-    background-size:34px;
-       background-repeat:no-repeat;
-       padding-left:55px;
-       background-position: 0px 0px;
-       
-}
-
-::v-deep .intro h3 a:link{
-  background-image:url(/linkbutton.png);
-    background-size:28px;
-       background-repeat:no-repeat;
-       padding-left:45px;
-       background-position: 0px 0px;
-       
-  
-}
+@media screen and (max-width: 900px) {
+  .introduction {
+    font-size: 30px;
+    columns: 1;
   }
+
+  .menu-item {
+    font-size: 32px;
+  }
+
+  ::v-deep .menu-item h1 {
+    font-size: 52px;
+    line-height: 1;
+    margin-top: 50px;
+  }
+
+  ::v-deep .menu-item h3 a:link {
+    background-image: url(/linkbuttonwhite.png);
+    background-size: 34px;
+    background-repeat: no-repeat;
+    padding-left: 55px;
+    background-position: 0px 0px;
+  }
+
+  ::v-deep .intro h3 a:link {
+    background-image: url(/linkbutton.png);
+    background-size: 28px;
+    background-repeat: no-repeat;
+    padding-left: 45px;
+    background-position: 0px 0px;
+  }
+}
 
 .top {
   width: 100%;
@@ -402,9 +387,6 @@ font-size:30px;
   }
 }
 
-
-
-
 .venue-footer {
   padding: 0 0 1rem;
   background-color: rgba(70, 70, 70, 1);
@@ -412,6 +394,4 @@ font-size:30px;
     inset 0 6px 40px 0 rgba(0, 0, 0, 0.19);
   color: white;
 }
-
-
 </style>

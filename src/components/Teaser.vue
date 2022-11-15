@@ -6,23 +6,19 @@
     :class="{ 'no-image': !image }"
     :style="{
       backgroundColor: strToColor(article.title),
-      backgroundImage: `url(${image})`,
+      backgroundImage: `url(${image})`
     }"
   >
     <div class="text">
-       
-        <div class="teaser-title">{{ article.title }}</div>
-         <div v-if="article.subtitle" class="teaser-subtitle">
-          {{ article.subtitle }}      
-          </div>
-       <div class="teaser-author"> {{ commaAnd(article.authors.map(fullName)) }} </div>
-
-   
+      <div class="teaser-title">{{ article.title }}</div>
+      <div v-if="article.subtitle" class="teaser-subtitle">
+        {{ article.subtitle }}
+      </div>
+      <div class="teaser-author">
+        {{ commaAnd(article.authors.map(fullName)) }}
       </div>
     </div>
-
   </router-link>
-   
 </template>
 
 <script>
@@ -45,17 +41,17 @@ export default {
         params: {
           journalName: this.journalName,
           identifier: this.article.identifier,
-          revision: this.article.revision,
-        },
+          revision: this.article.revision
+        }
       };
-    },
+    }
   },
   methods: {
     apiUrl,
     commaAnd,
     fullName,
-    strToColor,
-  },
+    strToColor
+  }
 };
 </script>
 
@@ -70,7 +66,6 @@ export default {
   background-size: cover;
   background-position: center;
   cursor: pointer;
-
 }
 
 .no-image {
@@ -82,8 +77,8 @@ export default {
   height: 7rem;
   position: relative;
   color: black;
-  padding-left:1rem;
-    padding-right:1rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -107,8 +102,7 @@ export default {
   font-weight: 600;
   line-height: 1.1;
   margin-top: 0px;
-  margin-bottom:10px;
-   
+  margin-bottom: 10px;
 }
 
 .teaser-subtitle {
@@ -116,28 +110,28 @@ export default {
   font-weight: 300;
   line-height: 1.1;
   display: none;
-   margin-bottom:10px;
+  margin-bottom: 10px;
 }
 
 .teaser-author {
-  border-width:0.5px 0 0 0;
-  padding:1rem 1rem 0 1rem;
-  border-style:dashed;
-  border-color:black;
+  border-width: 0.5px 0 0 0;
+  padding: 1rem 1rem 0 1rem;
+  border-style: dashed;
+  border-color: black;
   font-size: 18px;
   margin-top: 10px;
   font-weight: 300;
-    line-height: 1.0;
-    width:calc(100% + 2rem);
-    margin-left:-1rem;
+  line-height: 1;
+  width: calc(100% + 2rem);
+  margin-left: -1rem;
 }
 
 .teaser:hover {
   z-index: 10;
   cursor: pointer;
   .text {
-  margin-top: calc(15rem - 9rem);
-  height: 9rem;
+    margin-top: calc(15rem - 9rem);
+    height: 9rem;
 
     background: rgba(255, 255, 255, 0.9);
     cursor: pointer;
