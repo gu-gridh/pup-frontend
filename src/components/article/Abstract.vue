@@ -68,11 +68,11 @@ export default {
     font-weight: 100;
 
     /* Deep selector needed for v-html. The >>> syntax does not work in scss. */
-    ::v-deep p:first-child {
+    :deep(p:first-child) {
       margin-top: 0;
     }
 
-    ::v-deep p:last-child {
+    :deep(p:last-child) {
       margin-bottom: 0;
     }
 

@@ -156,23 +156,41 @@ export default {
   margin-bottom: 2rem;
   text-align: left;
   max-width: 1100px;
-}
 
-::v-deep .menu-item p {
-  line-height: 1.2;
-  padding: 0px;
-  margin-top: 0px;
-  margin-bottom: 8px;
-}
+  :deep(p) {
+    line-height: 1.2;
+    padding: 0px;
+    margin-top: 0px;
+    margin-bottom: 8px;
+  }
 
-::v-deep .menu-item h1 {
-  font-size: 30px;
-  margin-bottom: 10px;
-  margin-top: 30px;
-}
+  :deep(h1) {
+    font-size: 30px;
+    margin-bottom: 10px;
+    margin-top: 30px;
+  }
 
-::v-deep .menu-item a {
-  color: lightblue;
+  :deep(a) {
+    color: lightblue;
+  }
+
+  :deep(h3) {
+    a {
+      color: white;
+    }
+    a:link {
+      background-image: url(/linkbuttonwhite.png);
+      background-size: 19px;
+      background-repeat: no-repeat;
+      padding-left: 30px;
+      background-position: 0px 0px;
+      color: white;
+      cursor: pointer;
+    }
+    a:hover {
+      color: lightblue;
+    }
+  }
 }
 
 .introduction {
@@ -195,50 +213,27 @@ export default {
     font-size: 3rem;
     margin-block: 1rem;
   }
-}
 
-::v-deep .intro h3 {
-  margin-block-end: 0.5em;
-  margin-block-start: 0em;
-  line-height: 1.2;
-}
+  :deep(h3) {
+    margin-block-end: 0.5em;
+    margin-block-start: 0em;
+    line-height: 1.2;
 
-::v-deep .intro h3 a:link {
-  color: black;
-}
-
-::v-deep .intro h3 a:visited {
-  color: black;
-}
-
-::v-deep .intro h3 a:hover {
-  color: #159cea;
-}
-
-::v-deep .intro h3 a:link {
-  background-image: url(/linkbutton.png);
-  background-size: 19px;
-  background-repeat: no-repeat;
-  padding-left: 30px;
-  background-position: 0px 0px;
-}
-
-::v-deep .menu-item h3 a:link {
-  background-image: url(/linkbuttonwhite.png);
-  background-size: 19px;
-  background-repeat: no-repeat;
-  padding-left: 30px;
-  background-position: 0px 0px;
-  color: white;
-  cursor: pointer;
-}
-
-::v-deep .menu-item h3 a {
-  color: white;
-}
-
-::v-deep .menu-item h3 a:hover {
-  color: lightblue;
+    a:link {
+      color: black;
+      background-image: url(/linkbutton.png);
+      background-size: 19px;
+      background-repeat: no-repeat;
+      padding-left: 30px;
+      background-position: 0px 0px;
+    }
+    a:visited {
+      color: black;
+    }
+    a:hover {
+      color: #159cea;
+    }
+  }
 }
 
 @media screen and (max-width: 900px) {
@@ -249,23 +244,23 @@ export default {
 
   .menu-item {
     font-size: 32px;
+
+    :deep(h1) {
+      font-size: 52px;
+      line-height: 1;
+      margin-top: 50px;
+    }
+
+    :deep(h3) a:link {
+      background-image: url(/linkbuttonwhite.png);
+      background-size: 34px;
+      background-repeat: no-repeat;
+      padding-left: 55px;
+      background-position: 0px 0px;
+    }
   }
 
-  ::v-deep .menu-item h1 {
-    font-size: 52px;
-    line-height: 1;
-    margin-top: 50px;
-  }
-
-  ::v-deep .menu-item h3 a:link {
-    background-image: url(/linkbuttonwhite.png);
-    background-size: 34px;
-    background-repeat: no-repeat;
-    padding-left: 55px;
-    background-position: 0px 0px;
-  }
-
-  ::v-deep .intro h3 a:link {
+  .intro :deep(h3) a:link {
     background-image: url(/linkbutton.png);
     background-size: 28px;
     background-repeat: no-repeat;
@@ -348,23 +343,6 @@ export default {
   width: 100%;
   font-size: 1.25rem;
   text-align: justify;
-}
-
-.journalpresentation {
-  columns: 2;
-  column-gap: 40px;
-
-  ::v-deep & p:first-child {
-    margin-top: 0;
-  }
-
-  ::v-deep & p:last-child {
-    margin-bottom: 0;
-  }
-
-  @media screen and (max-width: 1500px) {
-    columns: 1;
-  }
 }
 
 .journal-menu {
