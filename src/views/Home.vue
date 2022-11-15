@@ -1,6 +1,6 @@
 <template>
   <section v-if="venue">
-    <div class="top" style="margin-top:-79px; background-color:white;">
+    <div class="top">
       <video id="videoBG" poster="/poster.jpg" autoplay muted loop playsinline>
         <source src="/introvideocompressed.mp4" type="video/mp4" />
       </video>
@@ -110,10 +110,7 @@ export default {
     parseMarkdown,
     async load() {
       this.loadVenue();
-      this.$store.commit("setHeader", {
-        route: "/",
-        label: "Biennial International Conference for the Craft Sciences"
-      });
+      this.$store.commit("setHeader", null);
     },
     async loadVenue() {
       this.venue = await getVenue();

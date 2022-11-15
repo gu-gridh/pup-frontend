@@ -1,5 +1,5 @@
 <template>
-  <aside id="header">
+  <aside v-if="header" id="header">
     <div class="container">
       <router-link v-if="header.route" :to="header.route" :title="header.label">
         {{ header.label }}
