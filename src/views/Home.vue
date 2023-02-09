@@ -148,6 +148,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
+
 .menu-item {
   font-size: 22px;
   //columns:2;
@@ -208,9 +210,9 @@ export default {
 }
 
 .intro {
-  h2 {
+  :deep(h2) {
     font-family: "Teko", sans-serif;
-    font-size: 3rem;
+    font-size: 4rem;
     margin-block: 1rem;
   }
 
@@ -240,6 +242,14 @@ export default {
   .introduction {
     font-size: 30px;
     columns: 1;
+  }
+
+  .intro {
+  :deep(h2) {
+    font-family: "Teko", sans-serif;
+    font-size: 5rem;
+    margin-block: 1rem;
+  }
   }
 
   .menu-item {
@@ -307,9 +317,12 @@ export default {
   margin-left: -0.05em;
 
   @media screen and (max-width: 1200px) {
-    font-size: 14vw;
+    font-size: 18vw;
   }
 }
+
+
+
 .info-menu {
   margin-top: 20px;
   font-family: "Teko", sans-serif;
@@ -345,6 +358,8 @@ export default {
   text-align: justify;
 }
 
+
+
 .journal-menu {
   margin-left: -0.05em;
   padding: 0.5rem 0 1rem;
@@ -368,5 +383,15 @@ export default {
   box-shadow: inset 0 10px 20px 0px rgba(0, 0, 0, 0.2),
     inset 0 6px 40px 0 rgba(0, 0, 0, 0.19);
   color: white;
+}
+
+
+@media screen and (max-width: 600px) {
+  
+  .container{
+      width: 80%;
+  }
+
+  
 }
 </style>

@@ -1,8 +1,8 @@
 <template>
   <footer id="footer">
-    <div class="container" style="width:800px; float:left; margin-left:10%;">
+    <div class="container" style="width:auto; float:left; margin-left:30px;;">
       <div class="column">
-        <img src="/biccs.png" alt="BICCS" title="Logo" height="90px" />
+        <img src="/biccs.png" alt="BICCS" title="Logo"  width="220px" />
       </div>
 
       <div class="column">
@@ -33,21 +33,13 @@ export default {
   text-align: left;
 
   .column {
+    float:left;
+    margin-left:30px;
+     margin-top:10px;
     margin-bottom: 0.5rem;
   }
 
-  .container {
-    @media screen and (min-width: 800px) {
-      display: flex;
-      text-align: left;
-      .column {
-        flex: 1;
-        &:not(:last-child) {
-          margin-right: 1rem;
-        }
-      }
-    }
-  }
+  
 }
 
 a {
