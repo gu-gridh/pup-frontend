@@ -199,8 +199,8 @@ export default {
 
 .introduction {
   letter-spacing: 1px;
-  font-size: 22px;
-  font-weight: 200;
+  font-size: 20px;
+  font-weight: 300;
   columns: 2;
   column-gap: 40px;
   text-align: left;
@@ -372,8 +372,8 @@ export default {
    :deep(h2) {
 
     font-size: 2.5rem;
-    margin-block: 1rem;
-    margin-top:80px;
+
+    margin-top:60px;
   margin-bottom:20px;
   }
 
@@ -383,6 +383,13 @@ export default {
     margin-block: 1rem;
     margin-top:30px;
   margin-bottom:0px;
+  }
+
+   :deep(p) {
+  
+  margin-bottom:20px;
+  font-size:20px;
+  max-width:800px;
   }
 }
 
