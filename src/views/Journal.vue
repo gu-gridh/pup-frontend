@@ -181,6 +181,8 @@ p {
   column-count: 2;
   text-align: justify;
   column-gap: 40px;
+  margin-top:20px;
+   margin-bottom:30px;
 }
 
 h1 {
