@@ -172,6 +172,8 @@ export default {
     margin-top: 30px;
   }
 
+  
+
   :deep(a) {
     color: lightblue;
   }
@@ -214,6 +216,8 @@ export default {
     font-family: "Teko", sans-serif;
     font-size: 4rem;
     margin-block: 1rem;
+    margin-top:40px;
+    margin-bottom:30px;
   }
 
   :deep(h3) {
@@ -246,8 +250,9 @@ export default {
 
   .intro {
   :deep(h2) {
-    font-family: "Teko", sans-serif;
+  
     font-size: 5rem;
+    color:black;
     margin-block: 1rem;
   }
   }
@@ -356,7 +361,31 @@ export default {
   width: 100%;
   font-size: 1.25rem;
   text-align: justify;
+
+   :deep(h1) {
+
+    margin-block: 1rem;
+    margin-top:30px;
+  margin-bottom:00px;
+  }
+
+   :deep(h2) {
+
+    font-size: 2.5rem;
+    margin-block: 1rem;
+    margin-top:80px;
+  margin-bottom:20px;
+  }
+
+  :deep(h6) {
+    font-family: "Teko", sans-serif;
+    font-size: 1.5rem;
+    margin-block: 1rem;
+    margin-top:30px;
+  margin-bottom:0px;
+  }
 }
+
 
 
 
