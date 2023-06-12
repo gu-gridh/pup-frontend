@@ -33,7 +33,22 @@ export default new Router({
       component: NotFound
     }
   ],
+
   scrollBehavior(to, from, savedPosition) {
+    if (to.hash) {
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          Vue.nextTick(() => {
+            resolve({
+              selector: to.hash,
+              behavior: "smooth",
+            });
+          });
+        }, 500);
+      });
+    }
+  
     return savedPosition || { x: 0, y: 0 };
-  }
+  }  
+  
 });

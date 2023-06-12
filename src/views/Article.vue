@@ -23,11 +23,12 @@
       v-if="article.content && article.content.length"
       class="container article-content"
     >
-      <ContentSection
-        v-for="section in article.content"
-        :key="section.label"
-        :section="section"
-      />
+    <ContentSection
+      v-for="(section, index) in article.content"
+      :key="section.label"
+      :section="section"
+      :order="index + 1"
+    />
     </div>
 
     <References
