@@ -31,6 +31,7 @@
         </div>
         <div v-for="group in groups" :key="group.id" class="group">
           <h1>{{ group.heading }}</h1>
+          <!--<p :style="group.description && group.description.length > 250 ? 'column-count: 2;' : 'column-count: 1;'"> -->
           <p>
             {{ group.description }}
           </p>
