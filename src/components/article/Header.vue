@@ -72,8 +72,11 @@ export default {
 <style lang="scss" scoped>
 .article-header {
   background-color: #f4f4f4;
-  padding: 1.5rem 0 1.5rem;
+  padding: 0px 20px;
   font-weight: 100;
+  width:calc(100% + 40px);
+  margin-left:-20px;
+}
 
   .article-mainmeta {
     margin: 0 0 1.5rem;
@@ -96,23 +99,30 @@ export default {
     font-family: "Yanone Kaffeesatz", sans-serif;
   }
 
-  @media screen and (min-width: 600px) {
+  @media screen and (max-width: 1000px) {
+    .article-header {
+    padding-left:20px;
+    }
     .article-title {
       font-size: 3rem;
+    
     }
     .article-subtitle {
       font-size: 2rem;
+
     }
   }
 
   .article-authors {
     font-size: 1.1rem;
 
+
     .author-name {
       font-size: 1.3rem;
       // line-height: 1.5;
       margin-bottom: 0.5rem;
+      
     }
   }
-}
+
 </style>

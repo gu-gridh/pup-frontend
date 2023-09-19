@@ -103,9 +103,11 @@ export default {
       padding-bottom: 1rem;
     }
   }
+}
 
-  @media screen and (min-width: 800px) {
-    width: 66.7%;
+  @media screen and (max-width: 1000px) {
+    .article-abstract {
+ 
   }
 }
 </style>

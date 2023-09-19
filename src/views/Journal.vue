@@ -31,7 +31,7 @@
         </div>
         <div v-for="group in groups" :key="group.id" class="group">
           <h1>{{ group.heading }}</h1>
-          <p :style="group.description && group.description.length > 250 ? 'column-count: 2;' : 'column-count: 1;'">
+          <p>
             {{ group.description }}
           </p>
           <div v-if="articles" class="articles">
@@ -154,6 +154,7 @@ export default {
 }
 
 .body {
+  margin-top:20px;
   columns: 15em 2;
     :first-child {
        margin-top: 0;
@@ -180,7 +181,7 @@ export default {
   font-weight: 200;
 }
 p {
-  column-count: 2;
+  columns: 2;
   text-align: justify;
   column-gap: 40px;
   margin-top:20px;
@@ -197,6 +198,7 @@ h1 {
   font-family: "Yanone Kaffeesatz", sans-serif;
   display: flex;
   flex-wrap: wrap;
+}
 
   .teaser {
     transition: all 0.2s ease-in-out;
@@ -215,17 +217,58 @@ h1 {
     @media screen and (max-width: 1700px) {
       width: 50%;
     }
-
-    @media screen and (max-width: 1000px) {
-      width: 100%;
-    }
   }
-}
+
 
 @media screen and (max-width: 1000px) {
+
+  .title {
+
+margin-top:50px;
+}
+
+  .grouping-select {
+  margin-left:20px;
+}
+
+
+  .articles {
+padding:20px;
+overflow:hidden;
+}
+
+.teaser{
+  min-width: 100px;
+  width: 100% !important;
+  height: 20rem;
+  border-radius:8px;
+  margin-bottom:30px;
+  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.teaser:hover{
+ transform:scale(1.05);
+}
+
+  .body {
+    padding:0px 20px;
+  margin-top:20px;
+  columns: 1;
+}
+
+  h1{
+    margin-top:10px;
+    padding:0px 20px;
+
+  }
   p {
-    column-count: 1;
-    font-size: 28px;
+    columns: 1;
+    font-size: 20px;
+    padding:0px 20px;
+    text-align:left;
+  }
+  .group {
+    columns: 1;
   }
 }
 </style>

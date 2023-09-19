@@ -73,29 +73,26 @@ export default {
 }
 
 .text {
-  margin-top: calc(15rem - 7rem);
-  height: 7rem;
-  position: relative;
+  position: absolute;
   color: black;
-  padding-left: 1rem;
-  padding-right: 1rem;
+  font-family: "Yanone Kaffeesatz", sans-serif;
+  text-align: left;
+  bottom:0px;
+  height: 7rem;
+  width:100%;
+  padding:1rem 1rem 1rem 1rem;
   display: flex;
   justify-content: center;
   flex-direction: column;
-  background: rgba(255, 255, 255, 0.8);
-  transition: all 0.2s ease-in-out;
+  background: rgba(255, 255, 255, 0.7);
   z-index: 20;
-  backdrop-filter: blur(5px);
   cursor: pointer;
-  text-align: left;
-  box-shadow: 0px 0px 20px 10px rgba(0, 0, 0, 0.2),
-    0 0px 40px 10px rgba(0, 0, 0, 0.19);
+  box-shadow: 0px -20px 20px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5px);
+  transition: all 1.5s ease-in-out;
 }
 
-.text {
-  color: black;
-  font-family: "Yanone Kaffeesatz", sans-serif;
-}
+
 
 .teaser-title {
   font-size: 22px;
@@ -127,12 +124,10 @@ export default {
 }
 
 .teaser:hover {
-  z-index: 10;
   cursor: pointer;
   .text {
-    margin-top: calc(15rem - 9rem);
-    height: 9rem;
-
+    height: auto;
+    min-height: 7.5rem;
     background: rgba(255, 255, 255, 0.9);
     cursor: pointer;
   }
@@ -144,8 +139,12 @@ export default {
   }
 }
 
-@media screen and (max-width: 600px) {
-  .text,
+@media screen and (max-width: 1000px) {
+  .text {
+  height: auto;
+  box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.0);
+  }
+
   .teaser:hover .text {
     margin-left: 0;
   }

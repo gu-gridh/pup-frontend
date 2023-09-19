@@ -144,8 +144,17 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
+
 .full-article {
   /* Make bottom margin match side margin */
-  margin: 0 0 10vw;
+
+}
+
+@media screen and (max-width: 1000px) {
+.full-article {
+  /* Make bottom margin match side margin */
+ padding:0px 20px;
+}
 }
 </style>

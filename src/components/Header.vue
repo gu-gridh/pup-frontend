@@ -32,11 +32,12 @@ export default {
   color: #eaeae7;
   font-family: "Teko", sans-serif;
   font-size: 30px;
+  line-height:1.0;
   display: flex;
 
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 1000px) {
     .container {
-      padding: 10px 0;
+      padding: 20px 20px;
     }
   }
 }

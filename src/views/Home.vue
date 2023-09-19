@@ -228,9 +228,9 @@ export default {
     a:link {
       color: black;
       background-image: url(/linkbutton.png);
-      background-size: 19px;
+      background-size: 25px;
       background-repeat: no-repeat;
-      padding-left: 30px;
+      padding: 5px 20px 5px 40px;
       background-position: 0px 0px;
     }
     a:visited {
@@ -242,10 +242,15 @@ export default {
   }
 }
 
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 1000px) {
   .introduction {
-    font-size: 30px;
+    margin-top:30px;
+    font-size: 22px;
     columns: 1;
+  }
+
+  .gallery{
+    display:none;
   }
 
   .intro {
@@ -276,10 +281,12 @@ export default {
   }
 
   .intro :deep(h3) a:link {
+    
     background-image: url(/linkbutton.png);
-    background-size: 28px;
+    background-size: 30px;
     background-repeat: no-repeat;
-    padding-left: 45px;
+    padding:5px 20px 10px 40px;
+    line-height:2;
     background-position: 0px 0px;
   }
 }
@@ -422,7 +429,7 @@ export default {
 }
 
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 1000px) {
   
   .container{
       width: 80%;
