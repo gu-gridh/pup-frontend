@@ -21,7 +21,13 @@ export const getJournal = memoize(
   async identifier => (await get("journals", { identifier }))[0]
 );
 
-export const getArticles = memoize(params => get("articles", params));
+export const getArticles = memoize(async params => {
+  const updatedParams = {
+    ...params,
+    _limit: 200, //set the limit to 200
+  };
+  return get("articles", updatedParams);
+});
 
 export const getArticle = async (identifier, revision) =>
   (await getArticles({ identifier, revision }))[0];
