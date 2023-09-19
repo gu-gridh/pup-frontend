@@ -142,6 +142,7 @@ export default {
 @media screen and (max-width: 1000px) {
   .text {
   height: auto;
+  min-height: 7rem;
   box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.0);
   }
 

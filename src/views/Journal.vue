@@ -234,7 +234,10 @@ margin-top:50px;
 
   .articles {
 padding:20px;
-overflow:hidden;
+}
+
+.teaser:hover{
+ transform:scale(1.02);
 }
 
 .teaser{
@@ -246,9 +249,7 @@ overflow:hidden;
   box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.2);
 }
 
-.teaser:hover{
- transform:scale(1.05);
-}
+
 
   .body {
     padding:0px 20px;
