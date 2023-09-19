@@ -31,7 +31,9 @@
         </div>
         <div v-for="group in groups" :key="group.id" class="group">
           <h1>{{ group.heading }}</h1>
-          <p>{{ group.description }}</p>
+          <p :style="group.description && group.description.length > 250 ? 'column-count: 2;' : 'column-count: 1;'">
+            {{ group.description }}
+          </p>
           <div v-if="articles" class="articles">
             <Teaser
               v-for="articlePartial of group.articles"
@@ -153,9 +155,9 @@ export default {
 
 .body {
   columns: 15em 2;
-  //  :first-child {
-  //     margin-top: 0;
-  //   }
+    :first-child {
+       margin-top: 0;
+     }
 }
 
 .active {
