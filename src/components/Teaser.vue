@@ -78,7 +78,7 @@ export default {
   font-family: "Yanone Kaffeesatz", sans-serif;
   text-align: left;
   bottom:0px;
-  height: 7rem;
+  height: 7.5rem;
   width:100%;
   padding:1rem 1rem 1rem 1rem;
   display: flex;
@@ -89,7 +89,7 @@ export default {
   cursor: pointer;
   box-shadow: 0px -20px 20px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(5px);
-  transition: all 1.5s ease-in-out;
+  transition: all 0.3s ease-in-out;
 }
 
 
@@ -127,7 +127,7 @@ export default {
   cursor: pointer;
   .text {
     height: auto;
-    min-height: 7.5rem;
+    min-height: 7.8rem;
     background: rgba(255, 255, 255, 0.9);
     cursor: pointer;
   }
