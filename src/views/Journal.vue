@@ -187,9 +187,6 @@ p {
   column-gap: 40px;
   margin-top:20px;
    margin-bottom:30px;
-   -webkit-column-break-inside: avoid;
-          page-break-inside: avoid;
-               break-inside: avoid;
 }
 
 h1 {
