@@ -32,7 +32,7 @@
         <div v-for="group in groups" :key="group.id" class="group">
           <h1>{{ group.heading }}</h1>
           <!--<p :style="group.description && group.description.length > 250 ? 'column-count: 2;' : 'column-count: 1;'"> -->
-          <p>
+          <p :style="group.description && group.description.length > 250 ? 'column-count: 2;' : 'column-count: 1;'">
             {{ group.description }}
           </p>
           <div v-if="articles" class="articles">
@@ -187,6 +187,9 @@ p {
   column-gap: 40px;
   margin-top:20px;
    margin-bottom:30px;
+   -webkit-column-break-inside: avoid;
+          page-break-inside: avoid;
+               break-inside: avoid;
 }
 
 h1 {
@@ -264,13 +267,13 @@ padding:20px;
 
   }
   p {
-    columns: 1;
+    columns: 1 !important;
     font-size: 20px;
     padding:0px 20px;
     text-align:left;
   }
   .group {
-    columns: 1;
+   
   }
 }
 </style>
