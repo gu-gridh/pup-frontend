@@ -56,7 +56,7 @@
 
       <div v-if="venue.introduction || venue.files.length" class="intro">
         <div class="container" style="margin-top:30px;">
-          <h2>BICCS 2023</h2>
+          <h2>BICCS 2025</h2>
           <div
             class="introduction"
             style=""
