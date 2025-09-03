@@ -7,7 +7,7 @@ export default new Vuex.Store({
   state: {
     header: {},
     article: null,
-    notFound: false
+    notFound: false,
   },
   mutations: {
     setHeader(state, header) {
@@ -21,6 +21,6 @@ export default new Vuex.Store({
     },
     clearNotFound(state) {
       state.notFound = false;
-    }
-  }
+    },
+  },
 });

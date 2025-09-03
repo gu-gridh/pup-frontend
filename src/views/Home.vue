@@ -31,7 +31,6 @@
         <div class="container">
           <TransitionExpand v-for="page in venue.pages" :key="page.id">
             <div v-if="tab === page.id">
-              <!--<h2>{{ page.heading }}</h2>-->
               <div class="menu-item" v-html="parseMarkdown(page.body)" />
             </div>
           </TransitionExpand>
@@ -40,26 +39,11 @@
     </TransitionExpand>
 
     <div class="main">
-      <!-- <div v-if="venue.journals.length" class="journal-menu">
-        <div class="container">
-         Past editions: 
-          <router-link
-            v-for="journal in venue.journals"
-            :key="journal.id"
-            :to="`/${journal.identifier}`"
-            class="journal-menu-item"
-          >
-            {{ journal.identifier }}
-          </router-link>
-        </div>
-      </div>-->
-
       <div v-if="venue.introduction || venue.files.length" class="intro">
         <div class="container" style="margin-top:30px;">
           <h2>BICCS</h2>
           <div
             class="introduction"
-            style=""
             v-html="parseMarkdown(venue.introduction)"
           />
           <Downloads :downloads="venue.files" class="venue-downloads" />
@@ -85,76 +69,71 @@
   </section>
 </template>
 
-<script>
-import TransitionExpand from "@/components/TransitionExpand";
-import { apiUrl, getImageAtLeast, getVenue } from "@/assets/api";
-import { parseMarkdown } from "@/assets/markdown";
-import Downloads from "@/components/article/Downloads.vue";
-import CaptionedImage from "@/components/CaptionedImage.vue";
+<script setup>
+import { ref, onMounted, onActivated } from 'vue'
+import { useHead } from '@vueuse/head'
+import { useStore } from 'vuex'
+import { useRoute } from 'vue-router'
 
-export default {
-  components: { TransitionExpand, Downloads, CaptionedImage },
-  data() {
-    return {
-      venue: null,
-      tab: ""
-    };
-  },
-  created() {
-    this.load();
-  },
-  activated() {
-    this.load();
-  },
-  methods: {
-    parseMarkdown,
-    async load() {
-      this.loadVenue();
-      this.$store.commit("setHeader", null);
+import TransitionExpand from '@/components/TransitionExpand'
+import Downloads from '@/components/article/Downloads.vue'
+import CaptionedImage from '@/components/CaptionedImage.vue'
+
+import { apiUrl, getImageAtLeast, getVenue } from '@/assets/api'
+import { parseMarkdown } from '@/assets/markdown'
+
+// state
+const venue = ref(null)
+const tab = ref('')
+
+// libs
+const store = useStore()
+const route = useRoute()
+
+// helpers
+function toggleTab(name) {
+  tab.value = tab.value === name ? '' : name
+}
+function imageUrl(image) {
+  return apiUrl(getImageAtLeast(image, 1000).url)
+}
+
+// load data + set header
+async function load() {
+  await loadVenue()
+  store.commit('setHeader', null)
+}
+async function loadVenue() {
+  venue.value = await getVenue()
+}
+
+// lifecycle (keep the same behavior as before)
+onMounted(load)
+onActivated(load)
+
+// head tags (reactive to venue)
+useHead({
+  title: 'BICCS',
+  meta: [
+    {
+      property: 'og:title',
+      content: 'Biennial International Conference for the Craft Sciences (BICCS)',
     },
-    async loadVenue() {
-      this.venue = await getVenue();
+    { property: 'og:type', content: 'website' },
+    {
+      property: 'og:url',
+      // prefer route.fullPath for SPA correctness
+      content:
+        (typeof window !== 'undefined' ? window.location.origin : 'https://biccs.dh.gu.se') +
+        route.fullPath,
     },
-    toggleTab(name) {
-      this.tab = this.tab === name ? "" : name;
-    },
-    gotoJournal(identifier) {
-      if (!identifier) {
-        throw new Error("Journal has no identifier");
-      }
-      this.$router.push(`/${identifier}`);
-    },
-    imageUrl(image) {
-      return apiUrl(getImageAtLeast(image, 1000).url);
-    }
-  },
-  metaInfo() {
-    return {
-      meta: [
-        {
-          property: "og:title",
-          content:
-            "Biennial International Conference for the Craft Sciences (BICCS)"
-        },
-        { property: "og:type", content: "website" },
-        {
-          property: "og:url",
-          content: location.origin + location.pathname
-        }
-      ]
-    };
-  }
-};
+  ],
+})
 </script>
 
 <style lang="scss" scoped>
-
-
 .menu-item {
   font-size: 22px;
-  //columns:2;
-  //:first-child {margin-top: 0;}
-  //  column-gap:40px;
   margin-bottom: 2rem;
   text-align: left;
   max-width: 1100px;
@@ -172,8 +151,6 @@ export default {
     margin-top: 30px;
   }
 
-  
-
   :deep(a) {
     color: lightblue;
   }
@@ -183,7 +160,7 @@ export default {
       color: white;
     }
     a:link {
-      background-image: url(/linkbuttonwhite.png);
+      background-image: url('@/assets/linkbutton.png');
       background-size: 19px;
       background-repeat: no-repeat;
       padding-left: 30px;
@@ -213,11 +190,11 @@ export default {
 
 .intro {
   :deep(h2) {
-    font-family: "Teko", sans-serif;
+    font-family: 'Teko', sans-serif;
     font-size: 4rem;
     margin-block: 1rem;
-    margin-top:40px;
-    margin-bottom:30px;
+    margin-top: 40px;
+    margin-bottom: 30px;
   }
 
   :deep(h3) {
@@ -227,7 +204,7 @@ export default {
 
     a:link {
       color: black;
-      background-image: url(/linkbutton.png);
+      background-image: url('@/assets/linkbutton.png');
       background-size: 25px;
       background-repeat: no-repeat;
       padding: 5px 20px 5px 40px;
@@ -244,22 +221,21 @@ export default {
 
 @media screen and (max-width: 1000px) {
   .introduction {
-    margin-top:30px;
+    margin-top: 30px;
     font-size: 22px;
     columns: 1;
   }
 
-  .gallery{
-    display:none;
+  .gallery {
+    display: none;
   }
 
   .intro {
-  :deep(h2) {
-  
-    font-size: 5rem;
-    color:black;
-    margin-block: 1rem;
-  }
+    :deep(h2) {
+      font-size: 5rem;
+      color: black;
+      margin-block: 1rem;
+    }
   }
 
   .menu-item {
@@ -272,7 +248,7 @@ export default {
     }
 
     :deep(h3) a:link {
-      background-image: url(/linkbuttonwhite.png);
+      background-image: url('@/assets/linkbuttonwhite.png');
       background-size: 34px;
       background-repeat: no-repeat;
       padding-left: 55px;
@@ -281,12 +257,11 @@ export default {
   }
 
   .intro :deep(h3) a:link {
-    
-    background-image: url(/linkbutton.png);
+    background-image: url('@/assets/linkbutton.png');
     background-size: 30px;
     background-repeat: no-repeat;
-    padding:5px 20px 10px 40px;
-    line-height:2;
+    padding: 5px 20px 10px 40px;
+    line-height: 2;
     background-position: 0px 0px;
   }
 }
@@ -320,7 +295,7 @@ export default {
 }
 
 .title {
-  font-family: "Teko", sans-serif;
+  font-family: 'Teko', sans-serif;
   font-weight: 100;
   font-size: 200px;
   line-height: 0.75;
@@ -333,13 +308,10 @@ export default {
   }
 }
 
-
-
 .info-menu {
   margin-top: 20px;
-  font-family: "Teko", sans-serif;
+  font-family: 'Teko', sans-serif;
   line-height: 0.8;
-
   font-size: 40px;
   margin-left: -10px;
 }
@@ -369,45 +341,38 @@ export default {
   font-size: 1.25rem;
   text-align: justify;
 
-   :deep(h1) {
-
+  :deep(h1) {
     margin-block: 1rem;
-    margin-top:30px;
-  margin-bottom:00px;
+    margin-top: 30px;
+    margin-bottom: 00px;
   }
 
-   :deep(h2) {
-
+  :deep(h2) {
     font-size: 2.5rem;
-
-    margin-top:60px;
-  margin-bottom:20px;
+    margin-top: 60px;
+    margin-bottom: 20px;
   }
 
   :deep(h6) {
-    font-family: "Teko", sans-serif;
+    font-family: 'Teko', sans-serif;
     font-size: 1.5rem;
     margin-block: 1rem;
-    margin-top:30px;
-  margin-bottom:0px;
+    margin-top: 30px;
+    margin-bottom: 0px;
   }
 
-   :deep(p) {
-  
-  margin-bottom:20px;
-  font-size:20px;
-  max-width:800px;
+  :deep(p) {
+    margin-bottom: 20px;
+    font-size: 20px;
+    max-width: 800px;
   }
 }
-
-
-
 
 .journal-menu {
   margin-left: -0.05em;
   padding: 0.5rem 0 1rem;
   border-bottom: thin solid #f4f4f4;
-  font-family: "Teko", sans-serif;
+  font-family: 'Teko', sans-serif;
   font-weight: 400;
   font-size: 2.5rem;
   line-height: 0.75;
@@ -428,13 +393,9 @@ export default {
   color: white;
 }
 
-
 @media screen and (max-width: 1000px) {
-  
-  .container{
-      width: 80%;
+  .container {
+    width: 80%;
   }
-
-  
 }
 </style>
