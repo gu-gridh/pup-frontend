@@ -1,13 +1,13 @@
-import Vue from "vue";
-import App from "./App.vue";
-import router from "./router";
-import store from "./store";
-import "./meta";
+import { createApp } from 'vue'
+import { createHead } from '@vueuse/head'
+import App from './App.vue'
+import router from './router'
+import store from './store'
 
-Vue.config.productionTip = false;
+const app = createApp(App)
 
-new Vue({
-  router,
-  store,
-  render: h => h(App)
-}).$mount("#app");
+app.use(router)
+app.use(store)
+app.use(createHead())   // ✅ Vue 3 head manager
+
+app.mount('#app')
