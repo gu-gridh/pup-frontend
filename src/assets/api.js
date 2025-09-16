@@ -25,7 +25,7 @@ export const getJournal = memoize(
 export const getArticles = memoize(async (params) => {
   const updatedParams = {
     ...params,
-    _limit: 200, //set the limit to 200
+    _limit: 500, //set the limit to 500
   };
   return get("articles", updatedParams);
 });
