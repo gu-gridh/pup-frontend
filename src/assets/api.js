@@ -19,7 +19,10 @@ export const getLatestJournal = memoize(
 )
 
 export const getJournal = memoize(
-  async (identifier) => (await get("journals", { identifier })), [0],
+  async (identifier) => {
+    const list = await get("journals", { identifier })
+    return list[0] || null
+  }
 );
 
 export const getArticles = memoize(async (params) => {

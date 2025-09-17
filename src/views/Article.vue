@@ -54,6 +54,16 @@ import Downloads from '@/components/article/Downloads.vue'
 import ContentSection from '@/components/article/ContentSection.vue'
 import References from '@/components/article/References.vue'
 
+function   normalizeArticle(a = {}) {
+    return {
+      ...a,
+      authors: Array.isArray(a.authors) ? a.authors : [],
+      keywords: Array.isArray(a.keywords) ? a.keywords : [],
+      references: Array.isArray(a.references) ? a.references : [],
+      attachments: Array.isArray(a.attachments) ? a.attachments : [],
+    }
+  }
+
 export default {
   name: 'Article',
   components: {
@@ -66,7 +76,6 @@ export default {
     References,
   },
 
-  // keep your props as-is
   props: ['journalName', 'identifier', 'revision'],
 
   // 🔹 Add setup only to manage <head> using the Vuex article state
@@ -86,8 +95,6 @@ export default {
           { property: 'og:title', content: a.title },
           { property: 'og:type', content: 'article' },
           ...(img ? [{ property: 'og:image', content: img }] : []),
-          // If you previously relied on this.$route; we avoid it here to keep setup simple.
-          // You can pass a canonical/absolute URL from props or store if needed.
           { property: 'og:description', content: a.abstract },
           {
             property: 'og:site_name',
@@ -128,12 +135,17 @@ export default {
   methods: {
     ...mapMutations(['reportNotFound']),
     async load() {
+      const year =
+        Number.isFinite(+this.journalName)
+        ? String(this.journalName)
+        : (this.article?.date ? String(new Date(this.article.date).getUTCFullYear()) : '')
       this.$store.commit('setHeader', {
         route: `/${this.journalName}`,
-        label: 'Biennial International Conference for the Craft Sciences 2021',
+        label: `Biennial International Conference for the Craft Sciences ${year}`,
       })
 
-      const article = await getArticle(this.identifier, this.revision)
+      const raw = await getArticle(this.identifier, this.revision)
+      const article = normalizeArticle(raw)
       if (!article) {
         this.reportNotFound()
         return
@@ -141,7 +153,6 @@ export default {
 
       this.$store.commit('setArticle', article)
 
-      // Title/meta are now handled by useHead; keep your custom event:
       document.dispatchEvent(
         new Event('ZoteroItemUpdated', {
           bubbles: true,

@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import filesize from "filesize";
+import { filesize } from "filesize";
 import { apiUrl } from "@/assets/api";
 
 export default {

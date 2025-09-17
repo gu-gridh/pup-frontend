@@ -2,9 +2,14 @@
   <div id="app">
     <Header />
     <main>
-      <keep-alive>
-        <router-view />
-      </keep-alive>
+      <router-view v-slot="{ Component, route }">
+        <template v-if="Component">
+          <keep-alive v-if="route.meta.keepAlive">
+            <component :is="Component" :key="route.fullPath" />
+          </keep-alive>
+          <component v-else :is="Component" :key="route.fullPath" />
+        </template>
+      </router-view>
       <div v-if="notFound" class="container">
         <h2>Page not found</h2>
         <p>

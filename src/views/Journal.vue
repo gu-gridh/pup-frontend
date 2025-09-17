@@ -16,11 +16,11 @@
           >
             Theme
           </span>
-          <ToggleButton
-            :value="grouping === 'formats'"
-            :color="{ unchecked: '#333', checked: '#333' }"
-            :sync="true"
-            @change="toggleGroupBy"
+          <Toggle
+            v-model="grouping"
+            true-value="formats"
+            false-value="themes"
+            class="toggle-dark"
           />
           <span
             :class="{ active: grouping === 'formats' }"
@@ -31,18 +31,15 @@
         </div>
         <div v-for="group in groups" :key="group.id" class="group">
           <h1>{{ group.heading }}</h1>
-          <p :style="group.description && group.description.length > 250 ? 'column-count: 2;' : 'column-count: 1;'">
+          <p :style="{ columnCount: (group.description && group.description.length > 250) ? 2 : 1 }">
             {{ group.description }}
           </p>
           <div v-if="articles" class="articles">
             <Teaser
-              v-for="articlePartial of group.articles"
+              v-for="articlePartial in group.articles"
               :key="articlePartial.id"
               :journal-name="journalName"
-              :article="
-                articles.find((article) => article.id === articlePartial.id) ||
-                  article
-              "
+              :article="articles?.find(a => a.id === articlePartial.id) || articlePartial"
             />
           </div>
         </div>
@@ -56,27 +53,23 @@ import { computed } from 'vue'
 import { useHead } from '@vueuse/head'
 import { useRoute } from 'vue-router'
 import { mapMutations } from 'vuex'
-import { ToggleButton } from 'vue-js-toggle-button'
 import { getJournal, getArticles } from '@/assets/api'
 import { parseMarkdown } from '@/assets/markdown'
 import Teaser from '@/components/Teaser'
+import Toggle from '@vueform/toggle'
+import '@vueform/toggle/themes/default.css'
 
 export default {
   name: 'Journal',
-  components: { ToggleButton, Teaser },
-  props: ['journalName'],
+  components: { Toggle, Teaser },
+  props: { journalName: 
+    { type: String, required: true }
+  },
 
   // 🔹 add setup only to manage <head> reactively
   setup(props, { attrs }) {
-    const route = useRoute()
-    // We’ll read `journal` via Options API below, but for head we use a computed that mirrors it:
-    // In Options API `this` isn’t available here, so we rely on window location + route for url,
-    // and we’ll update title/description when the store/data fills in via the computed below.
-    // To stay reactive to Options API's `journal`, we’ll expose it via a getter on `this` using
-    // useHead with computeds that reference `window` + a global getter pattern:
-    // Simpler: we’ll set a base head here, and the Options API will set document.title as a fallback.
+    const route = useRoute()   
     useHead({
-      // Base values (will be overridden by later reactive updates via document.title if needed)
       title: 'Journal',
       meta: [
         { property: 'og:type', content: 'website' },
@@ -108,15 +101,22 @@ export default {
     },
     journalHtml() {
       if (!this.journal) return ''
-      return (
-        parseMarkdown(this.journal.presentation) +
-        parseMarkdown(this.journal.contact)
-      )
+      const parts = [
+        this.journal.presentation ?? '',
+        this.journal.contact ?? '',
+      ].filter(Boolean).map(s => parseMarkdown(s))
+      return parts.join('')
     },
   },
 
   activated() {
     this.load()
+  },
+  watch: {
+    journalName: {
+     immediate: true,          
+     handler() { this.load() }
+    }
   },
 
   methods: {
@@ -138,7 +138,7 @@ export default {
 
       this.$store.commit('setHeader', {
         route: '/',
-        label: 'Biennial International Conference for the Craft Sciences',
+        label: `Biennial International Conference for the Craft Sciences ${this.journalName}`,
       })
     },
 
@@ -147,9 +147,6 @@ export default {
     },
     groupByFormats() {
       this.grouping = 'formats'
-    },
-    toggleGroupBy({ value }) {
-      this.grouping = value ? 'formats' : 'themes'
     },
   },
 }
@@ -284,7 +281,12 @@ h1 {
     text-align: left;
   }
 
-  .group {
+  .toogle-dark {
+    --toggle-bg-on:#333;
+    --toggle-bg-off:#333;
+    --toggle-border-on:#333;
+    --toggle-border-off:#333;
   }
+  
 }
 </style>

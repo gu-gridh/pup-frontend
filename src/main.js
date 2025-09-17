@@ -8,6 +8,6 @@ const app = createApp(App)
 
 app.use(router)
 app.use(store)
-app.use(createHead())   // ✅ Vue 3 head manager
+app.use(createHead())
 
 app.mount('#app')

@@ -15,7 +15,7 @@
         {{ article.subtitle }}
       </div>
       <div class="teaser-author">
-        {{ commaAnd(article.authors.map(fullName)) }}
+        {{ commaAnd((article.authors || []).map(fullName)) }}
       </div>
     </div>
   </router-link>

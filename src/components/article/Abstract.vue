@@ -7,7 +7,8 @@
 
     <div class="container">
       <table class="meta-table">
-        <tr v-if="keywords.length">
+        <tbody>
+        <tr v-if="keywords && keywords.length">
           <th>Keywords:</th>
           <td>{{ keywords.map(keyword => keyword.label).join(", ") }}</td>
         </tr>
@@ -18,14 +19,15 @@
               {{ citeAs }}
             </template>
             <template v-else>
-              {{ commaAnd(authors.map(lastnameFirst)) }}
-              ({{ date.slice(0, 4) }})
+              {{ commaAnd((authors || []).map(lastnameFirst)) }}
+              ({{ (date || "").slice(0, 4) }})
               <em>{{ title }}.</em>
               Biennial International Conference for the Craft Sciences. Version
               {{ revision }}. https://biccs.dh.gu.se{{ $route.path }}
             </template>
           </td>
         </tr>
+      </tbody>
       </table>
     </div>
   </div>
@@ -41,20 +43,20 @@ const showdownConverter = new showdown.Converter();
 export default {
   computed: {
     ...mapState({
-      abstract: state => state.article.abstract,
-      keywords: state => state.article.keywords,
-      citeAs: state => state.article.citeAs,
-      authors: state => state.article.authors,
-      date: state => state.article.date,
-      title: state => state.article.title,
-      revision: state => state.article.revision
-    })
+      abstract: s => s.article?.abstract ?? "",
+      keywords: s => Array.isArray(s.article?.keywords) ? s.article.keywords : [],
+      citeAs:   s => s.article?.citeAs ?? "",
+      authors:  s => Array.isArray(s.article?.authors) ? s.article.authors : [],
+      date:     s => s.article?.date ?? "",
+      title:    s => s.article?.title ?? "",
+      revision: s => s.article?.revision ?? 1,
+   })
   },
   methods: {
     commaAnd,
     lastnameFirst,
-    parseMarkdown(md) {
-      return showdownConverter.makeHtml(md);
+    parseMarkdown(md = "") {
+      return showdownConverter.makeHtml(md || "");
     }
   }
 };
