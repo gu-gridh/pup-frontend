@@ -23,12 +23,12 @@
       v-if="article.content && article.content.length"
       class="container article-content"
     >
-    <ContentSection
-      v-for="(section, index) in article.content"
-      :key="section.label"
-      :section="section"
-      :order="index + 1"
-    />
+      <ContentSection
+        v-for="(section, index) in article.content"
+        :key="section.label"
+        :section="section"
+        :order="index + 1"
+      />
     </div>
 
     <References
@@ -40,19 +40,32 @@
 </template>
 
 <script>
-import { apiUrl, getArticle, getImageAtLeast } from "@/assets/api";
-import Header from "@/components/article/Header.vue";
-import MainVideo from "@/components/article/MainVideo.vue";
-import MainGallery from "@/components/article/MainGallery.vue";
-import Abstract from "@/components/article/Abstract.vue";
-import Downloads from "@/components/article/Downloads.vue";
-import ContentSection from "@/components/article/ContentSection.vue";
-import References from "@/components/article/References.vue";
-import { mapMutations, mapState } from "vuex";
-import { fullName } from "@/assets/util";
+import { computed } from 'vue'
+import { useHead } from '@vueuse/head'
+import { useStore, mapMutations, mapState } from 'vuex'
+import { apiUrl, getArticle, getImageAtLeast } from '@/assets/api'
+import { fullName } from '@/assets/util'
+
+import Header from '@/components/article/Header.vue'
+import MainVideo from '@/components/article/MainVideo.vue'
+import MainGallery from '@/components/article/MainGallery.vue'
+import Abstract from '@/components/article/Abstract.vue'
+import Downloads from '@/components/article/Downloads.vue'
+import ContentSection from '@/components/article/ContentSection.vue'
+import References from '@/components/article/References.vue'
+
+function   normalizeArticle(a = {}) {
+    return {
+      ...a,
+      authors: Array.isArray(a.authors) ? a.authors : [],
+      keywords: Array.isArray(a.keywords) ? a.keywords : [],
+      references: Array.isArray(a.references) ? a.references : [],
+      attachments: Array.isArray(a.attachments) ? a.attachments : [],
+    }
+  }
 
 export default {
-  name: "Article",
+  name: 'Article',
   components: {
     Header,
     MainVideo,
@@ -60,101 +73,106 @@ export default {
     Abstract,
     Downloads,
     ContentSection,
-    References
+    References,
   },
-  props: ["journalName", "identifier", "revision"],
+
+  props: ['journalName', 'identifier', 'revision'],
+
+  // 🔹 Add setup only to manage <head> using the Vuex article state
+  setup() {
+    const store = useStore()
+    const article = computed(() => store.state.article)
+
+    useHead({
+      title: computed(() => article.value?.title ?? 'Article'),
+      meta: computed(() => {
+        if (!article.value) return []
+
+        const a = article.value
+        const img = a.image ? apiUrl(getImageAtLeast(a.image, 1000).url) : undefined
+
+        return [
+          { property: 'og:title', content: a.title },
+          { property: 'og:type', content: 'article' },
+          ...(img ? [{ property: 'og:image', content: img }] : []),
+          { property: 'og:description', content: a.abstract },
+          {
+            property: 'og:site_name',
+            content: 'Biennial International Conference for the Craft Sciences 2021',
+          },
+          { property: 'article:published_time', content: a.date },
+          { property: 'article:modified_time', content: a.revisionDate },
+          {
+            name: 'keywords',
+            content: Array.isArray(a.keywords) ? a.keywords.map((k) => k.label).join(', ') : '',
+          },
+          { name: 'description', content: a.abstract },
+          ...((a.authors || []).map((author) => ({
+            name: 'author',
+            content: fullName(author),
+          })) || []),
+        ]
+      }),
+    })
+
+    return {}
+  },
+
   computed: {
-    ...mapState(["article"])
+    ...mapState(['article']),
   },
+
   activated() {
-    this.load();
+    this.load()
   },
   created() {
-    this.load();
+    this.load()
   },
   deactivated() {
-    this.$store.commit("setArticle", null);
+    this.$store.commit('setArticle', null)
   },
+
   methods: {
-    ...mapMutations(["reportNotFound"]),
+    ...mapMutations(['reportNotFound']),
     async load() {
-      this.$store.commit("setHeader", {
+      const year =
+        Number.isFinite(+this.journalName)
+        ? String(this.journalName)
+        : (this.article?.date ? String(new Date(this.article.date).getUTCFullYear()) : '')
+      this.$store.commit('setHeader', {
         route: `/${this.journalName}`,
-        label: "Biennial International Conference for the Craft Sciences 2021"
-      });
-      const article = await getArticle(this.identifier, this.revision);
+        label: `Biennial International Conference for the Craft Sciences ${year}`,
+      })
+
+      const raw = await getArticle(this.identifier, this.revision)
+      const article = normalizeArticle(raw)
       if (!article) {
-        this.reportNotFound();
-        return;
+        this.reportNotFound()
+        return
       }
-      this.$store.commit("setArticle", article);
-      document.title = article.title;
+
+      this.$store.commit('setArticle', article)
+
       document.dispatchEvent(
-        new Event("ZoteroItemUpdated", {
+        new Event('ZoteroItemUpdated', {
           bubbles: true,
-          cancelable: true
-        })
-      );
-    }
+          cancelable: true,
+        }),
+      )
+    },
   },
-  metaInfo() {
-    return {
-      meta: this.article
-        ? [
-            { property: "og:title", content: this.article.title },
-            { property: "og:type", content: "article" },
-            {
-              property: "og:image",
-              content: apiUrl(getImageAtLeast(this.article.image, 1000).url)
-            },
-            {
-              property: "og:url",
-              content: `https://biccs.dh.gu.se${this.$route.path}`
-            },
-            { property: "og:description", content: this.article.abstract },
-            {
-              property: "og:site_name",
-              content:
-                "Biennial International Conference for the Craft Sciences 2021"
-            },
-            {
-              property: "article:published_time",
-              content: this.article.date
-            },
-            {
-              property: "article:modified_time",
-              content: this.article.revisionDate
-            },
-            {
-              name: "keywords",
-              content: this.article.keywords
-                .map(keyword => keyword.label)
-                .join(", ")
-            },
-            { name: "description", content: this.article.abstract },
-            ...this.article.authors.map(author => ({
-              name: "author",
-              content: fullName(author)
-            }))
-          ]
-        : []
-    };
-  }
-};
+}
 </script>
 
 <style lang="scss" scoped>
-
-
 .full-article {
   /* Make bottom margin match side margin */
-
 }
 
 @media screen and (max-width: 1000px) {
-.full-article {
-  /* Make bottom margin match side margin */
- padding:0px 20px;
-}
+  .full-article {
+    /* Make bottom margin match side margin */
+    padding: 0px 20px;
+  }
 }
 </style>

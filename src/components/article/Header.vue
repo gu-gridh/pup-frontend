@@ -45,16 +45,16 @@ export default {
   components: { MetaItem, CommaAnd },
   computed: {
     ...mapState({
-      date: state => state.article.date,
-      revision: state => state.article.revision,
-      revisionDate: state => state.article.revisionDate,
-      title: state => state.article.title,
-      subtitle: state => state.article.subtitle,
-      authors: state => state.article.authors
+      date:     s => s.article?.date ?? "",
+      revision: s => s.article?.revision ?? 1,
+      revisionDate: s => s.article?.revisionDate ?? "",
+      title: s => s.article?.title ?? "",
+      subtitle: s => s.article?.subtitle ?? "",
+      authors:  s => Array.isArray(s.article?.authors) ? s.article.authors : [],     
     }),
     affiliations() {
       return this.uniq(
-        this.authors.map(author => author.affiliation).filter(Boolean)
+        (this.authors || []).map(author => author.affiliation).filter(Boolean)
       );
     }
   },

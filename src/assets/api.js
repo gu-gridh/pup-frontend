@@ -1,9 +1,10 @@
+/* eslint-disable */
 import axios from "axios";
 import { memoize } from "./util";
 
 const API_BASE = process.env.VUE_APP_API_BASE || "http://localhost:1337/";
 
-export const apiUrl = path => API_BASE + path.replace(/^\//, "");
+export const apiUrl = (path) => API_BASE + path.replace(/^\//, "");
 
 export const get = async (endpoint, params) =>
   (await axios.get(apiUrl(endpoint), { params })).data;
@@ -14,14 +15,17 @@ export const getJournals = memoize(async () => get("journals"));
 
 export const getLatestJournal = memoize(
   async () =>
-    (await get(`journals`, { _sort: "published_at:DESC", _limit: 1 }))[0]
-);
+    (await get('journals', { _sort: 'published_at:DESC', _limit: 1 }))[0],
+)
 
 export const getJournal = memoize(
-  async identifier => (await get("journals", { identifier }))[0]
+  async (identifier) => {
+    const list = await get("journals", { identifier })
+    return list[0] || null
+  }
 );
 
-export const getArticles = memoize(async params => {
+export const getArticles = memoize(async (params) => {
   const updatedParams = {
     ...params,
     _limit: 500, //set the limit to 500
@@ -40,10 +44,10 @@ export const getImageAtLeast = (imageValue, width, height = 0) => {
   if (!imageValue.formats) return imageValue;
   // Find the smallest format that exceeds given dimensions.
   const format = ["thumbnail", "small", "medium", "large"].find(
-    format =>
+    (format) =>
       imageValue.formats[format] &&
       imageValue.formats[format].width >= width &&
-      imageValue.formats[format].height >= height
+      imageValue.formats[format].height >= height,
   );
   // No format big enough, fallback to the original.
   return imageValue.formats[format] || imageValue;

@@ -16,11 +16,11 @@
           >
             Theme
           </span>
-          <ToggleButton
-            :value="grouping === 'formats'"
-            :color="{ unchecked: '#333', checked: '#333' }"
-            :sync="true"
-            @change="toggleGroupBy"
+          <Toggle
+            v-model="grouping"
+            true-value="formats"
+            false-value="themes"
+            class="toggle-dark"
           />
           <span
             :class="{ active: grouping === 'formats' }"
@@ -31,19 +31,15 @@
         </div>
         <div v-for="group in groups" :key="group.id" class="group">
           <h1>{{ group.heading }}</h1>
-          <!--<p :style="group.description && group.description.length > 250 ? 'column-count: 2;' : 'column-count: 1;'"> -->
-          <p :style="group.description && group.description.length > 250 ? 'column-count: 2;' : 'column-count: 1;'">
+          <p :style="{ columnCount: (group.description && group.description.length > 250) ? 2 : 1 }">
             {{ group.description }}
           </p>
           <div v-if="articles" class="articles">
             <Teaser
-              v-for="articlePartial of group.articles"
+              v-for="articlePartial in group.articles"
               :key="articlePartial.id"
               :journal-name="journalName"
-              :article="
-                articles.find(article => article.id === articlePartial.id) ||
-                  article
-              "
+              :article="articles?.find(a => a.id === articlePartial.id) || articlePartial"
             />
           </div>
         </div>
@@ -53,87 +49,107 @@
 </template>
 
 <script>
-import { mapMutations } from "vuex";
-import { ToggleButton } from "vue-js-toggle-button";
-import { getJournal, getArticles } from "@/assets/api";
-import { parseMarkdown } from "@/assets/markdown";
-import Teaser from "@/components/Teaser";
+import { computed } from 'vue'
+import { useHead } from '@vueuse/head'
+import { useRoute } from 'vue-router'
+import { mapMutations } from 'vuex'
+import { getJournal, getArticles } from '@/assets/api'
+import { parseMarkdown } from '@/assets/markdown'
+import Teaser from '@/components/Teaser'
+import Toggle from '@vueform/toggle'
+import '@vueform/toggle/themes/default.css'
 
 export default {
-  name: "Journal",
-  components: { ToggleButton, Teaser },
-  props: ["journalName"],
+  name: 'Journal',
+  components: { Toggle, Teaser },
+  props: { journalName: 
+    { type: String, required: true }
+  },
+
+  // 🔹 add setup only to manage <head> reactively
+  setup(props, { attrs }) {
+    const route = useRoute()   
+    useHead({
+      title: 'Journal',
+      meta: [
+        { property: 'og:type', content: 'website' },
+        {
+          property: 'og:image',
+          content: 'https://biccs.dh.gu.se/biccs_2021.png',
+        },
+        {
+          property: 'og:url',
+          content:
+            (typeof window !== 'undefined' ? window.location.origin : 'https://biccs.dh.gu.se') +
+            route.fullPath,
+        },
+      ],
+    })
+  },
+
   data() {
     return {
       journal: null,
       articles: null,
-      grouping: "themes"
-    };
+      grouping: 'themes',
+    }
   },
+
   computed: {
     groups() {
-      return this.journal ? this.journal[this.grouping] : [];
+      return this.journal ? this.journal[this.grouping] : []
     },
     journalHtml() {
-      return (
-        parseMarkdown(this.journal.presentation) +
-        parseMarkdown(this.journal.contact)
-      );
+      if (!this.journal) return ''
+      const parts = [
+        this.journal.presentation ?? '',
+        this.journal.contact ?? '',
+      ].filter(Boolean).map(s => parseMarkdown(s))
+      return parts.join('')
+    },
+  },
+
+  activated() {
+    this.load()
+  },
+  watch: {
+    journalName: {
+     immediate: true,          
+     handler() { this.load() }
     }
   },
-  activated() {
-    this.load();
-  },
+
   methods: {
-    ...mapMutations(["reportNotFound"]),
+    ...mapMutations(['reportNotFound']),
+
     load() {
-      getJournal(this.journalName).then(journal => {
+      getJournal(this.journalName).then((journal) => {
         if (!journal) {
-          this.reportNotFound();
-          return;
+          this.reportNotFound()
+          return
         }
-        this.journal = journal;
-        document.title = this.journal.title;
-      });
+        this.journal = journal
 
-      getArticles().then(articles => (this.articles = articles));
+        // Update title now that we have data; head meta from setup stays valid.
+        document.title = this.journal.title
+      })
 
-      this.$store.commit("setHeader", {
-        route: "/",
-        label: "Biennial International Conference for the Craft Sciences"
-      });
+      getArticles().then((articles) => (this.articles = articles))
+
+      this.$store.commit('setHeader', {
+        route: '/',
+        label: `Biennial International Conference for the Craft Sciences ${this.journalName}`,
+      })
     },
+
     groupByThemes() {
-      this.grouping = "themes";
+      this.grouping = 'themes'
     },
     groupByFormats() {
-      this.grouping = "formats";
+      this.grouping = 'formats'
     },
-    toggleGroupBy({ value }) {
-      this.grouping = value ? "formats" : "themes";
-    }
   },
-  metaInfo() {
-    return {
-      meta: this.journal
-        ? [
-            { property: "og:title", content: this.journal.title },
-            { property: "og:type", content: "website" },
-            {
-              property: "og:image",
-              content: "https://biccs.dh.gu.se/biccs_2021.png"
-            },
-            {
-              property: "og:url",
-              content: "https://biccs.dh.gu.se/"
-            },
-            { property: "og:description", content: this.journal.presentation },
-            { property: "description", content: this.journal.presentation }
-          ]
-        : []
-    };
-  }
-};
+}
 </script>
 
 <style lang="scss" scoped>
@@ -155,11 +171,11 @@ export default {
 }
 
 .body {
-  margin-top:20px;
+  margin-top: 20px;
   columns: 15em 2;
-    :first-child {
-       margin-top: 0;
-     }
+  :first-child {
+    margin-top: 0;
+  }
 }
 
 .active {
@@ -181,12 +197,13 @@ export default {
   font-size: 20px;
   font-weight: 200;
 }
+
 p {
   columns: 2;
   text-align: justify;
   column-gap: 40px;
-  margin-top:20px;
-   margin-bottom:30px;
+  margin-top: 20px;
+  margin-bottom: 30px;
 }
 
 h1 {
@@ -201,76 +218,75 @@ h1 {
   flex-wrap: wrap;
 }
 
-  .teaser {
-    transition: all 0.2s ease-in-out;
-    min-width: 400px;
-    width: 20%;
-    margin-bottom: 10px;
+.teaser {
+  transition: all 0.2s ease-in-out;
+  min-width: 400px;
+  width: 20%;
+  margin-bottom: 10px;
 
-    @media screen and (max-width: 2500px) {
-      width: 25%;
-    }
-
-    @media screen and (max-width: 2000px) {
-      width: 33.3%;
-    }
-
-    @media screen and (max-width: 1700px) {
-      width: 50%;
-    }
+  @media screen and (max-width: 2500px) {
+    width: 25%;
   }
 
+  @media screen and (max-width: 2000px) {
+    width: 33.3%;
+  }
+
+  @media screen and (max-width: 1700px) {
+    width: 50%;
+  }
+}
 
 @media screen and (max-width: 1000px) {
-
   .title {
-
-margin-top:50px;
-}
+    margin-top: 50px;
+  }
 
   .grouping-select {
-  margin-left:20px;
-}
-
+    margin-left: 20px;
+  }
 
   .articles {
-padding:20px;
-}
+    padding: 20px;
+  }
 
-.teaser:hover{
- transform:scale(1.02);
-}
+  .teaser:hover {
+    transform: scale(1.02);
+  }
 
-.teaser{
-  min-width: 100px;
-  width: 100% !important;
-  height: 20rem;
-  border-radius:8px;
-  margin-bottom:30px;
-  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.2);
-}
-
-
+  .teaser {
+    min-width: 100px;
+    width: 100% !important;
+    height: 20rem;
+    border-radius: 8px;
+    margin-bottom: 30px;
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.2);
+  }
 
   .body {
-    padding:0px 20px;
-  margin-top:20px;
-  columns: 1;
-}
-
-  h1{
-    margin-top:10px;
-    padding:0px 20px;
-
+    padding: 0px 20px;
+    margin-top: 20px;
+    columns: 1;
   }
+
+  h1 {
+    margin-top: 10px;
+    padding: 0px 20px;
+  }
+
   p {
     columns: 1 !important;
     font-size: 20px;
-    padding:0px 20px;
-    text-align:left;
+    padding: 0px 20px;
+    text-align: left;
   }
-  .group {
-   
+
+  .toogle-dark {
+    --toggle-bg-on:#333;
+    --toggle-bg-off:#333;
+    --toggle-border-on:#333;
+    --toggle-border-off:#333;
   }
+  
 }
 </style>
